@@ -18,8 +18,8 @@ set title
 call plug#begin()
 Plug 'vim-scripts/L9'
 
-" theme
-Plug 'joshdick/onedark.vim'
+" theme (bleep bloop)
+Plug 'joshdick/onedar:k.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'jacoborus/tender.vim'
 
