@@ -83,6 +83,8 @@ let g:coc_global_extensions = [
   \ 'coc-eslint',
   \ ]
 
+au BufReadPost *.erb set syntax=javascript
+
 " nerdtree config
 " Check if NERDTree is open or active
 function! IsNERDTreeOpen()
