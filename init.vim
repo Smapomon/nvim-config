@@ -19,7 +19,7 @@ call plug#begin()
 Plug 'vim-scripts/L9'
 
 " theme (bleep bloop)
-Plug 'joshdick/onedar:k.vim'
+Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'jacoborus/tender.vim'
 
