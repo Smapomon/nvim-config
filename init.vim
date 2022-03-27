@@ -15,6 +15,8 @@ set nu rnu
 let &titlestring = @&
 set title
 
+set tags=tags; " tags file withing the current directory
+
 call plug#begin()
 Plug 'vim-scripts/L9'
 
@@ -190,6 +192,11 @@ function! LightlineLineinfo() abort
 endfunction
 
 filetype plugin on
+
+let s:is_win = has('win32') || has('win64')
+if s:is_win
+    nmap <C-z> <Nop>
+endif
 
 " remaps for ease of use
 nnoremap <A-j> :m+<CR>
