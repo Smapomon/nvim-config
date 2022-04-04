@@ -31,6 +31,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'sjl/gundo.vim'
 Plug 'christoomey/vim-system-copy'
+Plug 'dyng/ctrlsf.vim'
 
 " syntax highlighting
 Plug 'octol/vim-cpp-enhanced-highlight'
@@ -52,7 +53,8 @@ Plug 'junegunn/gv.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'ryanoasis/vim-devicons'
+" works with Clap
+Plug 'ryanoasis/vim-webdevicons'
 
 " File Navigation
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
@@ -193,10 +195,56 @@ endfunction
 
 filetype plugin on
 
-let s:is_win = has('win32') || has('win64')
-if s:is_win
-    nmap <C-z> <Nop>
-endif
+" *************************************************************
+" *                                                           *
+" *                     FUZZY CONFIGS                         *
+" *                                                           *
+" *************************************************************
+
+let mapleader = ","
+
+let g:ctrlsf_auto_focus = {
+  \ 'at': 'start',
+  \}
+
+"let g:ctrlsf_auto_preview = 1
+let g:ctrlsf_default_view_mode = 'compact'
+"let g:ctrlsf_position = 'bottom'
+
+"let s:is_win = has('win32') || has('win64')
+"if s:is_win
+    "nmap <C-z> <Nop>
+"endif
+
+let g:clap_current_selection_sign = { 'text': '->', 'texthl': 'ClapSelectedSign', 'linehl': 'ClapSelected' }
+
+" *************************************************************
+" *                                                           *
+" *                  UNBIND ARROW KEYS                        *
+" *                                                           *
+" *************************************************************
+nnoremap <Left> :echo "Git gud noob! <-"<CR>
+vnoremap <Left> :<C-u>:echo "Git gud noob! <-"<CR>
+inoremap <Left> <C-o>:echo "Git gud noob! <-"<CR>
+
+nnoremap <Right> :echo "Git gud noob! ->"<CR>
+vnoremap <Right> :<C-u>:echo "Git gud noob! ->"<CR>
+inoremap <Right> <C-o>:echo "Git gud noob! ->"<CR>
+
+nnoremap <Up> :echo "Git gud noob! ^"<CR>
+vnoremap <Up> :<C-u>:echo "Git gud noob! ^"<CR>
+inoremap <Up> <C-o>:echo "Git gud noob! ^"<CR>
+
+nnoremap <Down> :echo "Git gud noob! v"<CR>
+vnoremap <Down> :<C-u>echo "Git gud noob! v"<CR>
+inoremap <Down> <C-o>:echo "Git gud noob! v"<CR>
+
+" *************************************************************
+" *                                                           *
+" *                     REMAP KEYS                            *
+" *                                                           *
+" *************************************************************
+nmap <leader>f <Plug>CtrlSFPrompt
 
 " remaps for ease of use
 nnoremap <A-j> :m+<CR>
