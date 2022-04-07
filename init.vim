@@ -7,6 +7,7 @@ set ignorecase
 set smartcase
 set autoread
 set cursorline
+set clipboard=unnamed
 
 " set line numbering
 set nu rnu
@@ -33,13 +34,14 @@ Plug 'sjl/gundo.vim'
 Plug 'christoomey/vim-system-copy'
 Plug 'dyng/ctrlsf.vim'
 
-" syntax highlighting
+" syntax highlighting + lint/hint
 Plug 'octol/vim-cpp-enhanced-highlight'
 "Plug 'mattn/emmet-vim'
 Plug 'scrooloose/syntastic'
 Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
 Plug 'sheerun/vim-polyglot'
+Plug 'ngmy/vim-rubocop'
 
 " git integrations
 Plug 'tpope/vim-fugitive'
@@ -69,7 +71,6 @@ Plug 'preservim/nerdcommenter'
 " surround operations
 Plug 'tpope/vim-surround'
 
-Plug 'ngmy/vim-rubocop'
 call plug#end()
 
 " coc config
@@ -223,14 +224,6 @@ let g:clap_current_selection_sign = { 'text': '->', 'texthl': 'ClapSelectedSign'
 " *                  UNBIND ARROW KEYS                        *
 " *                                                           *
 " *************************************************************
-nnoremap <Left> :echo "Git gud noob! <-"<CR>
-vnoremap <Left> :<C-u>:echo "Git gud noob! <-"<CR>
-inoremap <Left> <C-o>:echo "Git gud noob! <-"<CR>
-
-nnoremap <Right> :echo "Git gud noob! ->"<CR>
-vnoremap <Right> :<C-u>:echo "Git gud noob! ->"<CR>
-inoremap <Right> <C-o>:echo "Git gud noob! ->"<CR>
-
 nnoremap <Up> :echo "Git gud noob! ^"<CR>
 vnoremap <Up> :<C-u>:echo "Git gud noob! ^"<CR>
 inoremap <Up> <C-o>:echo "Git gud noob! ^"<CR>
@@ -253,7 +246,7 @@ nnoremap <A-k> :m-2<CR>
 nnoremap <A-up> :m-2<CR>
 
 nnoremap <C-p> :Clap files<CR>
-inoremap <C-p> :Clap files<CR>
+inoremap <C-p> <C-o>:Clap files<CR>
 
 " move line
 inoremap <A-down> <ESC>:m+<CR>
@@ -298,11 +291,23 @@ inoremap <C-h> :GitGutterPreviewHunk<CR>
 " save file
 noremap <C-S>          :update<CR>
 vnoremap <C-S>         <C-C>:update<CR>
-inoremap <C-S>         <C-O>:update<CR>
+inoremap <C-S>         <C-O>:update<CR><Esc>
 
 " split window horizontally
 noremap <C-A><C-Right> :split<CR>
 
 " close tabs
 nnoremap <A-w> :tabclose<CR>
+
+inoremap jj <Esc>
+
+
+" *************************************************************
+" *                                                           *
+" *                       SNIPPETS                            *
+" *                                                           *
+" *************************************************************
+
+iabbrev clputs  5.times { puts '*** *** *** *** *** *** ***' }<CR>
+                \puts "--> #{<C-O>ma }"<C-O>`a
 
