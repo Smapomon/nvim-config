@@ -207,15 +207,15 @@ let mapleader = ","
 let g:ctrlsf_auto_focus = {
   \ 'at': 'start',
   \}
-
-"let g:ctrlsf_auto_preview = 1
+let g:ctrlsf_fold_result = 1
 let g:ctrlsf_default_view_mode = 'compact'
-"let g:ctrlsf_position = 'bottom'
+let g:ctrlsf_compact_position = 'bottom_inside'
+let g:ctrlsf_compact_winsize = '50%'
+let g:ctrlsf_auto_close = {
+        \ "normal" : 1,
+        \ "compact": 1
+        \ }
 
-"let s:is_win = has('win32') || has('win64')
-"if s:is_win
-    "nmap <C-z> <Nop>
-"endif
 
 let g:clap_current_selection_sign = { 'text': '->', 'texthl': 'ClapSelectedSign', 'linehl': 'ClapSelected' }
 
