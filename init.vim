@@ -42,6 +42,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
 Plug 'sheerun/vim-polyglot'
 Plug 'ngmy/vim-rubocop'
+Plug 'ap/vim-css-color'
 
 " git integrations
 Plug 'tpope/vim-fugitive'
@@ -88,7 +89,6 @@ let g:coc_global_extensions = [
   \ 'coc-eslint',
   \ ]
 
-au BufReadPost *.erb set syntax=javascript
 
 " nerdtree config
 " Check if NERDTree is open or active
@@ -106,29 +106,41 @@ function! SyncTree()
 endfunction
 
 " Highlight currently open buffer in NERDTree
-autocmd BufRead * call SyncTree()
+"autocmd BufRead * call SyncTree()
 
 function! DecideToggling()
   if IsNERDTreeOpen()
     :NERDTreeToggle
   else
     :NERDTreeFind
+    wincmd p
   endif
+endfunction
+
+function! OpenNTOnBufPost()
+  :NERDTreeFind
+  wincmd p
 endfunction
 
 nnoremap <C-t> :call DecideToggling()<CR>
 
-au VimEnter * NERDTreeFind
-
 let g:NERDTreeGitStatusWithFlags = 1
 let g:NERDTreeIgnore = ['^node_modules$', '^.git$']
-" let g:NERDTreeMapOpenInTab = '<ENTER>'
+let g:NERDTreeShowHidden = 1
+
+" *************************************************************
+" *                                                           *
+" *                     ALLA AUTOMAGIC                        *
+" *                                                           *
+" *************************************************************
+" open find file in NERDTree on tab change and on startup
+au VimEnter * call OpenNTOnBufPost()
+au TabEnter * call OpenNTOnBufPost()
 
 " auto close NERDTree if no file is open
 autocmd bufenter * if (winnr("$") == 1 && IsNERDTreeOpen()) | q | endif
 
-" jump to primary window
-autocmd VimEnter * wincmd p
+au BufReadPost *.erb set syntax=javascript
 
 " syntax configs
 syntax on
@@ -143,7 +155,8 @@ set ff=unix
 
 " theme configs
 colorscheme onedark
-
+au FileType gitcommit
+      \ colorscheme desert
 
 " show trailing whitespace
 hi ExtraWhitespace ctermbg=red guibg=red
@@ -154,7 +167,11 @@ match ExtraWhitespace /\s\+$/
 "hi Pmenu ctermfg=250 ctermbg=23 guifg=#ffffff guibg=#005f5f
 "hi PmenuSel cterm=underline ctermfg=250 ctermbg=59 gui=underline guifg=#ffffff guibg=#5f5f5f
 
-" lightline configs
+" *************************************************************
+" *                                                           *
+" *                     BOTTOM BAR CONFIG                     *
+" *                                                           *
+" *************************************************************
 let g:lightline= {
       \ 'colorscheme': 'onedark',
       \ 'active': {
@@ -218,6 +235,8 @@ let g:ctrlsf_auto_close = {
 
 
 let g:clap_current_selection_sign = { 'text': '->', 'texthl': 'ClapSelectedSign', 'linehl': 'ClapSelected' }
+let g:clap_layout = { 'relative': 'editor' }
+
 
 " *************************************************************
 " *                                                           *
@@ -227,80 +246,73 @@ let g:clap_current_selection_sign = { 'text': '->', 'texthl': 'ClapSelectedSign'
 nnoremap <Up> :echo "Git gud noob! ^"<CR>
 vnoremap <Up> :<C-u>:echo "Git gud noob! ^"<CR>
 inoremap <Up> <C-o>:echo "Git gud noob! ^"<CR>
-
 nnoremap <Down> :echo "Git gud noob! v"<CR>
 vnoremap <Down> :<C-u>echo "Git gud noob! v"<CR>
 inoremap <Down> <C-o>:echo "Git gud noob! v"<CR>
+
+" only unbind l/r when not in insert mode
+nnoremap <Left> :echo "Git gud noob! <-"<CR>
+vnoremap <Left> :<C-u>:echo "Git gud noob! <-"<CR>
+nnoremap <Right> :echo "Git gud noob! ->"<CR>
+vnoremap <Right> :<C-u>echo "Git gud noob! ->"<CR>
 
 " *************************************************************
 " *                                                           *
 " *                     REMAP KEYS                            *
 " *                                                           *
 " *************************************************************
-nmap <leader>f <Plug>CtrlSFPrompt
 
-" remaps for ease of use
-nnoremap <A-j> :m+<CR>
-nnoremap <A-down> :m+<CR>
-nnoremap <A-k> :m-2<CR>
-nnoremap <A-up> :m-2<CR>
+nnoremap <C-p> :Clap files --hidden<CR>
+inoremap <C-p> <C-o>:Clap files --hidden<CR>
 
-nnoremap <C-p> :Clap files<CR>
-inoremap <C-p> <C-o>:Clap files<CR>
+nnoremap <C-Left> :tabprevious<CR>
+nnoremap <C-Right> :tabnext<CR>
+inoremap <C-Left> <C-o>:tabprevious<CR>
+inoremap <C-Right> <C-o>:tabnext<CR>
 
 " move line
 inoremap <A-down> <ESC>:m+<CR>
 inoremap <A-j> <ESC>:m+<CR>
 inoremap <A-up> <ESC>:m-2<CR>
 inoremap <A-k> <ESC>:m-2<CR>
+nnoremap <A-j> :m+<CR>
+nnoremap <A-down> :m+<CR>
+nnoremap <A-k> :m-2<CR>
+nnoremap <A-up> :m-2<CR>
 
-" scroll up/down by one line
-nnoremap <C-Down> <C-e>
-inoremap <C-Down> <C-e>
-nnoremap <C-k> <C-e>
-inoremap <C-k> <C-e>
+" insert line before current line
+nnoremap <leader>o O
+inoremap <leader>o <C-o>O
 
-nnoremap <C-Up> <C-y>
-inoremap <C-Up> <C-y>
-nnoremap <C-j> <C-y>
-inoremap <C-j> <C-y>
+" scroll up/down by one line in command and visual mode
+nnoremap <C-Down> <C-y>
+nnoremap <C-Up> <C-e>
+nnoremap <C-k> <C-y>
+nnoremap <C-j> <C-e>
+inoremap <C-Down> <C-y>
+inoremap <C-Up> <C-e>
+inoremap <C-k> <C-y>
+inoremap <C-j> <C-e>
 
-" comment/uncomment
-vmap <C-k><C-m> <plug>NERDCommenterComment
-vmap <C-k><C-u> <plug>NERDCommenterUncomment
-
-nmap <C-k><C-m> <plug>NERDCommenterComment
-nmap <C-k><C-u> <plug>NERDCommenterUncomment
-
-" trim trailing whitespace
-nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
-
-" resize split vim panes
 nnoremap <silent> <S-Left> :vertical resize -1<CR>
 nnoremap <silent> <S-Right> :vertical resize +1<CR>
 nnoremap <silent> <S-Up> :resize -1<CR>
 nnoremap <silent> <S-Down> :resize +1<CR>
 
 " Open fugitive
-nnoremap <C-g> :G<CR>
+nnoremap <C-g> :G<CR><C-w>L :vertical resize 50<Cr>
 
-" open hunk preview
 nnoremap <C-h> :GitGutterPreviewHunk<CR>
-inoremap <C-h> :GitGutterPreviewHunk<CR>
 
-" save file
 noremap <C-S>          :update<CR>
 vnoremap <C-S>         <C-C>:update<CR>
 inoremap <C-S>         <C-O>:update<CR><Esc>
 
-" split window horizontally
 noremap <C-A><C-Right> :split<CR>
-
-" close tabs
 nnoremap <A-w> :tabclose<CR>
 
+" only in visual mode
 inoremap jj <Esc>
-
 
 " *************************************************************
 " *                                                           *
@@ -310,4 +322,31 @@ inoremap jj <Esc>
 
 iabbrev clputs  5.times { puts '*** *** *** *** *** *** ***' }<CR>
                 \puts "--> #{<C-O>ma }"<C-O>`a
+iabbrev magic  # frozen_string_literal: true<CR>
 
+" *************************************************************
+" *                                                           *
+" *                       COMMANDS                            *
+" *                                                           *
+" *************************************************************
+
+" global search
+nmap <leader>f <Plug>CtrlSFPrompt
+
+" trim trailing whitespace
+nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+inoremap <Leader>s :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+
+" Case changes
+nnoremap <Leader>u gUiw
+inoremap <Leader>u gUiw
+vnoremap <Leader>u gUiw
+
+nnoremap <Leader>d guiw
+inoremap <Leader>d guiw
+vnoremap <Leader>d guiw
+
+nnoremap <Leader>- ~h
+inoremap <Leader>- ~h
