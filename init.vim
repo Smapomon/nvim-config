@@ -137,8 +137,10 @@ let g:NERDTreeShowHidden = 1
 au VimEnter * call OpenNTOnBufPost()
 au TabEnter * call OpenNTOnBufPost()
 
+"autocmd bufenter * if (winnr("$") > 1 && IsNERDTreeOpen()) | call OpenNTOnBufPost() | endif
 " auto close NERDTree if no file is open
 autocmd bufenter * if (winnr("$") == 1 && IsNERDTreeOpen()) | q | endif
+autocmd bufenter * if (winnr("$") > 1 && IsNERDTreeOpen()) | call SyncTree() | endif
 
 au BufReadPost *.erb set syntax=javascript
 
@@ -313,6 +315,7 @@ nnoremap <A-w> :tabclose<CR>
 
 " only in visual mode
 inoremap jj <Esc>
+inoremap kk <Esc>
 
 " *************************************************************
 " *                                                           *
@@ -330,6 +333,8 @@ iabbrev magic  # frozen_string_literal: true<CR>
 " *                                                           *
 " *************************************************************
 
+" NERDTree shortcut commands
+nmap <leader>r :NERDTreeRefreshRoot<CR>
 " global search
 nmap <leader>f <Plug>CtrlSFPrompt
 
