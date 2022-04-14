@@ -60,7 +60,7 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-webdevicons'
 
 " File Navigation
-Plug 'junegunn/fzf.vim@'
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 " auto completion
