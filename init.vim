@@ -1,4 +1,5 @@
 set encoding=UTF-8
+set termguicolors
 
 hi Directory guifg=#ff0000 ctermfg=green
 hi CursorLine cterm=NONE ctermbg=darkgrey ctermfg=cyan
@@ -56,11 +57,11 @@ Plug 'junegunn/gv.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-" works with Clap
 Plug 'ryanoasis/vim-webdevicons'
 
 " File Navigation
-Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
+Plug 'junegunn/fzf.vim@'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 " auto completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -157,8 +158,6 @@ set ff=unix
 
 " theme configs
 colorscheme onedark
-au FileType gitcommit
-      \ colorscheme desert
 
 " show trailing whitespace
 hi ExtraWhitespace ctermbg=red guibg=red
@@ -236,9 +235,33 @@ let g:ctrlsf_auto_close = {
         \ }
 
 
-let g:clap_current_selection_sign = { 'text': '->', 'texthl': 'ClapSelectedSign', 'linehl': 'ClapSelected' }
-let g:clap_layout = { 'relative': 'editor' }
+let g:fzf_buffers_jump = 1
+set wildmode=list:longest,list:full
+set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
+let $FZF_DEFAULT_COMMAND='rg --files --follow --no-ignore-vcs --hidden -g "!{tmp/cache/*,node_modules/*,.git/*}"'
+let $FZF_DEFAULT_OPTS=' --layout=reverse --preview="bat --style=numbers --color=always {}"'
+let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 
+function! FloatingFZF()
+  let buf = nvim_create_buf(v:false, v:true)
+  call setbufvar(buf, '&signcolumn', 'no')
+
+  let height = float2nr(15)
+  let width = float2nr(150)
+  let horizontal = float2nr((&columns - width) / 2)
+  let vertical = 1
+
+  let opts = {
+        \ 'relative': 'editor',
+        \ 'row': vertical,
+        \ 'col': horizontal,
+        \ 'width': width,
+        \ 'height': height,
+        \ 'style': 'minimal'
+        \ }
+
+  call nvim_open_win(buf, v:true, opts)
+endfunction
 
 " *************************************************************
 " *                                                           *
@@ -264,8 +287,8 @@ vnoremap <Right> :<C-u>echo "Git gud noob! ->"<CR>
 " *                                                           *
 " *************************************************************
 
-nnoremap <C-p> :Clap files --hidden<CR>
-inoremap <C-p> <C-o>:Clap files --hidden<CR>
+nnoremap <silent> <C-p> :call fzf#vim#files('.', {'options': '--prompt ""'})<CR>
+inoremap <silent> <C-p> <C-o>:Files<CR>
 
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
@@ -355,3 +378,15 @@ vnoremap <Leader>d guiw
 
 nnoremap <Leader>- ~h
 inoremap <Leader>- ~h
+
+function! GitGutterNextHunkCycle()
+  let line = line('.')
+  silent! GitGutterNextHunk
+  if line('.') == line
+    1
+    GitGutterNextHunk
+  endif
+endfunction
+
+nmap <Leader>gh :call GitGutterNextHunkCycle()<CR>
+
