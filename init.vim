@@ -1,5 +1,5 @@
 set encoding=UTF-8
-set termguicolors
+set termguicolors " use the terminal colorscheme so that they padding matches the vim colorscheme
 
 hi Directory guifg=#ff0000 ctermfg=green
 hi CursorLine cterm=NONE ctermbg=darkgrey ctermfg=cyan
@@ -8,12 +8,17 @@ set ignorecase
 set smartcase
 set autoread
 set cursorline
-set clipboard=unnamed
+set clipboard=unnamed " use system clipboard
+set nu rnu " relative line numbers are better for navigation
 
-" set line numbering
-set nu rnu
+" splits to right and below feel more natural
+set splitbelow
+set splitright
 
-" set tab titles
+" disable multiple statusbars
+set laststatus=3
+
+" tab titles
 let &titlestring = @&
 set title
 
@@ -73,6 +78,11 @@ Plug 'preservim/nerdcommenter'
 " surround operations
 Plug 'tpope/vim-surround'
 
+" language specific stuff
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-rails'
+
 call plug#end()
 
 " coc config
@@ -128,6 +138,19 @@ nnoremap <C-t> :call DecideToggling()<CR>
 let g:NERDTreeGitStatusWithFlags = 1
 let g:NERDTreeIgnore = ['^node_modules$', '^.git$']
 let g:NERDTreeShowHidden = 1
+let g:NERDTreeStatusline = "%{matchstr(getline('.'), '\\s\\zs\\w\\(.*\\)')}"
+
+" disable lightline statusbar for NERDTree buffers (since it's useless)
+augroup filetype_nerdtree
+  au!
+  au FileType nerdtree call s:disable_lightline_on_nerdtree()
+  au WinEnter,BufWinEnter,TabEnter * call s:disable_lightline_on_nerdtree()
+augroup END
+
+fu s:disable_lightline_on_nerdtree() abort
+  let nerdtree_winnr = index(map(range(1, winnr('$')), {_,v -> getbufvar(winbufnr(v), '&ft')}), 'nerdtree') + 1
+  call timer_start(0, {-> nerdtree_winnr && setwinvar(nerdtree_winnr, '&stl', '%#Normal#')})
+endfu
 
 " *************************************************************
 " *                                                           *
@@ -194,6 +217,7 @@ let g:lightline= {
       \ 'component_type': {
       \	 'gitdiff': 'middle',
       \ },
+      \ 'nerdtree': [ '%{exists("b:NERDTreeRoot")?b:NERDTreeRoot.path.str():""}', '' ],
       \ }
 
 let g:lightline#gitdiff#inidicator_added = 'Add: '
@@ -246,7 +270,7 @@ function! FloatingFZF()
   let buf = nvim_create_buf(v:false, v:true)
   call setbufvar(buf, '&signcolumn', 'no')
 
-  let height = float2nr(15)
+  let height = float2nr(30)
   let width = float2nr(150)
   let horizontal = float2nr((&columns - width) / 2)
   let vertical = 1
@@ -308,6 +332,7 @@ nnoremap <A-up> :m-2<CR>
 " insert line before current line
 nnoremap <leader>o O
 inoremap <leader>o <C-o>O
+inoremap <leader>O <C-o>o
 
 " scroll up/down by one line in command and visual mode
 nnoremap <C-Down> <C-y>
