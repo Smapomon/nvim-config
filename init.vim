@@ -154,6 +154,22 @@ endfu
 
 " *************************************************************
 " *                                                           *
+" *                     EDITOR WARNINGS                       *
+" *                                                           *
+" *************************************************************
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+set signcolumn=yes
+
+let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" *************************************************************
+" *                                                           *
 " *                     ALLA AUTOMAGIC                        *
 " *                                                           *
 " *************************************************************
@@ -203,13 +219,13 @@ let g:lightline= {
       \		  	  ['gitbranch', 'readonly', 'filename', 'modified'],
       \		  	  ['gitdiff'],
       \			],
-      \		'right': [ ['lineinfo'], ['filetype'] ],
+      \		'right': [ ['lineinfo'], ['percent'], ['filetype'], ['gitbranch'] ],
       \ },
       \ 'inactive': {
       \		'left': [ ['filename', 'gitversion'] ],
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
+      \   'gitbranch': 'gitbranch#name'
       \ },
       \ 'component_expand': {
       \	 'gitdiff': 'lightline#gitdiff#get',
@@ -253,6 +269,7 @@ let g:ctrlsf_fold_result = 1
 let g:ctrlsf_default_view_mode = 'compact'
 let g:ctrlsf_compact_position = 'bottom_inside'
 let g:ctrlsf_compact_winsize = '50%'
+let g:ctrlsf_default_root = 'project'
 let g:ctrlsf_auto_close = {
         \ "normal" : 1,
         \ "compact": 1
@@ -312,7 +329,7 @@ vnoremap <Right> :<C-u>echo "Git gud noob! ->"<CR>
 " *************************************************************
 
 nnoremap <silent> <C-p> :call fzf#vim#files('.', {'options': '--prompt ""'})<CR>
-inoremap <silent> <C-p> <C-o>:Files<CR>
+inoremap <silent> <C-p> <C-o>:call fzf#vim#files('.', {'options': '--prompt ""'})<CR>
 
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
@@ -365,14 +382,23 @@ nnoremap <A-w> :tabclose<CR>
 inoremap jj <Esc>
 inoremap kk <Esc>
 
+" navigate quickfix list
+nnoremap <leader>n :cn<CR>
+vnoremap <leader>n <C-C>:cn<CR>
+inoremap <leader>n <C-O>:cn<CR><Esc>
+
+nnoremap <leader>p :cp<CR>
+vnoremap <leader>p <C-C>:cp<CR>
+inoremap <leader>p <C-O>:cp<CR><Esc>
+
 " *************************************************************
 " *                                                           *
 " *                       SNIPPETS                            *
 " *                                                           *
 " *************************************************************
 
-iabbrev clputs  5.times { puts '*** *** *** *** *** *** ***' }<CR>
-                \puts "--> #{<C-O>ma }"<C-O>`a
+iabbrev clputs  5.times { puts '*** *** *** *** *** *** ***' }
+                \<CR>puts "--> #{}"<Left><Left>
 iabbrev magic  # frozen_string_literal: true<CR>
 
 " *************************************************************
@@ -389,20 +415,24 @@ nmap <leader>f <Plug>CtrlSFPrompt
 " trim trailing whitespace
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
+" subsitute word under cursor
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 inoremap <Leader>s :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 
-" Case changes
+" open rubocop list
+nnoremap <Leader>ö :RuboCop<CR>
+
+" Case changes (in visual mode only change selection)
 nnoremap <Leader>u gUiw
 inoremap <Leader>u gUiw
-vnoremap <Leader>u gUiw
+vnoremap <Leader>u gU
 
 nnoremap <Leader>d guiw
 inoremap <Leader>d guiw
 vnoremap <Leader>d guiw
 
 nnoremap <Leader>- ~h
-inoremap <Leader>- ~h
+inoremap <leader>- ~h
 
 function! GitGutterNextHunkCycle()
   let line = line('.')
