@@ -147,6 +147,12 @@ augroup filetype_nerdtree
   au WinEnter,BufWinEnter,TabEnter * call s:disable_lightline_on_nerdtree()
 augroup END
 
+" assembly files with nasm highlighting
+augroup assembly_ft
+  au!
+  autocmd BufNewFile,BufRead *.asm set syntax=nasm filetype=nasm
+augroup END
+
 fu s:disable_lightline_on_nerdtree() abort
   let nerdtree_winnr = index(map(range(1, winnr('$')), {_,v -> getbufvar(winbufnr(v), '&ft')}), 'nerdtree') + 1
   call timer_start(0, {-> nerdtree_winnr && setwinvar(nerdtree_winnr, '&stl', '%#Normal#')})
@@ -216,8 +222,9 @@ let g:lightline= {
       \ 'colorscheme': 'onedark',
       \ 'active': {
       \		'left': [ ['mode', 'paste'],
-      \		  	  ['gitbranch', 'readonly', 'filename', 'modified'],
+      \		  	  ['gitbranch', 'readonly', 'modified'],
       \		  	  ['gitdiff'],
+      \		  	  ['relativepath'],
       \			],
       \		'right': [ ['lineinfo'], ['percent'], ['filetype'], ['gitbranch'] ],
       \ },
@@ -390,6 +397,16 @@ inoremap <leader>n <C-O>:cn<CR><Esc>
 nnoremap <leader>p :cp<CR>
 vnoremap <leader>p <C-C>:cp<CR>
 inoremap <leader>p <C-O>:cp<CR><Esc>
+
+" copilot remaps
+inoremap <leader>ce <C-O><Plug>(copilot-dismiss)<CR>
+
+" Hex read & write binary files
+nmap <Leader>hr :%!xxd<CR> :set filetype=xxd<CR>
+nmap <Leader>hw :%!xxd -r<CR> :set binary<CR> :set filetype=<CR>
+
+" visual search
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 " *************************************************************
 " *                                                           *
