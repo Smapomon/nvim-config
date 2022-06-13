@@ -222,17 +222,18 @@ let g:lightline= {
       \ 'colorscheme': 'onedark',
       \ 'active': {
       \		'left': [ ['mode', 'paste'],
-      \		  	  ['gitbranch', 'readonly', 'modified'],
+      \		  	  ['readonly', 'modified', 'gitbranch'],
       \		  	  ['gitdiff'],
       \		  	  ['relativepath'],
       \			],
-      \		'right': [ ['lineinfo'], ['percent'], ['filetype'], ['gitbranch'] ],
+      \		'right': [ ['lineinfo'], ['percent'], ['filetype'] ],
       \ },
       \ 'inactive': {
       \		'left': [ ['filename', 'gitversion'] ],
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'gitbranch#name'
+      \   'gitbranch': 'FugitiveHead',
+      \   'lineinfo': 'LightlineLineinfo'
       \ },
       \ 'component_expand': {
       \	 'gitdiff': 'lightline#gitdiff#get',
@@ -248,8 +249,6 @@ let g:lightline#gitdiff#inidicator_modified = 'Mod: '
 let g:lightline#gitdiff#inidicator_removed = 'Del: '
 let g:lightline#gitdiff#separator = ' '
 let g:lightline#gitdiff#show_empty_indicators = 1
-
-let g:lightline.component_function = { 'lineinfo': 'LightlineLineinfo' }
 
 function! LightlineLineinfo() abort
   let l:current_line = printf('%-3s', line('.'))
