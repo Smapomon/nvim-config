@@ -1,5 +1,6 @@
 set encoding=UTF-8
 set termguicolors " use the terminal colorscheme so that they padding matches the vim colorscheme
+set showtabline=2
 
 hi Directory guifg=#ff0000 ctermfg=green
 hi CursorLine cterm=NONE ctermbg=darkgrey ctermfg=cyan
@@ -413,8 +414,7 @@ vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 " *                                                           *
 " *************************************************************
 
-iabbrev clputs  5.times { puts '*** *** *** *** *** *** ***' }
-                \<CR>puts "--> #{}"<Left><Left>
+iabbrev clputs  5.times { puts '*** *** *** *** *** *** ***' }<CR>puts "--> #{}"<Left><Left>
 iabbrev magic  # frozen_string_literal: true<CR>
 
 " *************************************************************
@@ -461,3 +461,14 @@ endfunction
 
 nmap <Leader>gh :call GitGutterNextHunkCycle()<CR>
 
+inoremap <silent> =   =<Esc>:call <SID>align('=')<CR>a
+function! s:align(aa)
+  let p = '^.*\s'.a:aa.'\s.*$'
+  if exists(':Tabularize') && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+    let column = strlen(substitute(getline('.')[0:col('.')],'[^'.a:aa.']','','g'))
+    let position = strlen(matchstr(getline('.')[0:col('.')],'.*'.a:aa.':\s*\zs.*'))
+    exec 'Tabularize/'.a:aa.'/l1'
+    normal! 0
+    call search(repeat('[^'.a:aa.']*'.a:aa,column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+  endif
+endfunction
