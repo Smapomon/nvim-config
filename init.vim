@@ -1,6 +1,6 @@
 set encoding=UTF-8
 set termguicolors " use the terminal colorscheme so that they padding matches the vim colorscheme
-set showtabline=2
+set showtabline=2 " always show tabs
 
 hi Directory guifg=#ff0000 ctermfg=green
 hi CursorLine cterm=NONE ctermbg=darkgrey ctermfg=cyan
@@ -295,7 +295,7 @@ let g:ctrlsf_auto_close = {
 let g:fzf_buffers_jump = 1
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
-let $FZF_DEFAULT_COMMAND='rg --files --follow --no-ignore-vcs --hidden -g "!{tmp/cache/*,node_modules/*,.git/*}"'
+let $FZF_DEFAULT_COMMAND='rg --files --follow --no-ignore-vcs --hidden -g "!{tmp/cache/*,node_modules/*,.git/*,public/test/upload_items/*}"'
 let $FZF_DEFAULT_OPTS=' --layout=reverse --preview="bat --style=numbers --color=always {}"'
 let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 
