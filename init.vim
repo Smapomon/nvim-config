@@ -71,20 +71,29 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 " auto completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'github/copilot.vim'
 
 " comment code
 Plug 'preservim/nerdcommenter'
 
 " surround operations
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 
 " language specific stuff
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-rails'
 
+" snippets
+Plug 'marcweber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
+
 call plug#end()
+
+" Snippets config
+let g:snippets_dir="C:\Users\sampo\AppData\Local\nvim-data\plugged\vim-snippets\snippets\,C:\Users\sampo\AppData\Local\nvim\snippets"
 
 " coc config
 let g:coc_global_extensions = [
@@ -336,7 +345,7 @@ vnoremap <Right> :<C-u>echo "Git gud noob! ->"<CR>
 " *************************************************************
 
 nnoremap <silent> <C-p> :call fzf#vim#files('.', {'options': '--prompt ""'})<CR>
-inoremap <silent> <C-p> <C-o>:call fzf#vim#files('.', {'options': '--prompt ""'})<CR>
+"inoremap <silent> <C-p> <C-o>:call fzf#vim#files('.', {'options': '--prompt ""'})<CR>
 
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
@@ -414,8 +423,7 @@ vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 " *                                                           *
 " *************************************************************
 
-iabbrev clputs  5.times { puts '*** *** *** *** *** *** ***' }<CR>puts "--> #{}"<Left><Left>
-iabbrev magic  # frozen_string_literal: true<CR>
+" MOVED TO SNIPMATE
 
 " *************************************************************
 " *                                                           *
