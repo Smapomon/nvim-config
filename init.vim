@@ -59,6 +59,7 @@ Plug 'christoomey/vim-conflicted'
 Plug 'niklaas/lightline-gitdiff'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/gv.vim'
+Plug 'akinsho/git-conflict.nvim'
 
 " NERDTree Integrations
 "Plug 'scrooloose/nerdtree'
@@ -113,7 +114,7 @@ let g:coc_global_extensions = [
   \ 'coc-eslint',
   \ ]
 
-autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'NvimTree_1') | q | endif
+autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
 "autocmd BufRead * call OpenCocExplorer()
 
 " *************************************************************
@@ -130,27 +131,37 @@ require"nvim-treesitter.configs".setup {
 
   highlight = {
     enable                             = true,
-    additional_vim_regex_highluighting = false
+    additional_vim_regex_highluighting = false,
+  },
+
+  indent = {
+    enable = true,
   }
 }
 
 require"nvim-tree".setup {
-  disable_netrw       = true,
-  hijac_netrw         = true,
-  open_on_setup       = true,
-  open_on_setup_file  = true,
-  auto_close          = true,
-  update_cwd          = true,
-  open_on_tab         = true,
-  reload_on_buf_enter = true,
-  hijack_cursor       = true,
+  disable_netrw      = true,
+  hijack_netrw       = true,
+  open_on_setup      = true,
+  open_on_setup_file = true,
+  update_cwd         = true,
+  open_on_tab        = true,
+  reload_on_bufenter = true,
+  hijack_cursor      = true,
 
-  renderer = {
+  renderer                 = {
     highlight_git          = true,
     highlight_opened_files = "none",
+    full_name              = true,
+    group_empty            = true,
+
+    icons           = {
+      git_placement = "before",
+      padding       = "  ",
+    }
   },
 
-  update_to_buf_dir = {
+  hijack_directories = {
     enable          = true,
     auto_open       = true
   },
@@ -158,7 +169,6 @@ require"nvim-tree".setup {
     width = 30
   },
 
-  highlight_focused_file = true,
   update_focused_file = {
     enable = true,
   },
