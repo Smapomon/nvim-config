@@ -50,6 +50,7 @@ Plug 'godlygeek/tabular'
 Plug 'sheerun/vim-polyglot'
 Plug 'ngmy/vim-rubocop'
 Plug 'ap/vim-css-color'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " git integrations
 Plug 'tpope/vim-fugitive'
@@ -60,14 +61,16 @@ Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/gv.vim'
 
 " NERDTree Integrations
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+"Plug 'scrooloose/nerdtree'
+"Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-webdevicons'
 
 " File Navigation
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
+Plug 'kyazdani42/nvim-tree.lua'
 
 " auto completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -110,52 +113,105 @@ let g:coc_global_extensions = [
   \ 'coc-eslint',
   \ ]
 
+autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'NvimTree_1') | q | endif
+"autocmd BufRead * call OpenCocExplorer()
+
+" *************************************************************
+" *                                                           *
+" *                     LUA SETUPS                            *
+" *                                                           *
+" *************************************************************
+
+lua << EOF
+require"nvim-treesitter.configs".setup {
+  ensure_installed = "all",
+  sync_install     = false,
+
+
+  highlight = {
+    enable                             = true,
+    additional_vim_regex_highluighting = false
+  }
+}
+
+require"nvim-tree".setup {
+  disable_netrw       = true,
+  hijac_netrw         = true,
+  open_on_setup       = true,
+  open_on_setup_file  = true,
+  auto_close          = true,
+  update_cwd          = true,
+  open_on_tab         = true,
+  reload_on_buf_enter = true,
+  hijack_cursor       = true,
+
+  renderer = {
+    highlight_git          = true,
+    highlight_opened_files = "name",
+  },
+
+  update_to_buf_dir = {
+    enable          = true,
+    auto_open       = true
+  },
+  view = {
+    width = 30
+  },
+
+  highlight_focused_file = true,
+  update_focused_file = {
+    enable = true,
+  },
+}
+EOF
+
+nnoremap <C-t> :NvimTreeToggle<CR>
 
 " nerdtree config
 " Check if NERDTree is open or active
-function! IsNERDTreeOpen()
-  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
+"function! IsNERDTreeOpen()
+  "return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+"endfunction
 
 " Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
 " file, and were not in vimdiff
-function! SyncTree()
-  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-    NERDTreeFind
-    wincmd p
-  endif
-endfunction
+"function! SyncTree()
+  "if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+    "NERDTreeFind
+    "wincmd p
+  "endif
+"endfunction
 
 " Highlight currently open buffer in NERDTree
 "autocmd BufRead * call SyncTree()
 
-function! DecideToggling()
-  if IsNERDTreeOpen()
-    :NERDTreeToggle
-  else
-    :NERDTreeFind
-    wincmd p
-  endif
-endfunction
+"function! DecideToggling()
+  "if IsNERDTreeOpen()
+    ":NERDTreeToggle
+  "else
+    ":NERDTreeFind
+    "wincmd p
+  "endif
+"endfunction
 
-function! OpenNTOnBufPost()
-  :NERDTreeFind
-  wincmd p
-endfunction
+"function! OpenNTOnBufPost()
+  ":NERDTreeFind
+  "wincmd p
+"endfunction
 
-nnoremap <C-t> :call DecideToggling()<CR>
+"nnoremap <C-t> :call DecideToggling()<CR>
 
-let g:NERDTreeGitStatusWithFlags = 1
-let g:NERDTreeIgnore = ['^node_modules$', '^.git$']
-let g:NERDTreeShowHidden = 1
-let g:NERDTreeStatusline = "%{matchstr(getline('.'), '\\s\\zs\\w\\(.*\\)')}"
+"let g:NERDTreeGitStatusWithFlags = 1
+"let g:NERDTreeIgnore = ['^node_modules$', '^.git$']
+"let g:NERDTreeShowHidden = 1
+"let g:NERDTreeStatusline = "%{matchstr(getline('.'), '\\s\\zs\\w\\(.*\\)')}"
 
 " disable lightline statusbar for NERDTree buffers (since it's useless)
-augroup filetype_nerdtree
-  au!
-  au FileType nerdtree call s:disable_lightline_on_nerdtree()
-  au WinEnter,BufWinEnter,TabEnter * call s:disable_lightline_on_nerdtree()
-augroup END
+"augroup filetype_nerdtree
+  "au!
+  "au FileType nerdtree call s:disable_lightline_on_nerdtree()
+  "au WinEnter,BufWinEnter,TabEnter * call s:disable_lightline_on_nerdtree()
+"augroup END
 
 " assembly files with nasm highlighting
 augroup assembly_ft
@@ -163,10 +219,10 @@ augroup assembly_ft
   autocmd BufNewFile,BufRead *.asm set syntax=nasm filetype=nasm
 augroup END
 
-fu s:disable_lightline_on_nerdtree() abort
-  let nerdtree_winnr = index(map(range(1, winnr('$')), {_,v -> getbufvar(winbufnr(v), '&ft')}), 'nerdtree') + 1
-  call timer_start(0, {-> nerdtree_winnr && setwinvar(nerdtree_winnr, '&stl', '%#Normal#')})
-endfu
+"fu s:disable_lightline_on_nerdtree() abort
+  "let nerdtree_winnr = index(map(range(1, winnr('$')), {_,v -> getbufvar(winbufnr(v), '&ft')}), 'nerdtree') + 1
+  "call timer_start(0, {-> nerdtree_winnr && setwinvar(nerdtree_winnr, '&stl', '%#Normal#')})
+"endfu
 
 " *************************************************************
 " *                                                           *
@@ -190,13 +246,13 @@ let g:syntastic_check_on_wq = 0
 " *                                                           *
 " *************************************************************
 " open find file in NERDTree on tab change and on startup
-au VimEnter * call OpenNTOnBufPost()
-au TabEnter * call OpenNTOnBufPost()
+"au VimEnter * call OpenNTOnBufPost()
+"au TabEnter * call OpenNTOnBufPost()
 
 "autocmd bufenter * if (winnr("$") > 1 && IsNERDTreeOpen()) | call OpenNTOnBufPost() | endif
 " auto close NERDTree if no file is open
-autocmd bufenter * if (winnr("$") == 1 && IsNERDTreeOpen()) | q | endif
-autocmd bufenter * if (winnr("$") > 1 && IsNERDTreeOpen()) | call SyncTree() | endif
+"autocmd bufenter * if (winnr("$") == 1 && IsNERDTreeOpen()) | q | endif
+"autocmd bufenter * if (winnr("$") > 1 && IsNERDTreeOpen()) | call SyncTree() | endif
 
 au BufReadPost *.erb set syntax=javascript
 
@@ -251,7 +307,6 @@ let g:lightline= {
       \ 'component_type': {
       \	 'gitdiff': 'middle',
       \ },
-      \ 'nerdtree': [ '%{exists("b:NERDTreeRoot")?b:NERDTreeRoot.path.str():""}', '' ],
       \ }
 
 let g:lightline#gitdiff#inidicator_added = 'Add: '
@@ -432,7 +487,7 @@ vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 " *************************************************************
 
 " NERDTree shortcut commands
-nmap <leader>r :NERDTreeRefreshRoot<CR>
+"nmap <leader>r :NERDTreeRefreshRoot<CR>
 " global search
 nmap <leader>f <Plug>CtrlSFPrompt
 
