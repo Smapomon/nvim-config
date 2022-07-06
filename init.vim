@@ -147,7 +147,7 @@ require"nvim-tree".setup {
 
   renderer = {
     highlight_git          = true,
-    highlight_opened_files = "name",
+    highlight_opened_files = "none",
   },
 
   update_to_buf_dir = {
