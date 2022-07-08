@@ -51,7 +51,7 @@ Plug 'dense-analysis/ale'
 Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
 Plug 'sheerun/vim-polyglot'
-Plug 'ngmy/vim-rubocop'
+"Plug 'ngmy/vim-rubocop'
 Plug 'ap/vim-css-color'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
@@ -125,7 +125,7 @@ require"nvim-treesitter.configs".setup {
 
   highlight = {
     enable                             = true,
-    additional_vim_regex_highluighting = false,
+    additional_vim_regex_highluighting = true,
   },
 
   indent = {
@@ -198,7 +198,7 @@ let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']
 let g:ale_hover_cursor           = 1
 let g:ale_set_balloons           = 1
 let g:ale_cursor_detail          = 1
-let g:ale_set_quickfix           = 1
+let g:ale_set_quickfix           = 0
 
 " *************************************************************
 " *                                                           *
@@ -453,7 +453,8 @@ vmap <Leader>t: :Tabularize /:\zs<CR>
 " NERDTree shortcut commands
 "nmap <leader>r :NERDTreeRefreshRoot<CR>
 " global search
-nmap <leader>f <Plug>CtrlSFPrompt
+"nmap <leader>f <Plug>CtrlSFPrompt
+nmap <leader>f :Rg<CR>
 
 " trim trailing whitespace
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
@@ -463,7 +464,7 @@ nnoremap <Leader>s :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 inoremap <Leader>s :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 
 " open rubocop list
-nnoremap <Leader>ö :RuboCop<CR>
+"nnoremap <Leader>ö :RuboCop<CR>
 
 " Case changes (in visual mode only change selection)
 nnoremap <Leader>u gUiw
@@ -476,6 +477,25 @@ vnoremap <Leader>d guiw
 
 nnoremap <Leader>- ~h
 inoremap <leader>- ~h
+
+nnoremap <Leader>yy ^yg_
+
+function! ReplaceMatch()
+  call inputsave()
+  let start_val = input('Find: ')
+  call inputrestore()
+
+  call inputsave()
+  let end_val = input('Replace: ')
+  call inputrestore()
+
+  let exec_command = "cfdo %s/" . start_val . "/" . end_val . "/ | update<CR>"
+  echo "-->"
+  echo exec_command
+  execute exec_command
+endfunction
+nmap <leader>r :cfdo %s///<left><left>
+"nmap <leader>r :call ReplaceMatch()<CR>
 
 function! GitGutterNextHunkCycle()
   let line = line('.')
@@ -499,3 +519,21 @@ function! s:align(aa)
     call search(repeat('[^'.a:aa.']*'.a:aa,column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
   endif
 endfunction
+
+
+function! CycleEOL()
+  let eol_format   = &ff
+  let eol_dict     = {'unix': 'dos', 'dos': 'unix', 'mac': 'unix'}
+  let new_eol      = eol_dict[eol_format]
+  let exec_command = "e! ++ff=" . new_eol
+  execute exec_command
+endfunction
+
+command EOL call CycleEOL()
+
+function! RemoveEOLMarks()
+  let eol_sub_command = "%s///"
+  execute eol_sub_command
+endfunction
+
+command EOLSUB call RemoveEOLMarks()
