@@ -32,6 +32,8 @@ Plug 'vim-scripts/L9'
 Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'jacoborus/tender.vim'
+Plug 'ryanoasis/vim-webdevicons'
+Plug 'kyazdani42/nvim-web-devicons' " for coloured icons
 
 " snippets + magic
 Plug 'rstacruz/sparkup', {'rtp':'vim'}
@@ -44,7 +46,8 @@ Plug 'dyng/ctrlsf.vim'
 " syntax highlighting + lint/hint
 Plug 'octol/vim-cpp-enhanced-highlight'
 "Plug 'mattn/emmet-vim'
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
+Plug 'dense-analysis/ale'
 Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
 Plug 'sheerun/vim-polyglot'
@@ -61,12 +64,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/gv.vim'
 Plug 'akinsho/git-conflict.nvim'
 
-" NERDTree Integrations
-"Plug 'scrooloose/nerdtree'
-"Plug 'Xuyuanp/nerdtree-git-plugin'
-"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'ryanoasis/vim-webdevicons'
-
 " File Navigation
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -75,6 +72,7 @@ Plug 'kyazdani42/nvim-tree.lua'
 
 " auto completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'vim-scripts/CmdlineComplete'
 
 " comment code
 Plug 'preservim/nerdcommenter'
@@ -82,11 +80,6 @@ Plug 'preservim/nerdcommenter'
 " surround operations
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-
-" language specific stuff
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-rails'
 
 " snippets
 Plug 'marcweber/vim-addon-mw-utils'
@@ -98,6 +91,7 @@ call plug#end()
 
 " Snippets config
 let g:snippets_dir="C:\Users\sampo\AppData\Local\nvim-data\plugged\vim-snippets\snippets\,C:\Users\sampo\AppData\Local\nvim\snippets"
+let g:snipMate = { 'snippet_version' : 1 }
 
 " coc config
 let g:coc_global_extensions = [
@@ -173,55 +167,16 @@ require"nvim-tree".setup {
     enable = true,
   },
 }
+
+vim.opt.laststatus = 3
 EOF
 
-nnoremap <C-t> :NvimTreeToggle<CR>
+function! OpenFileTree()
+  NvimTreeToggle
+  wincmd p
+endfunction
 
-" nerdtree config
-" Check if NERDTree is open or active
-"function! IsNERDTreeOpen()
-  "return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-"endfunction
-
-" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
-" file, and were not in vimdiff
-"function! SyncTree()
-  "if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-    "NERDTreeFind
-    "wincmd p
-  "endif
-"endfunction
-
-" Highlight currently open buffer in NERDTree
-"autocmd BufRead * call SyncTree()
-
-"function! DecideToggling()
-  "if IsNERDTreeOpen()
-    ":NERDTreeToggle
-  "else
-    ":NERDTreeFind
-    "wincmd p
-  "endif
-"endfunction
-
-"function! OpenNTOnBufPost()
-  ":NERDTreeFind
-  "wincmd p
-"endfunction
-
-"nnoremap <C-t> :call DecideToggling()<CR>
-
-"let g:NERDTreeGitStatusWithFlags = 1
-"let g:NERDTreeIgnore = ['^node_modules$', '^.git$']
-"let g:NERDTreeShowHidden = 1
-"let g:NERDTreeStatusline = "%{matchstr(getline('.'), '\\s\\zs\\w\\(.*\\)')}"
-
-" disable lightline statusbar for NERDTree buffers (since it's useless)
-"augroup filetype_nerdtree
-  "au!
-  "au FileType nerdtree call s:disable_lightline_on_nerdtree()
-  "au WinEnter,BufWinEnter,TabEnter * call s:disable_lightline_on_nerdtree()
-"augroup END
+nnoremap <C-t> :call OpenFileTree()<CR>
 
 " assembly files with nasm highlighting
 augroup assembly_ft
@@ -229,26 +184,21 @@ augroup assembly_ft
   autocmd BufNewFile,BufRead *.asm set syntax=nasm filetype=nasm
 augroup END
 
-"fu s:disable_lightline_on_nerdtree() abort
-  "let nerdtree_winnr = index(map(range(1, winnr('$')), {_,v -> getbufvar(winbufnr(v), '&ft')}), 'nerdtree') + 1
-  "call timer_start(0, {-> nerdtree_winnr && setwinvar(nerdtree_winnr, '&stl', '%#Normal#')})
-"endfu
-
 " *************************************************************
 " *                                                           *
 " *                     EDITOR WARNINGS                       *
 " *                                                           *
 " *************************************************************
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 set signcolumn=yes
 
-let g:syntastic_ruby_checkers = ['mri', 'rubocop']
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 2
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:ale_floating_preview       = 1
+let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']
+let g:ale_hover_cursor           = 1
+let g:ale_set_balloons           = 1
+let g:ale_cursor_detail          = 1
+let g:ale_set_quickfix           = 1
 
 " *************************************************************
 " *                                                           *
@@ -256,13 +206,6 @@ let g:syntastic_check_on_wq = 0
 " *                                                           *
 " *************************************************************
 " open find file in NERDTree on tab change and on startup
-"au VimEnter * call OpenNTOnBufPost()
-"au TabEnter * call OpenNTOnBufPost()
-
-"autocmd bufenter * if (winnr("$") > 1 && IsNERDTreeOpen()) | call OpenNTOnBufPost() | endif
-" auto close NERDTree if no file is open
-"autocmd bufenter * if (winnr("$") == 1 && IsNERDTreeOpen()) | q | endif
-"autocmd bufenter * if (winnr("$") > 1 && IsNERDTreeOpen()) | call SyncTree() | endif
 
 au BufReadPost *.erb set syntax=javascript
 
@@ -302,7 +245,7 @@ let g:lightline= {
       \		  	  ['gitdiff'],
       \		  	  ['relativepath'],
       \			],
-      \		'right': [ ['lineinfo'], ['percent'], ['filetype'] ],
+      \		'right': [ ['lineinfo'], ['percent'], ['filetype', 'fileformat', 'fileencoding'] ],
       \ },
       \ 'inactive': {
       \		'left': [ ['filename', 'gitversion'] ],
@@ -385,6 +328,9 @@ function! FloatingFZF()
   call nvim_open_win(buf, v:true, opts)
 endfunction
 
+" update on vim enter because of lightline bug that does not initialize the bottom bar correctly
+autocmd FocusGained * call lightline#update()
+
 " *************************************************************
 " *                                                           *
 " *                  UNBIND ARROW KEYS                        *
@@ -456,10 +402,10 @@ noremap <C-S>          :update<CR>
 vnoremap <C-S>         <C-C>:update<CR>
 inoremap <C-S>         <C-O>:update<CR><Esc>
 
-noremap <C-A><C-Right> :split<CR>
+noremap <A-Right> :vsplit<CR>
 nnoremap <A-w> :tabclose<CR>
 
-" only in visual mode
+" only in insert mode
 inoremap jj <Esc>
 inoremap kk <Esc>
 
@@ -467,13 +413,16 @@ inoremap kk <Esc>
 nnoremap <leader>n :cn<CR>
 vnoremap <leader>n <C-C>:cn<CR>
 inoremap <leader>n <C-O>:cn<CR><Esc>
+nnoremap <leader>N :lnext<CR>
+vnoremap <leader>N <C-C>:lnext<CR>
+inoremap <leader>N <C-O>:lnext<CR><Esc>
 
 nnoremap <leader>p :cp<CR>
 vnoremap <leader>p <C-C>:cp<CR>
 inoremap <leader>p <C-O>:cp<CR><Esc>
-
-" copilot remaps
-inoremap <leader>ce <C-O><Plug>(copilot-dismiss)<CR>
+nnoremap <leader>P :lprevious<CR>
+vnoremap <leader>P <C-C>:lprevious<CR>
+inoremap <leader>P <C-O>:lprevious<CR><Esc>
 
 " Hex read & write binary files
 nmap <Leader>hr :%!xxd<CR> :set filetype=xxd<CR>
@@ -481,6 +430,11 @@ nmap <Leader>hw :%!xxd -r<CR> :set binary<CR> :set filetype=<CR>
 
 " visual search
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+
+nmap <Leader>t= :Tabularize /=<CR>
+vmap <Leader>t= :Tabularize /=<CR>
+nmap <Leader>t: :Tabularize /:\zs<CR>
+vmap <Leader>t: :Tabularize /:\zs<CR>
 
 " *************************************************************
 " *                                                           *
