@@ -200,14 +200,19 @@ let g:ale_set_balloons           = 1
 let g:ale_cursor_detail          = 1
 let g:ale_set_quickfix           = 0
 
+let g:ale_pattern_options = {
+\   '.*secure_headers\.rb$': {'ale_enabled': 0},
+\   'Gemfile\.lock$': {'ale_enabled': 0},
+\}
+
 " *************************************************************
 " *                                                           *
 " *                     ALLA AUTOMAGIC                        *
 " *                                                           *
 " *************************************************************
-" open find file in NERDTree on tab change and on startup
 
 au BufReadPost *.erb set syntax=javascript
+au BufEnter Gemfile.lock set ft=ruby
 
 " syntax configs
 syntax on
@@ -217,7 +222,7 @@ set smartindent
 set numberwidth=6
 hi LineNr term=bold cterm=NONE ctermbg=NONE gui=NONE
 
-" always use unix line endings
+" always prefer unix line endings
 set ff=unix
 
 " theme configs
@@ -537,3 +542,5 @@ function! RemoveEOLMarks()
 endfunction
 
 command EOLSUB call RemoveEOLMarks()
+
+command! Cclear cexpr []
