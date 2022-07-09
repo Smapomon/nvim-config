@@ -136,8 +136,8 @@ require"nvim-treesitter.configs".setup {
 require"nvim-tree".setup {
   disable_netrw      = true,
   hijack_netrw       = true,
-  open_on_setup      = true,
-  open_on_setup_file = true,
+  open_on_setup      = false,
+  open_on_setup_file = false,
   update_cwd         = true,
   open_on_tab        = true,
   reload_on_bufenter = true,
@@ -170,6 +170,9 @@ require"nvim-tree".setup {
 
 vim.opt.laststatus = 3
 EOF
+
+
+au VimEnter * call OpenFileTree()
 
 function! OpenFileTree()
   NvimTreeToggle
@@ -280,6 +283,8 @@ function! LightlineLineinfo() abort
 
   return l:lineinfo
 endfunction
+
+au VimEnter * call lightline#update()
 
 filetype plugin on
 
