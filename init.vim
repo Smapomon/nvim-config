@@ -159,8 +159,17 @@ require"nvim-tree".setup {
     enable          = true,
     auto_open       = true
   },
+
   view = {
     width = 30
+  },
+
+  git = {
+    ignore = false
+  },
+
+  filters = {
+    dotfiles = false
   },
 
   update_focused_file = {
@@ -206,6 +215,7 @@ let g:ale_set_quickfix           = 0
 let g:ale_pattern_options = {
 \   '.*secure_headers\.rb$': {'ale_enabled': 0},
 \   'Gemfile\.lock$': {'ale_enabled': 0},
+\   '.*schema\.rb': {'ale_enabled':0}
 \}
 
 " *************************************************************
@@ -221,12 +231,13 @@ au BufEnter Gemfile.lock set ft=ruby
 syntax on
 set shiftwidth=2
 set autoindent
-set smartindent
 set numberwidth=6
 hi LineNr term=bold cterm=NONE ctermbg=NONE gui=NONE
 
 " always prefer unix line endings
-set ff=unix
+set fileformat=unix
+set fileformats=unix,dos
+"set nobinary
 
 " theme configs
 colorscheme onedark
@@ -314,8 +325,11 @@ let g:fzf_buffers_jump = 1
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
 let $FZF_DEFAULT_COMMAND='rg --files --follow --no-ignore-vcs --hidden -g "!{tmp/cache/*,node_modules/*,.git/*,public/test/upload_items/*}"'
-let $FZF_DEFAULT_OPTS=' --layout=reverse --preview="bat --style=numbers --color=always {}"'
+let $FZF_DEFAULT_OPTS=' --layout=reverse'
+"let $FZF_DEFAULT_OPTS=' --layout=reverse --preview="bat --style=numbers --color=always {}"'
 let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
 function! FloatingFZF()
   let buf = nvim_create_buf(v:false, v:true)
@@ -365,7 +379,7 @@ vnoremap <Right> :<C-u>echo "Git gud noob! ->"<CR>
 " *                                                           *
 " *************************************************************
 
-nnoremap <silent> <C-p> :call fzf#vim#files('.', {'options': '--prompt ""'})<CR>
+nnoremap <silent> <C-p> :call fzf#vim#files('.', {'options': '--prompt "" --layout=reverse --preview="bat --style=numbers --color=always {}"'})<CR>
 "inoremap <silent> <C-p> <C-o>:call fzf#vim#files('.', {'options': '--prompt ""'})<CR>
 
 nnoremap <C-Left> :tabprevious<CR>
@@ -414,12 +428,13 @@ inoremap <C-S>         <C-O>:update<CR><Esc>
 
 noremap <A-Right> :vsplit<CR>
 nnoremap <A-w> :tabclose<CR>
+nnoremap <Leader>tc :tabclose<CR>
 
 " only in insert mode
 inoremap jj <Esc>
 inoremap kk <Esc>
 
-" navigate quickfix list
+" navigate quickfix list forward
 nnoremap <leader>n :cn<CR>
 vnoremap <leader>n <C-C>:cn<CR>
 inoremap <leader>n <C-O>:cn<CR><Esc>
@@ -427,6 +442,7 @@ nnoremap <leader>N :lnext<CR>
 vnoremap <leader>N <C-C>:lnext<CR>
 inoremap <leader>N <C-O>:lnext<CR><Esc>
 
+" navigate quickfix list back
 nnoremap <leader>p :cp<CR>
 vnoremap <leader>p <C-C>:cp<CR>
 inoremap <leader>p <C-O>:cp<CR><Esc>
@@ -460,10 +476,7 @@ vmap <Leader>t: :Tabularize /:\zs<CR>
 " *                                                           *
 " *************************************************************
 
-" NERDTree shortcut commands
-"nmap <leader>r :NERDTreeRefreshRoot<CR>
 " global search
-"nmap <leader>f <Plug>CtrlSFPrompt
 nmap <leader>f :Rg<CR>
 
 " trim trailing whitespace
