@@ -215,7 +215,7 @@ let g:ale_set_quickfix           = 0
 let g:ale_pattern_options = {
 \   '.*secure_headers\.rb$': {'ale_enabled': 0},
 \   'Gemfile\.lock$': {'ale_enabled': 0},
-\   '.*schema\.rb': {'ale_enabled':0}
+\   '.*schema\.rb$': {'ale_enabled': 0},
 \}
 
 " *************************************************************
