@@ -46,7 +46,6 @@ Plug 'dyng/ctrlsf.vim'
 " syntax highlighting + lint/hint
 Plug 'octol/vim-cpp-enhanced-highlight'
 "Plug 'mattn/emmet-vim'
-"Plug 'scrooloose/syntastic'
 Plug 'dense-analysis/ale'
 Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
@@ -54,6 +53,7 @@ Plug 'sheerun/vim-polyglot'
 "Plug 'ngmy/vim-rubocop'
 Plug 'ap/vim-css-color'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'vim-ruby/vim-ruby' " Ruby motions and other stuff
 
 " git integrations
 Plug 'tpope/vim-fugitive'
@@ -450,6 +450,9 @@ nnoremap <leader>P :lprevious<CR>
 vnoremap <leader>P <C-C>:lprevious<CR>
 inoremap <leader>P <C-O>:lprevious<CR><Esc>
 
+" paste at the end of line
+nmap <Leader>ap $p
+
 " Hex read & write binary files
 nmap <Leader>hr :%!xxd<CR> :set filetype=xxd<CR>
 nmap <Leader>hw :%!xxd -r<CR> :set binary<CR> :set filetype=<CR>
@@ -542,7 +545,6 @@ function! s:align(aa)
     call search(repeat('[^'.a:aa.']*'.a:aa,column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
   endif
 endfunction
-
 
 function! CycleEOL()
   let eol_format   = &ff
