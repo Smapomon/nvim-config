@@ -241,6 +241,9 @@ set fileformats=unix,dos
 
 " theme configs
 colorscheme onedark
+if has('unix')
+  hi Normal guibg=NONE ctermbg=NONE
+endif
 
 " show trailing whitespace
 hi ExtraWhitespace ctermbg=red guibg=red
@@ -426,7 +429,7 @@ noremap <C-S>          :update<CR>
 vnoremap <C-S>         <C-C>:update<CR>
 inoremap <C-S>         <C-O>:update<CR><Esc>
 
-noremap <A-Right> :vsplit<CR>
+"noremap <A-Right> :vsplit<CR> " does not work together with wtms
 nnoremap <A-w> :tabclose<CR>
 nnoremap <Leader>tc :tabclose<CR>
 
