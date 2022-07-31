@@ -228,6 +228,12 @@ let g:ale_pattern_options = {
 au BufReadPost *.erb set syntax=javascript
 au BufEnter Gemfile.lock set ft=ruby
 
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave * mkview
+  autocmd BufWinEnter * silent! loadview
+augroup END
+
 " syntax configs
 syntax on
 set shiftwidth=2
@@ -473,6 +479,11 @@ nmap <Leader>t= :Tabularize /=<CR>
 vmap <Leader>t= :Tabularize /=<CR>
 nmap <Leader>t: :Tabularize /:\zs<CR>
 vmap <Leader>t: :Tabularize /:\zs<CR>
+
+" Fold markers
+vmap <Leader>F zF
+" Toggle folds
+nmap <Leader>tf za
 
 " *************************************************************
 " *                                                           *
