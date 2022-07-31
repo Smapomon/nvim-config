@@ -30,6 +30,7 @@ Plug 'vim-scripts/L9'
 
 " theme (bleep bloop)
 Plug 'joshdick/onedark.vim'
+Plug 'liuchengxu/space-vim-theme'
 Plug 'itchyny/lightline.vim'
 Plug 'jacoborus/tender.vim'
 Plug 'ryanoasis/vim-webdevicons'
@@ -240,9 +241,14 @@ set fileformats=unix,dos
 "set nobinary
 
 " theme configs
-colorscheme onedark
-if has('unix')
+" used to be: onedark
+colorscheme space_vim_theme
+if has('unix') " linux specific configs
   hi Normal guibg=NONE ctermbg=NONE
+  hi SignColumn guibg=NONE
+  hi GitSignsAdd guibg=NONE
+  hi GitSignsChange guibg=NONE
+  hi GitSignsDelete guibg=NONE
 endif
 
 " show trailing whitespace
@@ -507,7 +513,18 @@ vnoremap <Leader>d guiw
 nnoremap <Leader>- ~h
 inoremap <leader>- ~h
 
-nnoremap <Leader>yy ^yg_
+" add clipboard yanks
+nnoremap <Leader>Y ^yg_
+nnoremap <Leader>y  "+y
+vnoremap <Leader>y  "+y
+
+" add clipboard puts
+nnoremap <Leader>p "+p
+nnoremap <Leader>P "+P
+vnoremap <Leader>p "+p
+vnoremap <Leader>P "+P
+
+
 
 function! ReplaceMatch()
   call inputsave()
