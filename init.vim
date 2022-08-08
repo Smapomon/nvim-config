@@ -108,8 +108,9 @@ let g:coc_global_extensions = [
   \ 'coc-eslint',
   \ ]
 
-autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
+"autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
 "autocmd BufRead * call OpenCocExplorer()
+autocmd BufEnter * ++nested if winnr('$') == 1 && stridx(bufname(), 'NvimTree_') != -1 | quit | endif
 
 " *************************************************************
 " *                                                           *
