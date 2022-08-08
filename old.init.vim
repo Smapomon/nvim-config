@@ -140,7 +140,7 @@ require"nvim-tree".setup {
   open_on_setup      = false,
   open_on_setup_file = false,
   update_cwd         = true,
-  open_on_tab        = true,
+  open_on_tab        = false,
   reload_on_bufenter = true,
   hijack_cursor      = true,
 
@@ -205,6 +205,7 @@ augroup END
 set statusline+=%#warningmsg#
 set statusline+=%*
 set signcolumn=yes
+set foldcolumn=2
 
 let g:ale_floating_preview       = 1
 let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']
@@ -256,6 +257,7 @@ colorscheme space_vim_theme
 if has('unix') " linux specific configs
   hi Normal guibg=NONE ctermbg=NONE
   hi SignColumn guibg=NONE
+  hi FoldColumn guibg=NONE
   hi GitSignsAdd guibg=NONE
   hi GitSignsChange guibg=NONE
   hi GitSignsDelete guibg=NONE
@@ -447,7 +449,7 @@ inoremap <C-S>         <C-O>:update<CR><Esc>
 
 "noremap <A-Right> :vsplit<CR> " does not work together with wtms
 nnoremap <A-w> :tabclose<CR>
-nnoremap <Leader>tc :tabclose<CR>
+nnoremap <Leader>tq :tabclose<CR>
 
 " only in insert mode
 inoremap jj <Esc>
