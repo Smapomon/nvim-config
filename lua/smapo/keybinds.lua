@@ -180,18 +180,10 @@ map('n', '<Leader>tt', ':tabnext<CR>')
 ---------------
 -- list navs --
 ---------------
-map({'n', 'i', 'v'}, '<Leader>n', function()
-  cmd[[:cn]]
-end)
-map({'n', 'i', 'v'}, '<Leader>N', function()
-  cmd[[:lnext]]
-end)
-map({'n', 'i', 'v'}, '<Leader>p', function()
-  cmd[[:cp]]
-end)
-map({'n', 'i', 'v'}, '<Leader>P', function()
-  cmd[[:lprevious]]
-end)
+map({'n', 'i', 'v'}, '<Leader>n', [[:cn<CR>]])
+map({'n', 'i', 'v'}, '<Leader>N', [[:lnext<CR>]])
+map({'n', 'i', 'v'}, '<Leader>p', [[:cp<CR>]])
+map({'n', 'i', 'v'}, '<Leader>P', [[:lprevious<CR>]])
 
 
 -------------

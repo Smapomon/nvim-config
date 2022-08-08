@@ -154,3 +154,19 @@ require"gitsigns".setup {
   current_line_blame = true,
   signcolumn         = true
 }
+
+
+---------------
+-- FZF setup --
+---------------
+vim.cmd[[
+let g:fzf_buffers_jump = 1
+set wildmode=list:longest,list:full
+set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
+let $FZF_DEFAULT_COMMAND='rg --files --follow --no-ignore-vcs --hidden -g "!{tmp/cache/*,node_modules/*,.git/*,public/test/upload_items/*}"'
+let $FZF_DEFAULT_OPTS=' --layout=reverse'
+]]
+
+vim.cmd[[
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+]]
