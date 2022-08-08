@@ -30,6 +30,7 @@ Plug 'vim-scripts/L9'
 
 " theme (bleep bloop)
 Plug 'joshdick/onedark.vim'
+Plug 'liuchengxu/space-vim-theme'
 Plug 'itchyny/lightline.vim'
 Plug 'jacoborus/tender.vim'
 Plug 'ryanoasis/vim-webdevicons'
@@ -46,7 +47,6 @@ Plug 'dyng/ctrlsf.vim'
 " syntax highlighting + lint/hint
 Plug 'octol/vim-cpp-enhanced-highlight'
 "Plug 'mattn/emmet-vim'
-"Plug 'scrooloose/syntastic'
 Plug 'dense-analysis/ale'
 Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
@@ -54,6 +54,7 @@ Plug 'sheerun/vim-polyglot'
 "Plug 'ngmy/vim-rubocop'
 Plug 'ap/vim-css-color'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'vim-ruby/vim-ruby' " Ruby motions and other stuff
 
 " git integrations
 Plug 'tpope/vim-fugitive'
@@ -140,7 +141,7 @@ require"nvim-tree".setup {
   open_on_setup      = false,
   open_on_setup_file = false,
   update_cwd         = true,
-  open_on_tab        = true,
+  open_on_tab        = false,
   reload_on_bufenter = true,
   hijack_cursor      = true,
 
@@ -182,7 +183,7 @@ vim.opt.laststatus = 3
 EOF
 
 
-au VimEnter * call OpenFileTree()
+"au VimEnter * call OpenFileTree()
 
 function! OpenFileTree()
   NvimTreeToggle
@@ -205,6 +206,7 @@ augroup END
 set statusline+=%#warningmsg#
 set statusline+=%*
 set signcolumn=yes
+set foldcolumn=2
 
 let g:ale_floating_preview       = 1
 let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']
@@ -228,6 +230,16 @@ let g:ale_pattern_options = {
 au BufReadPost *.erb set syntax=javascript
 au BufEnter Gemfile.lock set ft=ruby
 
+augroup remember_folds
+  autocmd!
+  " view files are about 500 bytes
+  " bufleave but not bufwinleave captures closing 2nd tab
+  " nested is needed by bufwrite* (if triggered via other autocmd)
+  " BufHidden for compatibility with `set hidden`
+  autocmd BufWinLeave,BufLeave,BufWritePost,BufHidden,QuitPre ?* nested silent! mkview!
+  autocmd BufWinEnter ?* silent! loadview
+augroup END
+
 " syntax configs
 syntax on
 set shiftwidth=2
@@ -241,7 +253,16 @@ set fileformats=unix,dos
 "set nobinary
 
 " theme configs
-colorscheme onedark
+" used to be: onedark
+colorscheme space_vim_theme
+if has('unix') " linux specific configs
+  hi Normal guibg=NONE ctermbg=NONE
+  hi SignColumn guibg=NONE
+  hi FoldColumn guibg=NONE
+  hi GitSignsAdd guibg=NONE
+  hi GitSignsChange guibg=NONE
+  hi GitSignsDelete guibg=NONE
+endif
 
 " show trailing whitespace
 hi ExtraWhitespace ctermbg=red guibg=red
@@ -427,9 +448,9 @@ noremap <C-S>          :update<CR>
 vnoremap <C-S>         <C-C>:update<CR>
 inoremap <C-S>         <C-O>:update<CR><Esc>
 
-noremap <A-Right> :vsplit<CR>
+"noremap <A-Right> :vsplit<CR> " does not work together with wtms
 nnoremap <A-w> :tabclose<CR>
-nnoremap <Leader>tc :tabclose<CR>
+nnoremap <Leader>tq :tabclose<CR>
 
 " only in insert mode
 inoremap jj <Esc>
@@ -451,6 +472,9 @@ nnoremap <leader>P :lprevious<CR>
 vnoremap <leader>P <C-C>:lprevious<CR>
 inoremap <leader>P <C-O>:lprevious<CR><Esc>
 
+" paste at the end of line
+nmap <Leader>ap $p
+
 " Hex read & write binary files
 nmap <Leader>hr :%!xxd<CR> :set filetype=xxd<CR>
 nmap <Leader>hw :%!xxd -r<CR> :set binary<CR> :set filetype=<CR>
@@ -462,6 +486,15 @@ nmap <Leader>t= :Tabularize /=<CR>
 vmap <Leader>t= :Tabularize /=<CR>
 nmap <Leader>t: :Tabularize /:\zs<CR>
 vmap <Leader>t: :Tabularize /:\zs<CR>
+
+" Fold markers
+vmap <Leader>F zF
+" Toggle folds
+nmap <Leader>tf za
+
+" remove empty lines from visual selection
+" and also remove highlight of empty lines
+vmap <Leader>e :g/^$/d<CR>:noh<CR>
 
 " *************************************************************
 " *                                                           *
@@ -502,7 +535,18 @@ vnoremap <Leader>d guiw
 nnoremap <Leader>- ~h
 inoremap <leader>- ~h
 
-nnoremap <Leader>yy ^yg_
+" add clipboard yanks
+nnoremap <Leader>Y ^yg_
+nnoremap <Leader>y  "+y
+vnoremap <Leader>y  "+y
+
+" add clipboard puts
+nnoremap <Leader>p "+p
+nnoremap <Leader>P "+P
+vnoremap <Leader>p "+p
+vnoremap <Leader>P "+P
+
+
 
 function! ReplaceMatch()
   call inputsave()
@@ -543,7 +587,6 @@ function! s:align(aa)
     call search(repeat('[^'.a:aa.']*'.a:aa,column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
   endif
 endfunction
-
 
 function! CycleEOL()
   let eol_format   = &ff
