@@ -30,9 +30,9 @@ map('n', '<C-t>', function()
 end)
 
 map('n', '<C-p>', function()
-	vim.cmd[[
-		:call fzf#vim#files('.', {'options': '--prompt "" --layout=reverse --preview="batcat --style=numbers --color=always {}"'})
-	]]
+  -- batcat for linux & bat for windows
+  vim.cmd[[ :call fzf#vim#files('.', {'options': '--prompt "" --layout=reverse --preview="batcat --style=numbers --color=always {}"'}) ]]
+  --vim.cmd[[ :call fzf#vim#files('.', {'options': '--prompt "" --layout=reverse --preview="bat --style=numbers --color=always {}"'}) ]]
 end)
 
 
