@@ -72,6 +72,10 @@ map({'n', 'i', 'v'}, '<C-s>', function()
 	cmd[[:update]]
 end)
 
+-------------------
+-- saving buffer --
+-------------------
+
 
 ----------------
 -- move lines --
@@ -94,9 +98,11 @@ end)
 --------------------
 -- scroll up/down --
 --------------------
-map({'n', 'i'}, '<C-j>', '<C-e>')
-map({'n', 'i'}, '<C-k>', '<C-y>')
+map('n', '<C-j>', '<C-e>')
+map('n', '<C-k>', '<C-y>')
 
+map('i', '<C-j>', '<C-o><C-e>')
+map('i', '<C-k>', '<C-o><C-y>')
 
 -----------------------
 -- insert blank line --
@@ -168,14 +174,27 @@ end)
 ----------------
 map('i', '<C-e>', '<ESC>A')
 map('i', '<C-a>', '<ESC>I')
+map('n', '<C-e>', '$')
+map('n', '<C-a>', '0')
+
+------------------
+-- visual tabs	--
+------------------
+map('v', '<', '<gv')
+map('v', '>', '>gv')
 
 
 -----------------
 -- tab actions --
 -----------------
 map('n', '<Leader>tq', ':tabclose<CR>')
-map('n', '<Leader>tt', ':tabnext<CR>')
 
+-----------------
+-- buf actions --
+-----------------
+map('n', '<Tab>', ':BufferLineCycleNext<CR>', true)
+map('n', '<S-Tab>', ':BufferLineCyclePrev<CR>', true)
+cmd[[cnoreabbrev <expr> q getcmdtype() == ":" && getcmdline() == 'q' ? 'bd' : 'x']]
 
 ---------------
 -- list navs --

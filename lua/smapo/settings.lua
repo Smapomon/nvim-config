@@ -10,7 +10,7 @@ vim.api.nvim_command('filetype plugin indent on')
 -- cmd([[hi Directory guifg=#ff0000 cftermfg=green]])
 -- cmd([[hi CursorLine cterm=NONE ctermbg=darkgrey ctermfg=cyan]])
 cmd([[colorscheme space_vim_theme]])
-cmd[[highlight CursorLine cterm=NONE ctermbg=darkgrey ctermfg=cyan]]
+--cmd[[highlight CursorLine cterm=NONE ctermbg=darkgrey ctermfg=cyan]]
 vim.highlight.create('Directory', {guifg='#ff0000', ctermfg=green}, false)
 
 -- linux terminal is set to transparent
@@ -68,3 +68,9 @@ o.numberwidth = 6
 ----------------
 g.mapleader      = ','
 g.maplocalleader = ','
+
+
+-----------------
+-- WO Settings --
+-----------------
+vim.wo.wrap = false

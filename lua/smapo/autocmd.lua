@@ -44,6 +44,7 @@ A.nvim_create_autocmd('BufEnter', {
   command = [[set ft=ruby]],
 })
 
+
 A.nvim_create_autocmd('BufReadPost', {
   group = smapo_au,
   pattern = {'*.erb'},
@@ -56,6 +57,7 @@ A.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
   command = [[set syntax=nasm filetype=nasm]],
 })
 
+cmd[[:let g:colorizer_auto_filetype='css,html,scss']]
 cmd[[
 augroup remember_folds
   autocmd!

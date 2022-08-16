@@ -105,6 +105,7 @@ require"lualine".setup {
     theme                = 'auto',
     component_separators = { left  = '', right = ''},
     section_separators   = { left  = '', right = ''},
+    show_file_names_only = false,
 
     disabled_filetypes = {
       statusline = {},
@@ -125,7 +126,7 @@ require"lualine".setup {
   sections = {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff', 'diagnostic'},
-    lualine_c = {'filename', 'filesize'},
+    lualine_c = {'filename', 'filesize' },
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location'},
@@ -161,7 +162,6 @@ require"gitsigns".setup {
 ---------------
 vim.cmd[[
 let g:fzf_buffers_jump = 1
-set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
 let $FZF_DEFAULT_COMMAND='rg --files --follow --no-ignore-vcs --hidden -g "!{tmp/cache/*,node_modules/*,.git/*,public/test/upload_items/*}"'
 let $FZF_DEFAULT_OPTS=' --layout=reverse'
@@ -170,3 +170,39 @@ let $FZF_DEFAULT_OPTS=' --layout=reverse'
 vim.cmd[[
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 ]]
+
+--------------------
+-- autopair setup --
+--------------------
+vim.cmd[[
+
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.jsx,*.js,*.tsx'
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js,*.tsx'
+let g:closetag_filetypes = 'html,xhtml,phtml,js,jsx,tsx'
+let g:closetag_xhtml_filetypes = 'xhtml,jsx,js,tsx'
+let g:closetag_emptyTags_caseSensitive = 1
+
+let g:closetag_regions = {
+    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ 'typescriptreact': 'jsxRegion,tsxRegion',
+    \ 'javascriptreact': 'jsxRegion',
+    \ }
+
+let g:closetag_shortcut = '>'
+let g:closetag_close_shortcut = '<leader>>'
+
+]]
+
+---------------------
+-- buffeline setup --
+---------------------
+require"bufferline".setup {
+  offsets = {
+    {
+      filetype = "NvimTree",
+      text = "",
+      padding = 1
+    }
+  }
+}
