@@ -72,10 +72,6 @@ map({'n', 'i', 'v'}, '<C-s>', function()
 	cmd[[:update]]
 end)
 
--------------------
--- saving buffer --
--------------------
-
 
 ----------------
 -- move lines --
@@ -212,6 +208,10 @@ map('n', '<Leader>ap', '$p')
 map({'n', 'v'}, '<Leader>p', '"+p')
 map({'n', 'v'}, '<Leader>P', '"+P')
 
+cmd[[
+xnoremap <expr> p 'pgv"'.v:register.'y`>'
+xnoremap <expr> P 'Pgv"'.v:register.'y`>'
+]] -- Don't replace buffer when pasting
 
 ---------------
 -- hex files --
