@@ -198,11 +198,13 @@ let g:closetag_close_shortcut = '<leader>>'
 -- buffeline setup --
 ---------------------
 require"bufferline".setup {
-  offsets = {
-    {
-      filetype = "NvimTree",
-      text = "",
-      padding = 1
+  options = {
+    offsets = {
+      {
+	filetype = "NvimTree",
+	text = "",
+	padding = 1
+      }
     }
   }
 }
