@@ -63,6 +63,11 @@ o.shiftwidth  = 2
 o.autoindent  = true
 o.numberwidth = 6
 
+cmd[[
+set expandtab
+set tabstop=4
+]]
+
 ----------------
 -- G Settings --
 ----------------
