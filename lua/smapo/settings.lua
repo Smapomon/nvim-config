@@ -51,7 +51,7 @@ o.splitright = true
 o.laststatus = 3 -- disable multiple statusbars
 --o.signcolumn = true
 
-o.shiftwidth  = 4
+o.shiftwidth  = 2
 o.autoindent  = true
 o.numberwidth = 6
 
@@ -60,7 +60,7 @@ o.fileformats = 'unix,dos'
 
 cmd[[
 set expandtab
-set tabstop=4
+set tabstop=2
 ]]
 
 ----------------
