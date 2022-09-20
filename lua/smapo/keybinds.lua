@@ -243,7 +243,7 @@ map('n', '<Leader>f', ':Rg<CR>')
 -- alignment --
 ---------------
 map({'n', 'v'}, '<Leader>t=', ':Tabularize /=<CR>')
-map({'n', 'v'}, '<Leader>t:', ':Tabularize /:\zs<CR>')
+map({'n', 'v'}, '<Leader>t:', ':Tabularize /:.*/<CR>')
 --cmd[[inoremap <silent> =   =<C-o>:Tabularize /=<CR>]]
 
 
