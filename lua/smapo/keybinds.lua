@@ -147,8 +147,20 @@ end, true)
 ---------
 -- git --
 ---------
-cmd[[nnoremap <C-g> :G<CR><C-w>L :vertical resize 50<CR>]]
+--cmd[[nnoremap <C-g> :G<CR><C-w>L :vertical resize 50<CR>]]
 map('n', '<C-h>', ':GitGutterPreviewHunk<CR>')
+
+cmd[[
+function FugitiveToggle() abort
+  try
+    exe filter(getwininfo(), "get(v:val['variables'], 'fugitive_status', v:false) != v:false")[0].winnr .. "wincmd c"
+  catch /E684/
+    vertical Git
+    vertical resize 50
+  endtry
+endfunction
+nnoremap <C-g> <cmd>call FugitiveToggle()<CR>
+]]
 
 map('n', '<Leader>gh', function()
   local linenr  = vim.api.nvim_win_get_cursor(0)[1]
