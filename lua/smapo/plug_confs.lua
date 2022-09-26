@@ -1,3 +1,5 @@
+local o = vim.o
+
 ----------------------
 -- nvim-tree setup --
 ----------------------
@@ -208,3 +210,14 @@ require"bufferline".setup {
     }
   }
 }
+
+
+---------------------
+-- nvim-ufo setup --
+---------------------
+-- coc.nvim as LSP clent
+require('ufo').setup({
+    provider_selector = function(bufnr, filetype, buftype)
+        return {'treesitter', 'indent'}
+    end
+})

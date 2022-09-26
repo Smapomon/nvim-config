@@ -238,6 +238,9 @@ map('n', '<Leader>hw', ':%!xxd -r<CR> :set binary<CR> :set filetype=<CR>')
 cmd[[vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>]]
 map('n', '<Leader>f', ':Rg<CR>')
 
+-- Search files for visually selected text
+cmd[[xnoremap <leader>f "zy :let cmd = 'Rg ' . @z <bar> call histadd("cmd", cmd) <bar> execute cmd <cr>]]
+
 
 ---------------
 -- alignment --
@@ -277,3 +280,9 @@ cmd[[nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>]]
 cmd[[nnoremap <Leader>s :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>]]
 cmd[[inoremap <Leader>s :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>]]
 
+
+-------------
+-- folding --
+-------------
+vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)

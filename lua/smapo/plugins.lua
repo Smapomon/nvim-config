@@ -22,7 +22,6 @@ require"paq"{
   "easymotion/vim-easymotion";
   "godlygeek/tabular";
   "chrisbra/colorizer";
-  --"ap/vim-css-color";
 
   "vim-ruby/vim-ruby"; --Ruby motions and other stuff
   {"nvim-treesitter/nvim-treesitter", run=':TSUpdate'};
@@ -60,5 +59,9 @@ require"paq"{
   "marcweber/vim-addon-mw-utils";
   "tomtom/tlib_vim";
   "garbas/vim-snipmate";
+
+  -- Folding code
+  "kevinhwang91/promise-async";
+  "kevinhwang91/nvim-ufo";
 }
 

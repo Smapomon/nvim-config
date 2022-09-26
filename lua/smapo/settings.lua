@@ -1,4 +1,5 @@
 local o   = vim.o
+local opt = vim.opt
 local g   = vim.g
 local cmd = vim.cmd
 
@@ -57,6 +58,14 @@ o.numberwidth = 6
 
 o.fileformat  = 'unix'
 o.fileformats = 'unix,dos'
+
+o.foldcolumn     = '1'
+o.foldlevel      = 99
+o.foldlevelstart = 99
+
+opt.foldenable = false
+opt.foldmethod = "expr"
+opt.foldexpr   = "nvim_treesitter#foldexpr()"
 
 cmd[[
 set expandtab

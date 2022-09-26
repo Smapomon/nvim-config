@@ -23,6 +23,12 @@ A.nvim_create_user_command(
   {bang = true}
 )
 
+A.nvim_create_user_command(
+  'FormatJson',
+  "%!jq .",
+  {bang = false}
+)
+
 cmd[[
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 ]]
@@ -44,6 +50,11 @@ A.nvim_create_autocmd('BufEnter', {
   command = [[set ft=ruby]],
 })
 
+A.nvim_create_autocmd('BufEnter', {
+  group = smapo_au,
+  pattern = {'*.es6.erb'},
+  command = [[set ft=javascript]],
+})
 
 A.nvim_create_autocmd('BufReadPost', {
   group = smapo_au,
@@ -58,16 +69,16 @@ A.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
 })
 
 cmd[[:let g:colorizer_auto_filetype='css,html,scss']]
-cmd[[
-augroup remember_folds
-  autocmd!
-  " view files are about 500 bytes
-  " bufleave but not bufwinleave captures closing 2nd tab
-  " nested is needed by bufwrite* (if triggered via other autocmd)
-  " BufHidden for compatibility with `set hidden`
-  autocmd BufWinLeave,BufLeave,BufWritePost,BufHidden,QuitPre ?* nested silent! mkview!
-  autocmd BufWinEnter ?* silent! loadview
-augroup END
-]]
+--cmd[[
+--augroup remember_folds
+  --autocmd!
+  --" view files are about 500 bytes
+  --" bufleave but not bufwinleave captures closing 2nd tab
+  --" nested is needed by bufwrite* (if triggered via other autocmd)
+  --" BufHidden for compatibility with `set hidden`
+  --autocmd BufWinLeave,BufLeave,BufWritePost,BufHidden,QuitPre ?* nested silent! mkview!
+  --autocmd BufWinEnter ?* silent! loadview
+--augroup END
+--]]
 
 cmd[[autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]]
