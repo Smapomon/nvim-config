@@ -74,19 +74,13 @@ end)
 ----------------
 -- move lines --
 ----------------
-map({'n', 'i'}, '<A-j>', function()
-	cmd[[:m+]]
-end)
-map({'n', 'i'}, '<A-down>', function()
-	cmd[[:m+]]
-end)
+map('n', '<A-j>', ':m .+1<CR>==')
+map('i', '<A-j>', '<ESC>:m .+1<CR>==gi')
+map('v', '<A-j>', ":m '>+1<CR>gv=gv")
 
-map({'n', 'i'}, '<A-k>', function()
-	cmd[[:m-2]]
-end)
-map({'n', 'i'}, '<A-up>', function()
-	cmd[[:m-2]]
-end)
+map('n', '<A-k>', ':m .-2<CR>==')
+map('i', '<A-k>', '<ESC>:m .-2<CR>==gi')
+map('v', '<A-k>', ":m '<-2<CR>gv=gv")
 
 
 --------------------
