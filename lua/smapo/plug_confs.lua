@@ -221,3 +221,14 @@ require('ufo').setup({
         return {'treesitter', 'indent'}
     end
 })
+
+------------------
+-- ctrlsf setup --
+------------------
+vim.cmd[[
+let g:ctrlsf_auto_focus = {
+    \ "at": "start"
+    \ }
+let g:ctrlsf_position = 'bottom'
+]]
+
