@@ -123,16 +123,16 @@ cmd[[vmap <Leader>e :g/^$/d<CR>:noh<CR>]]
 -- resize splits (tree, fugitive, etc.) --
 -------------------------------------------
 map('n', '<S-Left>', function()
-	cmd[[:vertical resize -1]]
+	cmd[[:vertical resize -5]]
 end, true)
 map('n', '<S-Right>', function()
-	cmd[[:vertical resize +1]]
+	cmd[[:vertical resize +5]]
 end, true)
 map('n', '<S-Up>', function()
-	cmd[[:resize -1]]
+	cmd[[:resize -5]]
 end, true)
 map('n', '<S-Down>', function()
-	cmd[[:resize +1]]
+	cmd[[:resize +5]]
 end, true)
 
 
@@ -269,6 +269,7 @@ map({'n', 'v'}, '<Leader>y', '"+y')
 -- trims --
 -----------
 cmd[[nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>]]
+cmd[[nnoremap <Leader>tw :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>]]
 
 
 ----------------
