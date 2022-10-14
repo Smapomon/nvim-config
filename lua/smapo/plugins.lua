@@ -10,16 +10,9 @@ require"paq"{
   "ryanoasis/vim-webdevicons";
   "kyazdani42/nvim-web-devicons"; --for coloured icons
 
-  --snippets + magic
-  "tpope/vim-commentary";
-  "sjl/gundo.vim";
-  "christoomey/vim-system-copy";
-  "dyng/ctrlsf.vim";
-
   --syntax highlighting + lint/hint + language specifics
   "octol/vim-cpp-enhanced-highlight";
   "dense-analysis/ale";
-  "easymotion/vim-easymotion";
   "godlygeek/tabular";
   "chrisbra/colorizer";
 
@@ -36,16 +29,15 @@ require"paq"{
   "lewis6991/gitsigns.nvim";
 
   --File Navigation & Search
+  "dyng/ctrlsf.vim";
   "junegunn/fzf.vim";
   "junegunn/fzf";
-  "kyazdani42/nvim-web-devicons"; --optional, for file icons
   "kyazdani42/nvim-tree.lua";
   "akinsho/bufferline.nvim";
 
   --auto completion
   { "neoclide/coc.nvim", branch = "release" };
   "vim-scripts/CmdlineComplete";
-  --"windwp/nvim-autopairs";
   "alvan/vim-closetag";
 
   --comment code
