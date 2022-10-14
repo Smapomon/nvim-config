@@ -59,7 +59,7 @@ o.numberwidth = 6
 o.fileformat  = 'unix'
 o.fileformats = 'unix,dos'
 
-o.foldcolumn     = '1'
+o.foldcolumn     = '0'
 o.foldlevel      = 99
 o.foldlevelstart = 99
 
