@@ -66,33 +66,9 @@ require"nvim-treesitter.configs".setup {
   }
 }
 
-----------------
--- COC setup --
-----------------
-vim.cmd[[
-	let g:coc_global_extensions = [
-  \ 'coc-snippets',
-  \ 'coc-yaml',
-  \ 'coc-json',
-  \ 'coc-html',
-  \ 'coc-css',
-  \ 'coc-solargraph',
-  \ 'coc-tsserver',
-  \ 'coc-pyright',
-  \ 'coc-pairs',
-  \ 'coc-git',
-  \ 'coc-eslint',
-  \ ]
-]]
 
+require'fzf_lsp'.setup()
 
---------------------
--- Snipmate setup --
---------------------
-vim.cmd[[
-let g:snippets_dir="~/.configs/nvim/snippets"
-let g:snipMate = { 'snippet_version' : 1 }
-]]
 
 -----------------------
 -- Statusline setup --
@@ -215,7 +191,7 @@ require"bufferline".setup {
 ---------------------
 -- nvim-ufo setup --
 ---------------------
--- coc.nvim as LSP clent
+-- treesitter as the main provider
 require('ufo').setup({
     provider_selector = function(bufnr, filetype, buftype)
         return {'treesitter', 'indent'}

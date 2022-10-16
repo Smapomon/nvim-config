@@ -4,6 +4,8 @@ require('smapo.settings')
 require('smapo.plug_confs')
 require('smapo.autocmd')
 require('smapo.keybinds')
+require('smapo.autocomplete')
+require('smapo.lsp')
 
 -- lua table pretty print
 function _G.dump(...)

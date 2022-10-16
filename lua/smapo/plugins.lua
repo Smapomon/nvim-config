@@ -12,12 +12,17 @@ require"paq"{
 
   --syntax highlighting + lint/hint + language specifics
   "octol/vim-cpp-enhanced-highlight";
-  "dense-analysis/ale";
   "godlygeek/tabular";
   "chrisbra/colorizer";
+  "ellisonleao/glow.nvim";
 
   "vim-ruby/vim-ruby"; --Ruby motions and other stuff
   {"nvim-treesitter/nvim-treesitter", run=':TSUpdate'};
+
+  --LSP and dependencies
+  "neovim/nvim-lspconfig";    -- Use native LSP
+  'gfanto/fzf-lsp.nvim';      -- fuzzy over lsp
+  'nvim-lua/plenary.nvim';    -- for fzf-lsp
 
   --git integrations
   "tpope/vim-fugitive";
@@ -36,9 +41,13 @@ require"paq"{
   "akinsho/bufferline.nvim";
 
   --auto completion
-  { "neoclide/coc.nvim", branch = "release" };
   "vim-scripts/CmdlineComplete";
   "alvan/vim-closetag";
+  "hrsh7th/nvim-cmp";         -- Autocompletion for LSP
+  'hrsh7th/cmp-nvim-lsp';     -- LSP source for nvim-cmp
+  'hrsh7th/cmp-buffer';
+  'hrsh7th/cmp-path';
+  'saadparwaiz1/cmp_luasnip'; -- Snippets source for nvim-cmp
 
   --comment code
   "preservim/nerdcommenter";
@@ -48,9 +57,7 @@ require"paq"{
   "tpope/vim-repeat";
 
   --snippets
-  "marcweber/vim-addon-mw-utils";
-  "tomtom/tlib_vim";
-  "garbas/vim-snipmate";
+  'L3MON4D3/LuaSnip';
 
   -- Folding code
   "kevinhwang91/promise-async";
