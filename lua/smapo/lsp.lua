@@ -46,3 +46,5 @@ for _, lsp in ipairs(servers) do
     flags = lsp_flags,
   }
 end
+
+require'fidget'.setup{}

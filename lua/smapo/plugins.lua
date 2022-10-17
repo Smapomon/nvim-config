@@ -15,6 +15,7 @@ require"paq"{
   "godlygeek/tabular";
   "chrisbra/colorizer";
   "ellisonleao/glow.nvim";
+  'tpope/vim-rails';
 
   "vim-ruby/vim-ruby"; --Ruby motions and other stuff
   {"nvim-treesitter/nvim-treesitter", run=':TSUpdate'};
@@ -23,6 +24,7 @@ require"paq"{
   "neovim/nvim-lspconfig";    -- Use native LSP
   'gfanto/fzf-lsp.nvim';      -- fuzzy over lsp
   'nvim-lua/plenary.nvim';    -- for fzf-lsp
+  'j-hui/fidget.nvim';        -- lsp progress
 
   --git integrations
   "tpope/vim-fugitive";
@@ -43,11 +45,13 @@ require"paq"{
   --auto completion
   "vim-scripts/CmdlineComplete";
   "alvan/vim-closetag";
-  "hrsh7th/nvim-cmp";         -- Autocompletion for LSP
-  'hrsh7th/cmp-nvim-lsp';     -- LSP source for nvim-cmp
+  'jiangmiao/auto-pairs';
+  "hrsh7th/nvim-cmp";             --  Autocompletion for LSP
+  'hrsh7th/cmp-nvim-lsp';         --  LSP source for nvim-cmp
   'hrsh7th/cmp-buffer';
   'hrsh7th/cmp-path';
-  'saadparwaiz1/cmp_luasnip'; -- Snippets source for nvim-cmp
+  'saadparwaiz1/cmp_luasnip';     --  Snippets source for nvim-cmp
+  'rafamadriz/friendly-snippets'; --  framework snippets
 
   --comment code
   "preservim/nerdcommenter";

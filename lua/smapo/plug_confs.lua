@@ -208,3 +208,9 @@ let g:ctrlsf_auto_focus = {
 let g:ctrlsf_position = 'bottom'
 ]]
 
+
+-------------------
+-- snippet setup --
+-------------------
+require'luasnip'.filetype_extend("ruby", {"rails"})
+
