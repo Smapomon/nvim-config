@@ -62,6 +62,12 @@ A.nvim_create_autocmd('BufEnter', {
   command = [[set ft=javascript]],
 })
 
+A.nvim_create_autocmd('BufEnter', {
+  group = smapo_au,
+  pattern = {'*.yml'},
+  command = [[set ft=yaml]],
+})
+
 A.nvim_create_autocmd('BufReadPost', {
   group = smapo_au,
   pattern = {'*.erb'},

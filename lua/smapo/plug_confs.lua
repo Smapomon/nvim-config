@@ -179,10 +179,14 @@ require"bufferline".setup {
   options = {
     offsets = {
       {
-	filetype = "NvimTree",
-	text = "",
-	padding = 1
+        filetype = "NvimTree",
+        text = "",
+        padding = 1
       }
+    },
+    diagnostic = "nvim_lsp",
+    indicator = {
+      style = 'underline'
     }
   }
 }
