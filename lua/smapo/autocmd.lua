@@ -35,6 +35,18 @@ A.nvim_create_user_command(
   {bang = false}
 )
 
+A.nvim_create_user_command(
+  'CopyFileName',
+  [[:let @+ = expand("%")]],
+  {bang = false}
+)
+
+A.nvim_create_user_command(
+  'CopyFilePath',
+  [[:let @+ = expand("%:p")]],
+  {bang = false}
+)
+
 cmd[[
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 ]]

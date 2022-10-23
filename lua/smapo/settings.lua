@@ -8,11 +8,15 @@ vim.api.nvim_command('filetype plugin indent on')
 -------------------------
 -- Highlights & Colors --
 -------------------------
--- cmd([[hi Directory guifg=#ff0000 cftermfg=green]])
--- cmd([[hi CursorLine cterm=NONE ctermbg=darkgrey ctermfg=cyan]])
+o.termguicolors = true -- match term colors
 cmd([[colorscheme space_vim_theme]])
---cmd[[highlight CursorLine cterm=NONE ctermbg=darkgrey ctermfg=cyan]]
-vim.highlight.create('Directory', {guifg='#ff0000', ctermfg=green}, false)
+
+-- POSSIBLY USELESS COLORING
+-- cmd([[hi CursorLine cterm=NONE ctermbg=darkgrey ctermfg=cyan]])
+-- cmd[[highlight CursorLine cterm=NONE ctermbg=darkgrey ctermfg=cyan]]
+-- vim.api.nvim_set_hl('Directory', {guifg='#ff0000', ctermfg=green}, false)
+-- cmd([[hi Directory guifg=#ff0000 cftermfg=green]])
+ --vim.highlight.create('Directory', {guifg='#ff0000', ctermfg=green}, false)
 
 -- linux terminal is set to transparent
 -- make use of that
@@ -34,8 +38,8 @@ cmd[[match ExtraWhitespace /\s\+$/]]
 ----------------
 -- O Settings --
 ----------------
-o.termguicolors = true -- match term colors
-o.showtabline   = 2 -- always show tabs
+o.showtabline    = 2 -- always show tabs
+opt.mouse        = nil
 
 o.ignorecase     = true
 o.smartcase      = true
