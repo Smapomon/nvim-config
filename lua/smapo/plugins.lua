@@ -17,7 +17,7 @@ require"paq"{
   "ellisonleao/glow.nvim";
   'tpope/vim-rails';
 
-  "vim-ruby/vim-ruby"; --Ruby motions and other stuff
+  "vim-ruby/vim-ruby"; --Ruby motions and other stuff (not working now for some reason)
   {"nvim-treesitter/nvim-treesitter", run=':TSUpdate'};
 
   --LSP and dependencies
