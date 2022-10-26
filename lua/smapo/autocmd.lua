@@ -36,6 +36,12 @@ A.nvim_create_user_command(
 )
 
 A.nvim_create_user_command(
+  'FoldInit',
+  'set foldmethod=expr foldexpr=nvim_treesitter#foldexpr()',
+  {bang = false}
+)
+
+A.nvim_create_user_command(
   'CopyFileName',
   [[:let @+ = expand("%")]],
   {bang = false}
