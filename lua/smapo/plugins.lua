@@ -15,9 +15,9 @@ require"paq"{
   "godlygeek/tabular";
   "chrisbra/colorizer";
   "ellisonleao/glow.nvim";
-  'tpope/vim-rails';
 
-  "vim-ruby/vim-ruby"; --Ruby motions and other stuff
+  'tpope/vim-rails'; -- Probably not working either
+  "vim-ruby/vim-ruby"; --Ruby motions and other stuff (not working now for some reason)
   {"nvim-treesitter/nvim-treesitter", run=':TSUpdate'};
 
   --LSP and dependencies
