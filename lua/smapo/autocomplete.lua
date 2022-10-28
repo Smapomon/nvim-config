@@ -43,10 +43,10 @@ cmp.setup({
     { name = 'path' },
     { name = 'luasnip' }, -- For luasnip users.
     { name = 'keyword_pattern' },
-    { name = 'calc' },
   }, {
     { name = 'buffer' },
   }, {
+    { name = 'calc' },
     { name = 'rg', max_item_count = 10 },
   }),
   experimental = {
