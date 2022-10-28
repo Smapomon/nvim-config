@@ -17,6 +17,7 @@ require"paq"{
   "ellisonleao/glow.nvim";
 
   'tpope/vim-rails'; -- Probably not working either
+  'tpope/vim-endwise';
   "vim-ruby/vim-ruby"; --Ruby motions and other stuff (not working now for some reason)
   {"nvim-treesitter/nvim-treesitter", run=':TSUpdate'};
 
@@ -46,12 +47,16 @@ require"paq"{
   "vim-scripts/CmdlineComplete";
   "alvan/vim-closetag";
   'jiangmiao/auto-pairs';
-  "hrsh7th/nvim-cmp";             --  Autocompletion for LSP
-  'hrsh7th/cmp-nvim-lsp';         --  LSP source for nvim-cmp
+  "hrsh7th/nvim-cmp";                    -- Autocompletion for LSP
+  'hrsh7th/cmp-nvim-lsp';                -- LSP source for nvim-cmp
   'hrsh7th/cmp-buffer';
+  'hrsh7th/cmp-nvim-lua';
   'hrsh7th/cmp-path';
-  'saadparwaiz1/cmp_luasnip';     --  Snippets source for nvim-cmp
-  'rafamadriz/friendly-snippets'; --  framework snippets
+  'hrsh7th/cmp-calc';
+  'hrsh7th/cmp-nvim-lsp-signature-help';
+  'saadparwaiz1/cmp_luasnip';            -- Snippets source for nvim-cmp
+  'rafamadriz/friendly-snippets';        -- framework snippets
+  'lukas-reineke/cmp-rg';                -- ripgrep source for nvim-cmp
 
   --comment code
   "preservim/nerdcommenter";

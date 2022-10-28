@@ -33,41 +33,43 @@ cmp.setup({
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 
-    -- luasnip supertab combo (use c-n & c-p shortcuts to jump between options)
-    ["<C-n>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      elseif has_words_before() then
-        cmp.complete()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-
-    ["C-p"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
   }),
   sources = cmp.config.sources({
-    { name = 'luasnip' }, -- For luasnip users.
     { name = 'nvim_lsp' },
+    { name = 'nvim_lua' },
+    { name = 'nvim_lsp_signature_help' }, -- method help window
     { name = 'path' },
+    { name = 'luasnip' }, -- For luasnip users.
+    { name = 'keyword_pattern' },
+    { name = 'calc' },
   }, {
     { name = 'buffer' },
+  }, {
+    { name = 'rg', max_item_count = 10 },
   }),
   experimental = {
     native_menu = false,
     ghost_text = true,
+  },
+  formatting = {
+    fields = {'abbr', 'kind', 'menu'},
+    format = function(entry, item)
+      local menu_icon = {
+        nvim_lsp = '[LSP]',
+        nvim_lua = '[LUA]',
+        luasnip = '[SNIP]',
+        buffer = '[BUF]',
+        path = '[PATH]',
+        keyword_pattern = '[KeyWordPattern]',
+        rg = '[RIPGREP]',
+        calc = '[CALC]',
+      }
+
+      item.menu = menu_icon[entry.source.name]
+      return item
+    end,
   }
 })
 
@@ -82,6 +84,8 @@ cmp.setup.filetype('gitcommit', {
 
 -- load snippets from path/of/your/nvim/config/my-cool-snippets
 require("luasnip.loaders.from_snipmate").lazy_load({paths = "~/.config/nvim/snippets"})
+require("luasnip.loaders.from_vscode").lazy_load()
+require'luasnip'.filetype_extend("ruby", {"rails"})
 
 local date = function() return {os.date('%Y-%m-%d')} end
 local snip = luasnip.snippet
