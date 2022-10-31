@@ -14,7 +14,7 @@ require"paq"{
   "octol/vim-cpp-enhanced-highlight";
   "godlygeek/tabular";
   "chrisbra/colorizer";
-  "ellisonleao/glow.nvim";
+  "ellisonleao/glow.nvim"; -- Markdown preview
 
   'tpope/vim-rails'; -- Probably not working either
   'tpope/vim-endwise';

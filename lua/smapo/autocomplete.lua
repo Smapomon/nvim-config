@@ -47,7 +47,7 @@ cmp.setup({
     { name = 'buffer' },
   }, {
     { name = 'calc' },
-    { name = 'rg', max_item_count = 10 },
+    { name = 'rg', keyword_length = 4, max_item_count = 10 },
   }),
   experimental = {
     native_menu = false,
