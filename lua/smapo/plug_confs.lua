@@ -184,10 +184,7 @@ require"bufferline".setup {
         padding = 1
       }
     },
-    diagnostic = "nvim_lsp",
-    indicator = {
-      style = 'underline'
-    }
+    diagnostic = "nvim_lsp"
   }
 }
 
@@ -218,3 +215,6 @@ let g:ctrlsf_position = 'bottom'
 -------------------
 require'luasnip'.filetype_extend("ruby", {"rails"})
 
+-----------------
+-- theme setup --
+-----------------
