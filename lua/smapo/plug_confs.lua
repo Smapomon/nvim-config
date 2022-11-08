@@ -106,7 +106,7 @@ require"lualine".setup {
     lualine_b = {'branch', 'diff', 'diagnostic'},
     lualine_c = {{'filename', file_status = true, path = 1}, 'filesize' },
     lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress', {function() return (tostring(vim.api.nvim_win_get_cursor(0)[1]) .. "/" .. tostring(vim.api.nvim_buf_line_count(0))) end}},
+    lualine_y = {'progress', 'location', {function() return (tostring(vim.api.nvim_buf_line_count(0))) end}},
     lualine_z = {},
   },
 
