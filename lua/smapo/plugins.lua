@@ -5,6 +5,7 @@ require"paq"{
 
   --theme (bleep bloop)
   "liuchengxu/space-vim-theme";
+  "ayu-theme/ayu-vim";
   "nvim-lualine/lualine.nvim";
   "jacoborus/tender.vim"; -- lightline colorscheme
   "ryanoasis/vim-webdevicons";

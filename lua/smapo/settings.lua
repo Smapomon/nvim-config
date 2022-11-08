@@ -9,7 +9,8 @@ vim.api.nvim_command('filetype plugin indent on')
 -- Highlights & Colors --
 -------------------------
 o.termguicolors = true -- match term colors
-cmd([[colorscheme space_vim_theme]])
+cmd([[colorscheme ayu]])
+cmd([[let ayucolor="mirage"]])
 
 -- POSSIBLY USELESS COLORING
 -- cmd([[hi CursorLine cterm=NONE ctermbg=darkgrey ctermfg=cyan]])
@@ -23,6 +24,7 @@ cmd([[colorscheme space_vim_theme]])
 if vim.fn.has('unix')
 then
 	cmd[[highlight Normal guibg=NONE ctermbg=NONE]]
+	cmd[[highlight NonText guibg=NONE ctermbg=NONE]]
 	cmd[[highlight SignColumn guibg=NONE]]
 	cmd[[highlight FoldColumn guibg=NONE]]
 	cmd[[highlight GitSignsAdd guibg=NONE]]
@@ -39,6 +41,7 @@ cmd[[match ExtraWhitespace /\s\+$/]]
 -- O Settings --
 ----------------
 o.showtabline    = 2 -- always show tabs
+o.transparent    = true
 opt.mouse        = nil
 
 o.ignorecase     = true
@@ -56,6 +59,8 @@ o.splitright = true
 o.laststatus = 3 -- disable multiple statusbars
 --o.signcolumn = true
 
+-- shiftwidth sets the the correct indentation
+-- on << and >> operations
 o.shiftwidth  = 2
 o.autoindent  = true
 o.numberwidth = 6
@@ -71,6 +76,8 @@ opt.foldenable = false
 opt.foldmethod = "expr"
 opt.foldexpr   = "nvim_treesitter#foldexpr()"
 
+-- expandtab "expands" tabs to spaces
+-- tabstop sets the indent on typing
 cmd[[
 set expandtab
 set tabstop=2

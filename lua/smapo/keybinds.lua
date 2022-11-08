@@ -241,7 +241,8 @@ cmd[[nnoremap <Leader>r :%s/\<<C-r><C-w>\>/<C-r><C-w>/gi<left><left><left>]]
 ---------------
 -- alignment --
 ---------------
-map({'n', 'v'}, '<Leader>t=', ':Tabularize /=<CR>')
+--map({'n', 'v'}, '<Leader>t=', ':Tabularize /=<CR>')
+map({'n', 'v'}, '<Leader>t=', ':Tabularize /=.*<CR>')
 --map({'n', 'v'}, '<Leader>t:', ':Tabularize /:.*/<CR>')
 map({'n', 'v'}, '<Leader>t:', ':Tabularize /:\zs<CR>')
 --cmd[[inoremap <silent> =   =<C-o>:Tabularize /=<CR>]]
