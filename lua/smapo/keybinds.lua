@@ -280,6 +280,12 @@ cmd[[nnoremap <Leader>s :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>]]
 cmd[[inoremap <Leader>s :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>]]
 
 
+---------------------
+-- last ex command --
+---------------------
+map('n', '<Leader>1', ':<Up><CR>')
+
+
 -------------
 -- folding --
 -------------
