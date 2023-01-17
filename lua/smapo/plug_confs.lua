@@ -77,6 +77,17 @@ local function git_changes()
 
 end
 
+local treesitter = require('nvim-treesitter')
+local function treelocation()
+  -- TODO: write custom handler for yml context
+
+  return treesitter.statusline({
+    indicator_size = 70,
+    type_patterns = {'class', 'function', 'method'},
+    separator = ' -> '
+  })
+end
+
 require"lualine".setup {
   options = {
     icons_enabled        = true,
@@ -105,7 +116,7 @@ require"lualine".setup {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff', 'diagnostic'},
     lualine_c = {{'filename', file_status = true, path = 1}, 'filesize' },
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_x = {{treelocation}, 'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress', 'location', {function() return (tostring(vim.api.nvim_buf_line_count(0))) end}},
     lualine_z = {},
   },
