@@ -81,6 +81,7 @@ opt.foldexpr   = "nvim_treesitter#foldexpr()"
 cmd[[
 set expandtab
 set tabstop=2
+set so=5
 ]]
 
 ----------------
