@@ -11,6 +11,8 @@ require"paq"{
   "ryanoasis/vim-webdevicons";
   "kyazdani42/nvim-web-devicons"; --for coloured icons
 
+  {"glepnir/dashboard-nvim", event="VimEnter"};
+
   --syntax highlighting + lint/hint + language specifics
   "octol/vim-cpp-enhanced-highlight";
   "godlygeek/tabular";

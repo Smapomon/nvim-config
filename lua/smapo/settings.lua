@@ -33,7 +33,7 @@ then
 end
 
 -- Show trailing whitespace
-cmd[[highlight ExtraWhitespace ctermbg=red guibg=red]]
+cmd[[highlight ExtraWhitespace ctermbg=darkgreen guibg=darkcyan]]
 cmd[[match ExtraWhitespace /\s\+$/]]
 
 

@@ -80,6 +80,7 @@ end
 local treesitter = require('nvim-treesitter')
 local function treelocation()
   -- TODO: write custom handler for yml context
+  -- TODO: write parser for clearer ruby classes
 
   return treesitter.statusline({
     indicator_size = 70,
@@ -224,8 +225,27 @@ let g:ctrlsf_position = 'bottom'
 -------------------
 -- snippet setup --
 -------------------
-require'luasnip'.filetype_extend("ruby", {"rails"})
+require'luasnip'.filetype_extend("ruby", {"rails"});
 
 -----------------
 -- theme setup --
 -----------------
+require('dashboard').setup({
+  theme = 'hyper',
+  config = {
+    week_header = {
+      enable = true,
+    },
+    disable_move = false,
+    project = { limit = 8, action = [[:e]] },
+    shortcut = {
+      { desc = ' Update Plugins', group = '@property', action = 'PaqSync', key = 'u' },
+      {
+        desc = ' Files',
+        group = 'Label',
+        action = [[call fzf#vim#files('.', {'options': '--prompt "" --layout=reverse --preview="bat --style=numbers --color=always {}"'})]],
+        key = 'f',
+      },
+    },
+  },
+});
