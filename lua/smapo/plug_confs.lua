@@ -73,10 +73,6 @@ require'fzf_lsp'.setup()
 -----------------------
 -- Statusline setup --
 -----------------------
-local function git_changes()
-
-end
-
 local treesitter = require('nvim-treesitter')
 local function treelocation()
   -- TODO: write custom handler for yml context
@@ -115,8 +111,17 @@ require"lualine".setup {
 
   sections = {
     lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostic'},
-    lualine_c = {{'filename', file_status = true, path = 1}, 'filesize' },
+    lualine_b = {'branch', 'diff'},
+    lualine_c = {
+      {
+        'diagnostics',
+        sources = {'nvim_lsp'},
+        symbols = { error = ' ', warn = ' ', info = ' ' },
+        colored = true, update_in_insert = true, always_visible = true
+      },
+      {'filename', file_status = true, path = 1},
+      'filesize'
+    },
     lualine_x = {{treelocation}, 'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress', 'location', {function() return (tostring(vim.api.nvim_buf_line_count(0))) end}},
     lualine_z = {},
