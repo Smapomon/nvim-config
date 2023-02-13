@@ -78,4 +78,7 @@ for _, lsp in ipairs(servers) do
 end
 
 
-require'fidget'.setup{}
+require'lsp-notify'.setup({
+  notify = require('notify')
+})
+

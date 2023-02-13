@@ -10,6 +10,7 @@ require"paq"{
   "jacoborus/tender.vim"; -- lightline colorscheme
   "ryanoasis/vim-webdevicons";
   "kyazdani42/nvim-web-devicons"; --for coloured icons
+  "rcarriga/nvim-notify"; -- notifications
 
   {"glepnir/dashboard-nvim", event="VimEnter"};
 
@@ -19,16 +20,20 @@ require"paq"{
   "chrisbra/colorizer";
   "ellisonleao/glow.nvim"; -- Markdown preview
 
-  'tpope/vim-rails'; -- Probably not working either
+  'tpope/vim-rails';                                    -- Probably not working either
   'tpope/vim-endwise';
-  "vim-ruby/vim-ruby"; --Ruby motions and other stuff (not working now for some reason)
+  "vim-ruby/vim-ruby";                                  --Ruby motions and other stuff (not working now for some reason)
   {"nvim-treesitter/nvim-treesitter", run=':TSUpdate'};
+  'hiphish/nvim-ts-rainbow2';                           -- rainbow pairs
+  --'theHamsta/nvim-treesitter-pairs';                  -- better % matcher
+  'andymass/vim-matchup';                               -- better % matcher
 
   --LSP and dependencies
   "neovim/nvim-lspconfig";    -- Use native LSP
   'gfanto/fzf-lsp.nvim';      -- fuzzy over lsp
   'nvim-lua/plenary.nvim';    -- for fzf-lsp
-  'j-hui/fidget.nvim';        -- lsp progress
+  --'j-hui/fidget.nvim';      -- lsp progress
+  'mrded/nvim-lsp-notify';    -- lsp progress
 
   --git integrations
   "tpope/vim-fugitive";

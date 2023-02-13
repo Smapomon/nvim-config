@@ -32,6 +32,8 @@ then
 	cmd[[highlight GitSignsDelete guibg=NONE]]
 end
 
+cmd[[highlight MatchParen ctermbg=none guibg=none ctermfg=darkgreen guifg=darkgreen cterm=italic gui=italic]]
+
 -- Show trailing whitespace
 cmd[[highlight ExtraWhitespace ctermbg=darkgreen guibg=darkcyan]]
 cmd[[match ExtraWhitespace /\s\+$/]]

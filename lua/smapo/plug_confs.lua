@@ -63,9 +63,25 @@ require"nvim-treesitter.configs".setup {
 
   indent = {
     enable = false,
-  }
-}
+  },
 
+  rainbow = {
+    enable = true,
+    -- list of languages you want to disable the plugin for
+    --disable = { "jsx", "cpp" },
+    -- Which query to use for finding delimiters
+    query = 'rainbow-parens',
+    -- Highlight the entire buffer all at once
+    strategy = require 'ts-rainbow.strategy.global',
+    -- Do not enable for files with more than n lines
+    max_file_lines = 3000
+  },
+
+  matchup = {
+    enable = true, -- mandatory, false will disable the whole extension
+    include_match_words = true,
+  },
+}
 
 require'fzf_lsp'.setup()
 
@@ -254,3 +270,10 @@ require('dashboard').setup({
     },
   },
 });
+
+require("notify").setup({
+  background_colour = "#000000",
+})
+
+vim.notify = require("notify")
+
