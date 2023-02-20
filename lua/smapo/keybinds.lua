@@ -1,15 +1,16 @@
-local cmd = vim.cmd
-local fn = vim.fn
+local editor = vim
+local cmd = editor.cmd
+--local fn = editor.fn
 
 -- helper for shortening map calls
 local function map(mode, keys, mapping, silent)
 	silent = silent or false
 	if type(mode) == 'string'
 	then
-		vim.keymap.set(mode, keys, mapping, { silent = silent })
+		editor.keymap.set(mode, keys, mapping, { silent = silent })
 	else
 		for i, ext_mode in ipairs(mode) do
-			vim.keymap.set(ext_mode, keys, mapping, { silent = silent })
+			editor.keymap.set(ext_mode, keys, mapping, { silent = silent })
 		end
 	end
 end
@@ -23,13 +24,13 @@ end
 map('n', '*', '*N') -- Keep cursor position when starting search
 
 map('n', '<C-t>', function()
-	vim.cmd[[NvimTreeToggle]]
-	vim.cmd[[wincmd p]]
+	editor.cmd[[NvimTreeToggle]]
+	editor.cmd[[wincmd p]]
 end)
 
 map('n', '<C-p>', function()
   -- batcat for linux & bat for windows
-  vim.cmd[[ :call fzf#vim#files('.', {'options': '--prompt "" --layout=reverse --preview="bat --style=numbers --color=always {}"'}) ]]
+  editor.cmd[[ :call fzf#vim#files('.', {'options': '--prompt "" --layout=reverse --preview="bat --style=numbers --color=always {}"'}) ]]
 end)
 
 
@@ -154,12 +155,12 @@ nnoremap <C-g> <cmd>call FugitiveToggle()<CR>
 ]]
 
 map('n', '<Leader>gh', function()
-  local linenr  = vim.api.nvim_win_get_cursor(0)[1]
-  local curline = vim.api.nvim_buf_get_lines(0, linenr - 1, linenr, false)[1]
+  local linenr  = editor.api.nvim_win_get_cursor(0)[1]
+  local curline = editor.api.nvim_buf_get_lines(0, linenr - 1, linenr, false)[1]
 
   cmd[[:GitGutterNextHunk]]
-  linenr = vim.api.nvim_win_get_cursor(0)[1]
-  local lineAfterJump = vim.api.nvim_buf_get_lines(0, linenr - 1, linenr, false)[1]
+  linenr = editor.api.nvim_win_get_cursor(0)[1]
+  local lineAfterJump = editor.api.nvim_buf_get_lines(0, linenr - 1, linenr, false)[1]
   if lineAfterJump == curline
   then
     cmd[[1]]
@@ -292,5 +293,5 @@ map('n', '<Leader>1', ':<Up><CR>')
 -------------
 -- folding --
 -------------
-vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+editor.keymap.set('n', 'zR', require('ufo').openAllFolds)
+editor.keymap.set('n', 'zM', require('ufo').closeAllFolds)

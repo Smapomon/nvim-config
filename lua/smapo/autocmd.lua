@@ -1,5 +1,6 @@
-local A   = vim.api
-local cmd = vim.cmd
+local editor = vim
+local A   = editor.api
+local cmd = editor.cmd
 
 
 -------------------
@@ -76,7 +77,7 @@ local smapo_au = A.nvim_create_augroup('SMAPO', { clear = true })
 A.nvim_create_autocmd('TextYankPost', {
   group = smapo_au,
   callback = function()
-    vim.highlight.on_yank({ higroup = 'Visual' })
+    editor.highlight.on_yank({ higroup = 'Visual' })
   end,
 })
 

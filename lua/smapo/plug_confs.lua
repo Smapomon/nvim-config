@@ -1,4 +1,5 @@
-local o = vim.o
+local editor = vim
+--local o = editor.o
 
 ----------------------
 -- nvim-tree setup --
@@ -139,7 +140,7 @@ require"lualine".setup {
       'filesize'
     },
     lualine_x = {{treelocation}, 'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress', 'location', {function() return (tostring(vim.api.nvim_buf_line_count(0))) end}},
+    lualine_y = {'progress', 'location', {function() return (tostring(editor.api.nvim_buf_line_count(0))) end}},
     lualine_z = {},
   },
 
@@ -171,21 +172,21 @@ require"gitsigns".setup {
 ---------------
 -- FZF setup --
 ---------------
-vim.cmd[[
+editor.cmd[[
 let g:fzf_buffers_jump = 1
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
 let $FZF_DEFAULT_COMMAND='rg --files --follow --no-ignore-vcs --hidden -g "!{tmp/cache/*,node_modules/*,.git/*,public/*/upload_items/*}"'
 let $FZF_DEFAULT_OPTS=' --layout=reverse'
 ]]
 
-vim.cmd[[
+editor.cmd[[
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 ]]
 
 --------------------
 -- autopair setup --
 --------------------
-vim.cmd[[
+editor.cmd[[
 
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.jsx,*.js,*.tsx'
 let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js,*.tsx'
@@ -235,7 +236,7 @@ require('ufo').setup({
 ------------------
 -- ctrlsf setup --
 ------------------
-vim.cmd[[
+editor.cmd[[
 let g:ctrlsf_auto_focus = {
     \ "at": "start"
     \ }
@@ -275,5 +276,5 @@ require("notify").setup({
   background_colour = "#000000",
 })
 
-vim.notify = require("notify")
+editor.notify = require("notify")
 

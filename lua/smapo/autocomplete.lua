@@ -5,15 +5,16 @@
 -- Set up lspconfig.
 Capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+local editor = vim
 local cmp     = require'cmp'
 local luasnip = require("luasnip")
 
 local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  local line, col = unpack(editor.api.nvim_win_get_cursor(0))
+  return col ~= 0 and editor.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
-vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
+editor.opt.completeopt = {'menu', 'menuone', 'noselect'}
 
 cmp.setup({
   snippet = {

@@ -1,9 +1,10 @@
-local o   = vim.o
-local opt = vim.opt
-local g   = vim.g
-local cmd = vim.cmd
+local editor = vim
+local o   = editor.o
+local opt = editor.opt
+local g   = editor.g
+local cmd = editor.cmd
 
-vim.api.nvim_command('filetype plugin indent on')
+editor.api.nvim_command('filetype plugin indent on')
 
 -------------------------
 -- Highlights & Colors --
@@ -15,13 +16,13 @@ cmd([[let ayucolor="mirage"]])
 -- POSSIBLY USELESS COLORING
 -- cmd([[hi CursorLine cterm=NONE ctermbg=darkgrey ctermfg=cyan]])
 -- cmd[[highlight CursorLine cterm=NONE ctermbg=darkgrey ctermfg=cyan]]
--- vim.api.nvim_set_hl('Directory', {guifg='#ff0000', ctermfg=green}, false)
+-- editor.api.nvim_set_hl('Directory', {guifg='#ff0000', ctermfg=green}, false)
 -- cmd([[hi Directory guifg=#ff0000 cftermfg=green]])
- --vim.highlight.create('Directory', {guifg='#ff0000', ctermfg=green}, false)
+ --editor.highlight.create('Directory', {guifg='#ff0000', ctermfg=green}, false)
 
 -- linux terminal is set to transparent
 -- make use of that
-if vim.fn.has('unix')
+if editor.fn.has('unix')
 then
 	cmd[[highlight Normal guibg=NONE ctermbg=NONE]]
 	cmd[[highlight NonText guibg=NONE ctermbg=NONE]]
@@ -96,4 +97,4 @@ g.maplocalleader = ','
 -----------------
 -- WO Settings --
 -----------------
-vim.wo.wrap = false
+editor.wo.wrap = false
