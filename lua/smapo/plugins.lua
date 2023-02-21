@@ -25,14 +25,13 @@ require"paq"{
   "vim-ruby/vim-ruby";                                  --Ruby motions and other stuff (not working now for some reason)
   {"nvim-treesitter/nvim-treesitter", run=':TSUpdate'};
   'hiphish/nvim-ts-rainbow2';                           -- rainbow pairs
-  --'theHamsta/nvim-treesitter-pairs';                  -- better % matcher
   'andymass/vim-matchup';                               -- better % matcher
+  'folke/trouble.nvim';                                 -- diagnostic listing
 
   --LSP and dependencies
   "neovim/nvim-lspconfig";    -- Use native LSP
   'gfanto/fzf-lsp.nvim';      -- fuzzy over lsp
   'nvim-lua/plenary.nvim';    -- for fzf-lsp
-  --'j-hui/fidget.nvim';      -- lsp progress
   'mrded/nvim-lsp-notify';    -- lsp progress
 
   --git integrations

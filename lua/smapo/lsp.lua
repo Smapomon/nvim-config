@@ -55,7 +55,7 @@ local on_attach = function(client, bufnr)
         focusable = false,
         close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
         source = 'always',
-        prefix = ' ',
+        prefix = ' ',
       }
 
       editor.diagnostic.open_float(nil, diag_opts)

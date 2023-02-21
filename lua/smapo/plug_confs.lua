@@ -278,3 +278,12 @@ require("notify").setup({
 
 editor.notify = require("notify")
 
+-------------------
+-- diagnostic setup --
+-------------------
+require'trouble'.setup({
+  mode = "document_diagnostics",
+  auto_jump = {},
+  auto_preview = false,
+});
+
