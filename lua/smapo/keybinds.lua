@@ -33,8 +33,7 @@ map('n', '<C-p>', function()
   editor.cmd[[ :call fzf#vim#files('.', {'options': '--prompt "" --layout=reverse --preview="bat --style=numbers --color=always {}"'}) ]]
 end)
 
-map('n', '<C-ö>', '<cmd>TroubleToggle document_diagnostics<CR>')
-
+map('n', '<C-ö>', '<cmd>Trouble document_diagnostics<CR>')
 
 -------------------
 -- unbind arrows --
