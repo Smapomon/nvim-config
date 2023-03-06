@@ -78,5 +78,6 @@ require"paq"{
   -- Folding code
   "kevinhwang91/promise-async";
   "kevinhwang91/nvim-ufo";
+  "luukvbaal/statuscol.nvim";
 }
 

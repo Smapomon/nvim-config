@@ -74,10 +74,11 @@ o.fileformats = 'unix,dos'
 o.foldcolumn     = '0'
 o.foldlevel      = 99
 o.foldlevelstart = 99
+o.foldenable     = true
 
-opt.foldenable = false
-opt.foldmethod = "expr"
-opt.foldexpr   = "nvim_treesitter#foldexpr()"
+--opt.foldenable = false
+--opt.foldmethod = "expr"
+--opt.foldexpr   = "nvim_treesitter#foldexpr()"
 
 -- expandtab "expands" tabs to spaces
 -- tabstop sets the indent on typing
