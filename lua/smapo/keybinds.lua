@@ -170,6 +170,12 @@ map('n', '<Leader>gh', function()
 end)
 
 
+-------------------------------
+-- number increase, decrease --
+-------------------------------
+cmd[[nnoremap <A-a> <C-a>]]
+cmd[[nnoremap <A-x> <C-x>]]
+
 ----------------
 -- emacs like --
 ----------------
