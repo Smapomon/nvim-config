@@ -21,6 +21,8 @@ end
 --	KEY MAPS	--
 ----------------
 
+map('n', '<F3>', 'ggg?G``')
+
 map('n', '*', '*N') -- Keep cursor position when starting search
 
 map('n', '<C-t>', function()
