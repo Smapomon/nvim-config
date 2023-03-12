@@ -262,8 +262,8 @@ require('ufo').setup({
   end
 })
 
-require("statuscol").setup({ foldfunc = "builtin", setopt = true })
-editor.o.statuscolumn = '%=%l%s%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? " " : " ") : "  " }'
+--require("statuscol").setup({ foldfunc = "builtin", setopt = true })
+--editor.o.statuscolumn = '%=%l%s%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? " " : " ") : "  " }'
 
 ------------------
 -- ctrlsf setup --
