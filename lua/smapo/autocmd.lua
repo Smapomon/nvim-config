@@ -111,6 +111,16 @@ A.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
   command = [[set syntax=nasm filetype=nasm]],
 })
 
+A.nvim_create_autocmd('InsertEnter', {
+  group = smapo_au,
+  command = [[NoMatchParen]]
+})
+
+A.nvim_create_autocmd('InsertLeave', {
+  group = smapo_au,
+  command = [[DoMatchParen]]
+})
+
 cmd[[autocmd FileType dashboard match none]]
 
 cmd[[:let g:colorizer_auto_filetype='css,html,scss']]
