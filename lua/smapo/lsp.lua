@@ -79,7 +79,5 @@ for _, lsp in ipairs(servers) do
 end
 
 
-require'lsp-notify'.setup({
-  notify = require('notify')
-})
+require'lsp-notify'.setup({})
 

@@ -46,9 +46,8 @@ cmp.setup({
     { name = 'keyword_pattern' },
   }, {
     { name = 'buffer' },
-  }, {
-    { name = 'calc' },
     { name = 'rg', keyword_length = 4, max_item_count = 10 },
+    { name = 'calc' },
   }),
   experimental = {
     native_menu = false,
@@ -77,9 +76,18 @@ cmp.setup({
 -- Set configuration for specific filetype.
 cmp.setup.filetype('gitcommit', {
   sources = cmp.config.sources({
-    { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+    { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you installed it.
   }, {
     { name = 'buffer' },
+  })
+})
+
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }, -- You can specify the `cmp_git` source if you installed it.
+  }, {
+    { name = 'cmdline' },
   })
 })
 
