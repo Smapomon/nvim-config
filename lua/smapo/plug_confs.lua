@@ -147,7 +147,6 @@ local function treelocation()
     treelocation_str = editor.fn['tagbar#currenttag']("%s", "", 'f', 'scoped-stl')
   end
 
-  --return 'testing'
   return treelocation_str
 end
 
