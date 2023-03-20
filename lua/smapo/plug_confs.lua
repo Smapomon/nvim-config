@@ -90,16 +90,145 @@ require'fzf_lsp'.setup()
 -----------------------
 -- Statusline setup --
 -----------------------
-local treesitter = require('nvim-treesitter')
+local ts_utils = require("nvim-treesitter.ts_utils")
+local function get_keys(root)
+  local keys = {}
+  for node, name in root:iter_children() do
+    if name == "key" then
+      table.insert(keys, node)
+    end
+
+    if node:child_count() > 0 then
+      for _, child in pairs(get_keys(node)) do
+        table.insert(keys, child)
+      end
+    end
+  end
+  return keys
+end
+
+local all_keys = function()
+  local bufnr = editor.api.nvim_get_current_buf()
+  local ft = editor.api.nvim_buf_get_option(bufnr, "ft")
+  local tree = editor.treesitter.get_parser(bufnr, ft):parse()[1]
+  local root = tree:root()
+  return get_keys(root)
+end
+
+local get_key_relevant_to_cursor = function()
+	local cursor_line = editor.api.nvim_win_get_cursor(0)[1]
+	local previous_node = nil
+
+	for _, node in pairs(all_keys()) do
+		local node_line, _ = node:start()
+		node_line = node_line + 1
+
+		if cursor_line == node_line then
+			return node
+		end
+
+		if cursor_line < node_line then
+			return previous_node
+		end
+
+		previous_node = node
+	end
+end
+
+local function reverse(keys)
+	local n = #keys
+	local i = 1
+	while i < n do
+		keys[i], keys[n] = keys[n], keys[i]
+		i = i + 1
+		n = n - 1
+	end
+end
+
+local function is_sequence_block(value)
+	if value:type() ~= "block_node" then
+		return false
+	end
+
+	for block_sequence, _ in value:iter_children() do
+		return block_sequence:type() == "block_sequence"
+	end
+end
+
+local function get_sequence_index(block, key)
+	for block_sequence, _ in block:iter_children() do
+		local index = 0
+		for block_sequence_item, _ in block_sequence:iter_children() do
+			if ts_utils.is_parent(block_sequence_item, key) then
+				return index
+			end
+			index = index + 1
+		end
+	end
+end
+
+local function get_pair_keys(node, bufnr)
+	local keys = {}
+	local original = node
+
+	while node ~= nil do
+		if node:type() == "block_mapping_pair" then
+			local key = node:field("key")[1]
+			local key_as_string = editor.treesitter.query.get_node_text(key, bufnr)
+
+			local value = node:field("value")[1]
+			if is_sequence_block(value) then
+				local index = get_sequence_index(value, original)
+				if index ~= nil then
+					key_as_string = key_as_string .. "[" .. index .. "]"
+				end
+			end
+
+			table.insert(keys, key_as_string)
+		end
+
+		node = node:parent()
+	end
+
+	reverse(keys)
+	return table.concat(keys, ".")
+end
+
+local parse = function(node)
+  local bufnr         = editor.api.nvim_get_current_buf()
+  local key           = get_pair_keys(node, bufnr)
+  local human         = string.format("%s", key)
+
+  return human
+end
+
+local function get_yaml_keys()
+  local key_chain = get_key_relevant_to_cursor()
+  if key_chain == nil then
+    return 'no key found'
+  end
+
+  local parsed = parse(key_chain)
+  return parsed
+end
+
 local function treelocation()
   -- TODO: write custom handler for yml context
   -- TODO: write parser for clearer ruby classes
 
-  return treesitter.statusline({
-    indicator_size = 70,
-    type_patterns = {'class', 'function', 'method'},
-    separator = ' -> '
-  })
+  --return treesitter.statusline({
+    --indicator_size = 70,
+    --type_patterns = {'class', 'function', 'method'},
+    --separator = ' -> '
+  --})
+
+  if editor.bo.filetype == 'yaml' then
+    local current_tag = get_yaml_keys()
+
+    return current_tag
+  end
+
+  return editor.fn['tagbar#currenttag']("%s", "", 'f', 'scoped-stl')
 end
 
 require"lualine".setup {

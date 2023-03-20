@@ -27,6 +27,7 @@ require"paq"{
   'hiphish/nvim-ts-rainbow2';                           -- rainbow pairs
   'andymass/vim-matchup';                               -- better % matcher
   'folke/trouble.nvim';                                 -- diagnostic listing
+  'preservim/tagbar';                                   -- ctags browser
 
   --LSP and dependencies
   "neovim/nvim-lspconfig";    -- Use native LSP
@@ -51,7 +52,7 @@ require"paq"{
   "akinsho/bufferline.nvim";
 
   --auto completion
-  "vim-scripts/CmdlineComplete";
+  --"vim-scripts/CmdlineComplete";
   "alvan/vim-closetag";
   'jiangmiao/auto-pairs';
   "hrsh7th/nvim-cmp";                    -- Autocompletion for LSP
