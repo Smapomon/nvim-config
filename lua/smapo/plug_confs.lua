@@ -367,3 +367,13 @@ require'trouble'.setup({
   auto_preview = false,
 });
 
+-------------------
+-- copilot setup --
+-------------------
+require'copilot'.setup({
+  suggestion = { enabled = false },
+  panel = { enabled = false },
+})
+
+require'copilot_cmp'.setup({})
+

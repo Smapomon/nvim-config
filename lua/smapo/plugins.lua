@@ -18,8 +18,8 @@ require"paq"{
   "octol/vim-cpp-enhanced-highlight";
   "godlygeek/tabular";
   "chrisbra/colorizer";
-  "ellisonleao/glow.nvim"; -- Markdown preview
 
+  "ellisonleao/glow.nvim"; -- Markdown preview
   'tpope/vim-rails';                                    -- Probably not working either
   'tpope/vim-endwise';
   "vim-ruby/vim-ruby";                                  --Ruby motions and other stuff (not working now for some reason)
@@ -66,6 +66,8 @@ require"paq"{
   'saadparwaiz1/cmp_luasnip';            -- Snippets source for nvim-cmp
   'rafamadriz/friendly-snippets';        -- framework snippets
   'lukas-reineke/cmp-rg';                -- ripgrep source for nvim-cmp
+  'zbirenbaum/copilot.lua';              -- github copilot lua version
+  'zbirenbaum/copilot-cmp';              -- use copilot as a CMP source
 
   --comment code
   "preservim/nerdcommenter";
