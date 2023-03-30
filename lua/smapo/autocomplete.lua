@@ -32,7 +32,7 @@ cmp.setup({
   mapping = cmp.mapping.preset.insert({
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<Leader><Space>'] = cmp.mapping.complete(),
+    ['<Leader>c'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm({ select = false, behavior = cmp.ConfirmBehavior.Replace, }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 
@@ -40,14 +40,14 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'copilot', group_index = 1 },
     { name = 'nvim_lsp', group_index = 1 },
-    { name = 'nvim_lua', group_index = 1 },
-    { name = 'nvim_lsp_signature_help', group_index = 1 }, -- method help window
-    { name = 'path', group_index = 1 },
-    { name = 'luasnip', group_index = 1 }, -- For luasnip users.
-    { name = 'keyword_pattern', group_index = 1 },
-    { name = 'buffer', group_index = 2 },
-    { name = 'rg', keyword_length = 4, max_item_count = 10, group_index = 2 },
-    { name = 'calc', group_index = 2 },
+    { name = 'nvim_lua', group_index = 2 },
+    { name = 'nvim_lsp_signature_help', group_index = 2 }, -- method help window
+    { name = 'path', group_index = 2 },
+    { name = 'keyword_pattern', group_index = 2 },
+    { name = 'buffer', group_index = 3 },
+    { name = 'rg', keyword_length = 4, max_item_count = 10, group_index = 3 },
+    { name = 'calc', group_index = 3 },
+    { name = 'luasnip', group_index = 4 }, -- For luasnip users.
   }),
   experimental = {
     native_menu = false,
