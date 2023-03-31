@@ -114,7 +114,7 @@ local function yaml_cursor_key(yaml_str, row, prev_indent)
   if c > 0 then
     -- same indent means same scope
     -- lower indent means previous key
-    if c == prev_indent then
+    if c >= prev_indent then
       -- keep going one row up
       return yaml_cursor_key(yaml_str, row-1, prev_indent)
     else
