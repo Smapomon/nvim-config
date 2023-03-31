@@ -147,6 +147,8 @@ local function treelocation()
     treelocation_str = editor.fn['tagbar#currenttag']("%s", "", 'f', 'scoped-stl')
   end
 
+  treelocation_str = treelocation_str:gsub("%.", " --> ")
+
   return treelocation_str
 end
 
