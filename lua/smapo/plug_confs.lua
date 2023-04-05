@@ -129,22 +129,27 @@ end
 
 local function treelocation()
   local treelocation_str = ''
+  local current_mode = editor.api.nvim_get_mode().mode
 
   -- for yaml use custom logic instead of ctags
-  if editor.bo.filetype == 'yaml' then
-    local row, _        = unpack(editor.api.nvim_win_get_cursor(0))
-    treelocation_str    = yaml_cursor_key('', row, nil)
+  if current_mode == 'n' then
+    if editor.bo.filetype == 'yaml' then
+      local row, _        = unpack(editor.api.nvim_win_get_cursor(0))
+      treelocation_str    = yaml_cursor_key('', row, nil)
 
-    -- get current line key
-    local current_key   = editor.api.nvim_get_current_line()
-    current_key         = current_key:match('([^:]+)')
+      -- get current line key
+      local current_key   = editor.api.nvim_get_current_line()
+      current_key         = current_key:match('([^:]+)')
 
-    -- trim the whitespace from the string
-    -- go ahead with concatenation
-    local parsed_key, _ = current_key:gsub(" ","")
-    treelocation_str    = treelocation_str..parsed_key
+      -- trim the whitespace from the string
+      -- go ahead with concatenation
+      local parsed_key, _ = current_key:gsub(" ","")
+      treelocation_str    = treelocation_str..parsed_key
+    else
+      treelocation_str = editor.fn['tagbar#currenttag']("%s", "", 'f', 'scoped-stl')
+    end
   else
-    treelocation_str = editor.fn['tagbar#currenttag']("%s", "", 'f', 'scoped-stl')
+    treelocation_str = 'See Context In Normal Mode'
   end
 
   treelocation_str = treelocation_str:gsub("%.", " --> ")
@@ -372,10 +377,10 @@ require'trouble'.setup({
 -------------------
 -- copilot setup --
 -------------------
-require'copilot'.setup({
-  suggestion = { enabled = false },
-  panel = { enabled = false },
-})
+--require'copilot'.setup({
+  --suggestion = { enabled = false },
+  --panel = { enabled = false },
+--})
 
-require'copilot_cmp'.setup({})
+--require'copilot_cmp'.setup({})
 

@@ -5,7 +5,7 @@ local editor = vim;
 editor.keymap.set('n', '<Leader>e', editor.diagnostic.open_float, key_map_opts)
 editor.keymap.set('n', '<Leader>D', editor.diagnostic.goto_prev, key_map_opts)
 editor.keymap.set('n', '<Leader>d', editor.diagnostic.goto_next, key_map_opts)
-editor.keymap.set('n', '<space>q', editor.diagnostic.setloclist, key_map_opts)
+editor.keymap.set('n', '<Leader>q', editor.diagnostic.setloclist, key_map_opts)
 
 editor.o.updatetime = 300 -- updatetime affects the CursorHold event
 
