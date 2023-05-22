@@ -30,10 +30,11 @@ require"paq"{
   'preservim/tagbar';                                   -- ctags browser
 
   --LSP and dependencies
-  "neovim/nvim-lspconfig";    -- Use native LSP
-  'gfanto/fzf-lsp.nvim';      -- fuzzy over lsp
-  'nvim-lua/plenary.nvim';    -- for fzf-lsp
-  'mrded/nvim-lsp-notify';    -- lsp progress
+  "neovim/nvim-lspconfig";                           -- Use native LSP
+  'gfanto/fzf-lsp.nvim';                             -- fuzzy over lsp
+  'nvim-lua/plenary.nvim';                           -- for fzf-lsp
+  'mrded/nvim-lsp-notify';                           -- lsp progress
+  { 'williamboman/mason.nvim', run=':MasonUpdate' }; -- lsp installer'
 
   --git integrations
   "tpope/vim-fugitive";

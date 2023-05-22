@@ -7,8 +7,6 @@ local editor = vim
 require"nvim-tree".setup {
 	disable_netrw      = true,
 	hijack_netrw       = true,
-	open_on_setup      = false,
-	open_on_setup_file = false,
 	update_cwd         = true,
 	open_on_tab        = false,
 	reload_on_bufenter = true,

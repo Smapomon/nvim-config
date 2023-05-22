@@ -31,6 +31,12 @@ A.nvim_create_user_command(
 )
 
 A.nvim_create_user_command(
+  'FormatSql',
+  "%!sqlformat --reindent --keywords upper --identifiers lower -",
+  {bang = false}
+)
+
+A.nvim_create_user_command(
   'CloseBufsExceptCurrent',
   "%bd|e#|bd#",
   {bang = false}

@@ -81,3 +81,5 @@ end
 
 require'lsp-notify'.setup({})
 
+require("mason").setup()
+
