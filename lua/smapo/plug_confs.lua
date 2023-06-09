@@ -382,3 +382,8 @@ require'copilot'.setup({
 
 require'copilot_cmp'.setup({})
 
+-----------------------
+-- git plugins setup --
+-----------------------
+require('git-conflict').setup()
+

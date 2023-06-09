@@ -4,10 +4,8 @@ require"paq"{
   "savq/paq-nvim";
 
   --theme (bleep bloop)
-  "liuchengxu/space-vim-theme";
   "ayu-theme/ayu-vim";
   "nvim-lualine/lualine.nvim";
-  "jacoborus/tender.vim"; -- lightline colorscheme
   "ryanoasis/vim-webdevicons";
   "kyazdani42/nvim-web-devicons"; --for coloured icons
   "rcarriga/nvim-notify"; -- notifications
@@ -18,11 +16,7 @@ require"paq"{
   "octol/vim-cpp-enhanced-highlight";
   "godlygeek/tabular";
   "chrisbra/colorizer";
-
-  "ellisonleao/glow.nvim"; -- Markdown preview
-  'tpope/vim-rails';                                    -- Probably not working either
-  'tpope/vim-endwise';
-  "vim-ruby/vim-ruby";                                  --Ruby motions and other stuff (not working now for some reason)
+  "ellisonleao/glow.nvim";                              -- Markdown preview
   {"nvim-treesitter/nvim-treesitter", run=':TSUpdate'};
   'hiphish/nvim-ts-rainbow2';                           -- rainbow pairs
   'andymass/vim-matchup';                               -- better % matcher
@@ -38,10 +32,7 @@ require"paq"{
 
   --git integrations
   "tpope/vim-fugitive";
-  "tpope/vim-rhubarb";
-  "christoomey/vim-conflicted";
   "airblade/vim-gitgutter";
-  "junegunn/gv.vim";
   "akinsho/git-conflict.nvim";
   "lewis6991/gitsigns.nvim";
 
@@ -83,6 +74,5 @@ require"paq"{
   -- Folding code
   "kevinhwang91/promise-async";
   "kevinhwang91/nvim-ufo";
-  --"luukvbaal/statuscol.nvim";
 }
 
