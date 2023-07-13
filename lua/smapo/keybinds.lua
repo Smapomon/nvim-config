@@ -240,10 +240,10 @@ map('n', '<Leader>hw', ':%!xxd -r<CR> :set binary<CR> :set filetype=<CR>')
 -- searching --
 ---------------
 cmd[[vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>]]
-map('n', '<Leader>f', ':Rg<CR>')
+map('n', '<Leader>f', ':Ag<CR>')
 
 -- Search files for visually selected text
-cmd[[xnoremap <leader>f "zy :let cmd = 'Rg ' . @z <bar> call histadd("cmd", cmd) <bar> execute cmd <cr>]]
+cmd[[xnoremap <leader>f "zy :let cmd = 'Ag ' . @z <bar> call histadd("cmd", cmd) <bar> execute cmd <cr>]]
 
 ---------------
 -- replacing --
