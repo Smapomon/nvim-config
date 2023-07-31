@@ -16,7 +16,7 @@ require"paq"{
   "octol/vim-cpp-enhanced-highlight";
   "godlygeek/tabular";
   "chrisbra/colorizer";
-  "ellisonleao/glow.nvim";                              -- Markdown preview
+  "iamcco/markdown-preview.nvim",
   {"nvim-treesitter/nvim-treesitter", run=':TSUpdate'};
   'hiphish/nvim-ts-rainbow2';                           -- rainbow pairs
   'andymass/vim-matchup';                               -- better % matcher
