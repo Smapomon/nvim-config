@@ -21,7 +21,7 @@ end
 --	KEY MAPS	--
 ----------------
 
-map('n', '<F3>', 'ggg?G``')
+map('n', '<F3>', 'ggg?G``') -- obfuscate buffer
 
 map('n', '*', '*N') -- Keep cursor position when starting search
 
