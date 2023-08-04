@@ -251,12 +251,16 @@ cmd[[xnoremap <leader>f "zy :let cmd = 'Ag ' . @z <bar> call histadd("cmd", cmd)
 map('n', '<Leader>R', ':CtrlSF <C-r><C-w><CR>')
 cmd[[nnoremap <Leader>r :%s/\<<C-r><C-w>\>/<C-r><C-w>/gi<left><left><left>]]
 
+-- move each . to new line in visual selection
+map({'n', 'v'}, '<Leader>td', ':s/\\m\\%(\\..*\\)\\@<=\\./\\r\\./g<CR>:noh<CR>')
+
 ---------------
 -- alignment --
 ---------------
 --map({'n', 'v'}, '<Leader>t=', ':Tabularize /=<CR>')
 map({'n', 'v'}, '<Leader>t=', ':Tabularize /=.*<CR>')
 map({'n', 'v'}, '<Leader>t:', ':Tabularize /:.*/<CR>')
+map({'n', 'v'}, '<Leader>t.', ":Tabularize /\\..*/l0<CR>")
 --map({'n', 'v'}, '<Leader>t:', ':Tabularize /:\zs<CR>')
 --cmd[[inoremap <silent> =   =<C-o>:Tabularize /=<CR>]]
 

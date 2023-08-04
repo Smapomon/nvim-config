@@ -18,7 +18,6 @@ require"paq"{
   "chrisbra/colorizer";
   "iamcco/markdown-preview.nvim",
   {"nvim-treesitter/nvim-treesitter", run=':TSUpdate'};
-  'hiphish/nvim-ts-rainbow2';                           -- rainbow pairs
   'andymass/vim-matchup';                               -- better % matcher
   'folke/trouble.nvim';                                 -- diagnostic listing
   'preservim/tagbar';                                   -- ctags browser
@@ -46,7 +45,7 @@ require"paq"{
   --auto completion
   --"vim-scripts/CmdlineComplete";
   "alvan/vim-closetag";
-  'jiangmiao/auto-pairs';
+  'windwp/nvim-autopairs';               -- Autopairs
   "hrsh7th/nvim-cmp";                    -- Autocompletion for LSP
   'hrsh7th/cmp-nvim-lsp';                -- LSP source for nvim-cmp
   'hrsh7th/cmp-buffer';

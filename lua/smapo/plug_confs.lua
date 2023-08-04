@@ -64,18 +64,6 @@ require"nvim-treesitter.configs".setup {
     enable = false,
   },
 
-  rainbow = {
-    enable = true,
-    -- list of languages you want to disable the plugin for
-    disable = { "yml", "yaml" },
-    -- Which query to use for finding delimiters
-    query = 'rainbow-parens',
-    -- Highlight the entire buffer all at once
-    strategy = require 'ts-rainbow.strategy.global',
-    -- Do not enable for files with more than n lines
-    max_file_lines = 3000
-  },
-
   matchup = {
     enable = true, -- mandatory, false will disable the whole extension
     include_match_words = true,
@@ -84,6 +72,28 @@ require"nvim-treesitter.configs".setup {
 
 require'fzf_lsp'.setup()
 
+local npairs = require("nvim-autopairs")
+local Rule = require('nvim-autopairs.rule')
+
+npairs.setup({
+    check_ts = true,
+    ts_config = {
+        lua = {'string'},-- it will not add a pair on that treesitter node
+        javascript = {'template_string'},
+        java = false,-- don't check treesitter on java
+    }
+})
+
+local ts_conds = require('nvim-autopairs.ts-conds')
+
+
+-- press % => %% only while inside a comment or string
+npairs.add_rules({
+  Rule("%", "%", "lua")
+    :with_pair(ts_conds.is_ts_node({'string','comment'})),
+  Rule("$", "$", "lua")
+    :with_pair(ts_conds.is_not_ts_node({'function'}))
+})
 
 -----------------------
 -- Statusline setup --
