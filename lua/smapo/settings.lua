@@ -31,6 +31,8 @@ then
 	cmd[[highlight GitSignsAdd guibg=NONE]]
 	cmd[[highlight GitSignsChange guibg=NONE]]
 	cmd[[highlight GitSignsDelete guibg=NONE]]
+	cmd[[highlight FloatBorder guifg=DarkGrey]]
+	cmd[[highlight GitSignsDeletePreview guibg=none guifg=red]]
 end
 
 cmd[[highlight MatchParen ctermbg=none guibg=none ctermfg=darkgreen guifg=darkgreen cterm=italic gui=italic]]

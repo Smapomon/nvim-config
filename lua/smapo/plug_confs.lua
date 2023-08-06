@@ -68,6 +68,13 @@ require"nvim-treesitter.configs".setup {
     enable = true, -- mandatory, false will disable the whole extension
     include_match_words = true,
   },
+
+  autotag = {
+    enable = true,
+    enable_rename = true,
+    enable_close = true,
+    enable_close_on_slash = true,
+  }
 }
 
 require'fzf_lsp'.setup()
@@ -228,7 +235,40 @@ require"lualine".setup {
 --------------------
 require"gitsigns".setup {
   current_line_blame = true,
-  signcolumn         = true
+  signcolumn         = true,
+
+  preview_config = {
+    border    = 'rounded',
+    style     = 'minimal',
+    relative  = 'cursor',
+    --title     = "Hunk Preview:",
+    --title_pos = "center",
+  },
+
+  on_attach = function(bufnr)
+    local gs = package.loaded.gitsigns
+
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      editor.keymap.set(mode, l, r, opts)
+    end
+
+    -- Navigation
+    map('n', '<Leader>gh', function()
+      if editor.wo.diff then return ']c' end
+      editor.schedule(function() gs.next_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
+
+    map('n', '<Leader>gH', function()
+      if editor.wo.diff then return '[c' end
+      editor.schedule(function() gs.prev_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
+
+    map('n', '<C-h>', gs.preview_hunk)
+  end
 }
 
 
@@ -396,4 +436,11 @@ require'copilot_cmp'.setup({})
 -- git plugins setup --
 -----------------------
 require('git-conflict').setup()
+
+---------------------
+-- colorizer setup --
+---------------------
+require('colorizer').setup {
+  css = { css = true; };
+}
 

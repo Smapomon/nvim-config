@@ -143,7 +143,6 @@ end, true)
 -- git --
 ---------
 --cmd[[nnoremap <C-g> :G<CR><C-w>L :vertical resize 50<CR>]]
-map('n', '<C-h>', ':GitGutterPreviewHunk<CR>')
 
 cmd[[
 function FugitiveToggle() abort
@@ -156,20 +155,6 @@ function FugitiveToggle() abort
 endfunction
 nnoremap <C-g> <cmd>call FugitiveToggle()<CR>
 ]]
-
-map('n', '<Leader>gh', function()
-  local linenr  = editor.api.nvim_win_get_cursor(0)[1]
-  local curline = editor.api.nvim_buf_get_lines(0, linenr - 1, linenr, false)[1]
-
-  cmd[[:GitGutterNextHunk]]
-  linenr = editor.api.nvim_win_get_cursor(0)[1]
-  local lineAfterJump = editor.api.nvim_buf_get_lines(0, linenr - 1, linenr, false)[1]
-  if lineAfterJump == curline
-  then
-    cmd[[1]]
-    cmd[[:GitGutterNextHunk]]
-  end
-end)
 
 
 -------------------------------

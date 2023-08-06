@@ -15,7 +15,7 @@ require"paq"{
   --syntax highlighting + lint/hint + language specifics
   "octol/vim-cpp-enhanced-highlight";
   "godlygeek/tabular";
-  "chrisbra/colorizer";
+  "norcalli/nvim-colorizer.lua";
   "iamcco/markdown-preview.nvim",
   {"nvim-treesitter/nvim-treesitter", run=':TSUpdate'};
   'andymass/vim-matchup';                               -- better % matcher
@@ -31,7 +31,6 @@ require"paq"{
 
   --git integrations
   "tpope/vim-fugitive";
-  "airblade/vim-gitgutter";
   "akinsho/git-conflict.nvim";
   "lewis6991/gitsigns.nvim";
 
@@ -46,6 +45,7 @@ require"paq"{
   --"vim-scripts/CmdlineComplete";
   "alvan/vim-closetag";
   'windwp/nvim-autopairs';               -- Autopairs
+  'windwp/nvim-ts-autotag';              -- Auto close and rename html tags
   "hrsh7th/nvim-cmp";                    -- Autocompletion for LSP
   'hrsh7th/cmp-nvim-lsp';                -- LSP source for nvim-cmp
   'hrsh7th/cmp-buffer';
