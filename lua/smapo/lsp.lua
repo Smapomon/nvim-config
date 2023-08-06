@@ -69,7 +69,7 @@ local lsp_flags = {
 }
 
 -- Setup lsp default servers
-local servers = { 'solargraph', 'pyright', 'tsserver', 'rust_analyzer', 'ruby_ls', 'lua_ls', 'tailwindcss', 'eslint' }
+local servers = { 'solargraph', 'pyright', 'tsserver', 'rust_analyzer', 'ruby_ls', 'lua_ls', 'tailwindcss' }
 for _, lsp in ipairs(servers) do
   require('lspconfig')[lsp].setup{
     capabilities = Capabilities,
