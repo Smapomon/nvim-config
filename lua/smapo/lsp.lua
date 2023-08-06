@@ -69,7 +69,7 @@ local lsp_flags = {
 }
 
 -- Setup lsp default servers
-local servers = { 'solargraph', 'pyright', 'tsserver', 'rust_analyzer', 'ruby_ls', 'lua_ls', 'tailwindcss' }
+local servers = { 'solargraph', 'pyright', 'tsserver', 'rust_analyzer', 'ruby_ls', 'lua_ls', 'tailwindcss', 'eslint' }
 for _, lsp in ipairs(servers) do
   require('lspconfig')[lsp].setup{
     capabilities = Capabilities,
@@ -78,6 +78,13 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+-- Format mappings
+editor.keymap.set({"n"}, "gf", editor.lsp.buf.format)
+editor.keymap.set({"v"}, "gf", function()
+    editor.api.nvim_input('V')
+    editor.lsp.buf.format({ async = true })
+    editor.api.nvim_input('<ESC>')
+end)
 
 require'lsp-notify'.setup({})
 

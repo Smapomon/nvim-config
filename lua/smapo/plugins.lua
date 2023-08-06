@@ -28,6 +28,7 @@ require"paq"{
   'nvim-lua/plenary.nvim';                           -- for fzf-lsp
   'mrded/nvim-lsp-notify';                           -- lsp progress
   { 'williamboman/mason.nvim', run=':MasonUpdate' }; -- lsp installer'
+  'jose-elias-alvarez/null-ls.nvim';                 -- lsp helper
 
   --git integrations
   "tpope/vim-fugitive";
