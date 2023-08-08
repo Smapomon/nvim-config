@@ -68,6 +68,9 @@ local lsp_flags = {
   debounce_text_changes = 150,
 }
 
+require("mason").setup()
+require("mason-lspconfig").setup()
+
 -- Setup lsp default servers
 local servers = { 'solargraph', 'pyright', 'tsserver', 'rust_analyzer', 'ruby_ls', 'lua_ls', 'tailwindcss' }
 for _, lsp in ipairs(servers) do
@@ -87,6 +90,4 @@ editor.keymap.set({"v"}, "gf", function()
 end)
 
 require'lsp-notify'.setup({})
-
-require("mason").setup()
 
