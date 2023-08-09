@@ -31,11 +31,11 @@ map('n', '<C-t>', function()
 end)
 
 map('n', '<C-p>', function()
-  -- batcat for linux & bat for windows
   editor.cmd[[ :call fzf#vim#files('.', {'options': '--prompt "" --layout=reverse --preview="bat --style=numbers --color=always {}"'}) ]]
 end)
 
-map('n', '<C-ö>', '<cmd>Trouble document_diagnostics<CR>')
+map('n', '<C-ö>', '<cmd>TroubleToggle<CR>')
+map ('n', '<Leader>gf', 'gf')
 
 -------------------
 -- unbind arrows --
@@ -200,6 +200,13 @@ map({'n', 'i', 'v'}, '<Leader>n', [[:cn<CR>]])
 map({'n', 'i', 'v'}, '<Leader>N', [[:lnext<CR>]])
 map({'n', 'i', 'v'}, '<Leader>p', [[:cp<CR>]])
 map({'n', 'i', 'v'}, '<Leader>P', [[:lprevious<CR>]])
+
+map('n', 'gn', function()
+  require("trouble").next({skip_groups = true, jump = true});
+end)
+map('n', 'gp', function()
+  require("trouble").previous({skip_groups = true, jump = true});
+end)
 
 
 -------------
