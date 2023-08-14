@@ -268,6 +268,7 @@ require"gitsigns".setup {
     end, {expr=true})
 
     map('n', '<C-h>', gs.preview_hunk)
+    map('n', '<Leader>hu', gs.reset_hunk)
   end
 }
 
