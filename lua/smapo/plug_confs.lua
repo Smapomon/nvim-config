@@ -51,7 +51,13 @@ require"nvim-tree".setup {
 -- nvim-treesitter setup --
 ----------------------------
 require"nvim-treesitter.configs".setup {
-  ensure_installed = "all",
+  ensure_installed = {
+    "c", "lua", "vim", "vimdoc", "query", "ruby",
+    "css", "scss", "html", "javascript", "gitcommit",
+    "typescript", "json", "yaml", "python", "gitignore",
+    "dockerfile", "bash", "regex", "jq", "jsonc", "markdown",
+    "git_config", "sql", "tsx", "terraform"
+  },
   sync_install     = false,
 
 
@@ -62,6 +68,7 @@ require"nvim-treesitter.configs".setup {
 
   indent = {
     enable = true,
+    disable = {"ruby"}
   },
 
   matchup = {
