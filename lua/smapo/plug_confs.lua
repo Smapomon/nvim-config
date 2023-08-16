@@ -421,6 +421,7 @@ require'trouble'.setup({
   mode = "document_diagnostics",
   auto_jump = {},
   auto_preview = false,
+  auto_open = false,
 });
 
 -------------------
