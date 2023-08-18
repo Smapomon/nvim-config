@@ -101,6 +101,12 @@ A.nvim_create_autocmd('BufEnter', {
 
 A.nvim_create_autocmd('BufEnter', {
   group = smapo_au,
+  pattern = {'*.scss.erb'},
+  command = [[set ft=scss]],
+})
+
+A.nvim_create_autocmd('BufEnter', {
+  group = smapo_au,
   pattern = {'*.es6'},
   command = [[set ft=javascript]],
 })
