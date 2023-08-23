@@ -39,10 +39,13 @@ local on_attach = function(client, bufnr)
     virtual_text = false,
     signs = true,
     update_in_insert = true,
+    float = {
+      source = "always",
+    },
     severity_sort = true,
   })
 
-  local signs = { Error = "🛑", Warn = " ", Hint = "", Info = " " }
+  local signs = { Error = "⛔", Warn = "⚠️", Hint = "💡", Info = "🔎" }
   for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     editor.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
@@ -55,7 +58,7 @@ local on_attach = function(client, bufnr)
         focusable = false,
         close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
         source = 'always',
-        prefix = ' ',
+        prefix = '🔎 ',
       }
 
       editor.diagnostic.open_float(nil, diag_opts)
