@@ -241,7 +241,6 @@ cmd[[xnoremap <leader>f "zy :let cmd = 'Ag ' . @z <bar> call histadd("cmd", cmd)
 ---------------
 -- replacing --
 ---------------
-map('n', '<Leader>R', ':CtrlSF <C-r><C-w><CR>')
 cmd[[nnoremap <Leader>r :%s/\<<C-r><C-w>\>/<C-r><C-w>/gi<left><left><left>]]
 
 -- move each . to new line in visual selection

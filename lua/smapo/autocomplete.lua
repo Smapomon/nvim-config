@@ -48,7 +48,6 @@ cmp.setup({
     { name = 'keyword_pattern', group_index = 2 },
     { name = 'buffer', group_index = 3 },
     { name = 'rg', keyword_length = 4, max_item_count = 10, group_index = 3 },
-    { name = 'calc', group_index = 3 },
     { name = 'luasnip', group_index = 4, max_item_count = 10 }, -- For luasnip users.
   }),
   experimental = {
@@ -67,7 +66,6 @@ cmp.setup({
         path = '[PATH]',
         keyword_pattern = '[KeyWordPattern]',
         rg = '[RIPGREP]',
-        calc = '[CALC]',
       }
 
       item.menu = menu_icon[entry.source.name]

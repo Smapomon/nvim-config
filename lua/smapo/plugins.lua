@@ -20,7 +20,7 @@ require"paq"{
   {"nvim-treesitter/nvim-treesitter", run=':TSUpdate'};
   'andymass/vim-matchup';                               -- better % matcher
   'folke/trouble.nvim';                                 -- diagnostic listing
-  'preservim/tagbar';                                   -- ctags browser
+  'preservim/tagbar';                                   -- ctags browser (used in treelocation)
 
   --LSP and dependencies
   "neovim/nvim-lspconfig";                           -- Use native LSP
@@ -33,19 +33,15 @@ require"paq"{
 
   --git integrations
   "tpope/vim-fugitive";
-  "akinsho/git-conflict.nvim";
   "lewis6991/gitsigns.nvim";
 
   --File Navigation & Search
-  "dyng/ctrlsf.vim";
   "junegunn/fzf.vim";
   "junegunn/fzf";
   "kyazdani42/nvim-tree.lua";
   "akinsho/bufferline.nvim";
 
   --auto completion
-  --"vim-scripts/CmdlineComplete";
-  "alvan/vim-closetag";
   'windwp/nvim-autopairs';               -- Autopairs
   'windwp/nvim-ts-autotag';              -- Auto close and rename html tags
   "hrsh7th/nvim-cmp";                    -- Autocompletion for LSP
@@ -53,11 +49,9 @@ require"paq"{
   'hrsh7th/cmp-buffer';
   'hrsh7th/cmp-nvim-lua';
   'hrsh7th/cmp-path';
-  'hrsh7th/cmp-calc';
   'hrsh7th/cmp-cmdline',
   'hrsh7th/cmp-nvim-lsp-signature-help';
   'saadparwaiz1/cmp_luasnip';            -- Snippets source for nvim-cmp
-  'rafamadriz/friendly-snippets';        -- framework snippets
   'lukas-reineke/cmp-rg';                -- ripgrep source for nvim-cmp
   'zbirenbaum/copilot.lua';              -- github copilot lua version
   'zbirenbaum/copilot-cmp';              -- use copilot as a CMP source

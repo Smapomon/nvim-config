@@ -376,16 +376,6 @@ require('ufo').setup({
 --require("statuscol").setup({ foldfunc = "builtin", setopt = true })
 --editor.o.statuscolumn = '%=%l%s%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? " " : " ") : "  " }'
 
-------------------
--- ctrlsf setup --
-------------------
-editor.cmd[[
-let g:ctrlsf_auto_focus = {
-    \ "at": "start"
-    \ }
-let g:ctrlsf_position = 'bottom'
-]]
-
 
 -------------------
 -- snippet setup --
@@ -395,25 +385,25 @@ require'luasnip'.filetype_extend("ruby", {"rails"});
 -----------------
 -- theme setup --
 -----------------
-require('dashboard').setup({
-  theme = 'hyper',
-  config = {
-    week_header = {
-      enable = true,
-    },
-    disable_move = false,
-    project = { limit = 8, action = [[:e]] },
-    shortcut = {
-      { desc = ' Update Plugins', group = '@property', action = 'PaqSync', key = 'u' },
-      {
-        desc = ' Files',
-        group = 'Label',
-        action = [[call fzf#vim#files('.', {'options': '--prompt "" --layout=reverse --preview="bat --style=numbers --color=always {}"'})]],
-        key = 'f',
-      },
-    },
-  },
-});
+--require('dashboard').setup({
+  --theme = 'hyper',
+  --config = {
+    --week_header = {
+      --enable = true,
+    --},
+    --disable_move = false,
+    --project = { limit = 8, action = [[:e]] },
+    --shortcut = {
+      --{ desc = ' Update Plugins', group = '@property', action = 'PaqSync', key = 'u' },
+      --{
+        --desc = ' Files',
+        --group = 'Label',
+        --action = [[call fzf#vim#files('.', {'options': '--prompt "" --layout=reverse --preview="bat --style=numbers --color=always {}"'})]],
+        --key = 'f',
+      --},
+    --},
+  --},
+--});
 
 require("notify").setup({
   background_colour = "#000000",
@@ -440,11 +430,6 @@ require'copilot'.setup({
 })
 
 require'copilot_cmp'.setup({})
-
------------------------
--- git plugins setup --
------------------------
-require('git-conflict').setup()
 
 ---------------------
 -- colorizer setup --

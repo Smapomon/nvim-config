@@ -46,7 +46,7 @@ cmd[[match ExtraWhitespace /\s\+$/]]
 -- O Settings --
 ----------------
 o.showtabline    = 2 -- always show tabs
-o.transparent    = true
+--o.transparent    = true
 opt.mouse        = nil
 
 o.ignorecase     = true
