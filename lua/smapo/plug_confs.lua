@@ -1,6 +1,12 @@
 local editor = vim
 --local o = editor.o
 
+require("notify").setup({
+  background_colour = "#000000",
+})
+
+editor.notify = require("notify")
+
 ----------------------
 -- nvim-tree setup --
 ----------------------
@@ -62,8 +68,22 @@ require"nvim-treesitter.configs".setup {
 
 
   highlight = {
-    enable                             = true,
-    additional_vim_regex_highluighting = true,
+    enable                            = true,
+    additional_vim_regex_highlighting = false,
+    disable = function(lang, buf)
+
+      local max_filesize = 70 * 1024 -- 70 KB
+      local ok, stats = pcall(editor.loop.fs_stat, editor.api.nvim_buf_get_name(buf))
+      if ok and stats and stats.size > max_filesize then
+        -- only disable for JS
+        if lang == 'embedded_template' or lang == 'javascript' then
+          require('notify')('"'.. lang .. '"' .. ' highlight is disabled')
+          return true
+        else
+          return false
+        end
+      end
+    end,
   },
 
   indent = {
@@ -167,8 +187,6 @@ local function treelocation()
       -- go ahead with concatenation
       local parsed_key, _ = current_key:gsub(" ","")
       treelocation_str    = treelocation_str..parsed_key
-    else
-      treelocation_str = editor.fn['tagbar#currenttag']("%s", "", 'f', 'scoped-stl')
     end
   else
     treelocation_str = 'See Context In Normal Mode'
@@ -216,7 +234,7 @@ require"lualine".setup {
       {color = { fg = '#c151cc' }, 'filename', file_status = true, path = 1},
       'filesize'
     },
-    lualine_x = {{color = { fg = '#0c9bb7' }, treelocation}, 'encoding', 'fileformat', 'filetype'},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress', 'location', {function() return (tostring(editor.api.nvim_buf_line_count(0))) end}},
     lualine_z = {},
   },
@@ -405,11 +423,6 @@ require'luasnip'.filetype_extend("ruby", {"rails"});
   --},
 --});
 
-require("notify").setup({
-  background_colour = "#000000",
-})
-
-editor.notify = require("notify")
 
 -------------------
 -- diagnostic setup --

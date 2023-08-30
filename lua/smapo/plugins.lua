@@ -20,7 +20,6 @@ require"paq"{
   {"nvim-treesitter/nvim-treesitter", run=':TSUpdate'};
   'andymass/vim-matchup';                               -- better % matcher
   'folke/trouble.nvim';                                 -- diagnostic listing
-  'preservim/tagbar';                                   -- ctags browser (used in treelocation)
 
   --LSP and dependencies
   "neovim/nvim-lspconfig";                           -- Use native LSP
