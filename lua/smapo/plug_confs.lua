@@ -304,7 +304,7 @@ require"gitsigns".setup {
 editor.cmd[[
 let g:fzf_buffers_jump = 1
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
-let $FZF_DEFAULT_COMMAND='rg --files --follow --no-ignore-vcs --hidden -g "!{tmp/cache/*,node_modules/*,**/node_modules/*,.git/*,public/*/upload_items/*}"'
+let $FZF_DEFAULT_COMMAND='rg --files --follow --no-ignore-vcs --hidden -g "!{tmp/cache/*,node_modules/*,**/node_modules/*,.git/*,public/*/upload_items/*,vendor/assets/javascripts/*}"'
 let $FZF_DEFAULT_OPTS=' --layout=reverse'
 ]]
 
