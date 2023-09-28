@@ -87,6 +87,9 @@ map('n', '<A-k>', ':m .-2<CR>==')
 map('i', '<A-k>', '<ESC>:m .-2<CR>==gi')
 map('v', '<A-k>', ":m '<-2<CR>gv=gv")
 
+map('n', '<C-d', '<C-d>zz')
+map('n', '<C-u', '<C-u>zz')
+
 
 --------------------
 -- scroll up/down --
@@ -236,6 +239,8 @@ map('n', '<Leader>hw', ':%!xxd -r<CR> :set binary<CR> :set filetype=<CR>')
 cmd[[vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>]]
 map('n', '<Leader>f', ':Ag<CR>')
 map('n', '<Leader>F', ':Ag ')
+map('n', 'n', 'nzzzv')
+map('n', 'N', 'Nzzzv')
 
 -- Search files for visually selected text
 cmd[[xnoremap <leader>f "zy :let cmd = 'Ag ' . @z <bar> call histadd("cmd", cmd) <bar> execute cmd <cr>]]
