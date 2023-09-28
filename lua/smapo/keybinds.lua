@@ -34,6 +34,8 @@ map('n', '<C-p>', function()
   editor.cmd[[ :call fzf#vim#files('.', {'options': '--prompt "" --layout=reverse --preview="bat --style=numbers --color=always {}"'}) ]]
 end)
 
+map('n', '<Leader>b', ':Buffers<CR>')
+
 map('n', '<C-ö>', '<cmd>TroubleToggle<CR>')
 map ('n', '<Leader>gf', 'gf')
 
