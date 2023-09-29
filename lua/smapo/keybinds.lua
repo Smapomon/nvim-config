@@ -87,8 +87,8 @@ map('n', '<A-k>', ':m .-2<CR>==')
 map('i', '<A-k>', '<ESC>:m .-2<CR>==gi')
 map('v', '<A-k>', ":m '<-2<CR>gv=gv")
 
-map('n', '<C-d', '<C-d>zz')
-map('n', '<C-u', '<C-u>zz')
+map('n', '<C-d>', '<C-d>zz')
+map('n', '<C-u>', '<C-u>zz')
 
 
 --------------------
