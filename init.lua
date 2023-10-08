@@ -8,9 +8,3 @@ require('smapo.autocomplete')
 require('smapo.lsp')
 require('smapo.null_ls')
 
--- lua table pretty print
-function _G.dump(...)
-	local objects vim.tbl_map(vim.inspect, { ... })
-	print(unpack(objects))
-end
-

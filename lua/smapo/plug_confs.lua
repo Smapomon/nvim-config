@@ -403,25 +403,25 @@ require'luasnip'.filetype_extend("ruby", {"rails"});
 -----------------
 -- theme setup --
 -----------------
---require('dashboard').setup({
-  --theme = 'hyper',
-  --config = {
-    --week_header = {
-      --enable = true,
-    --},
-    --disable_move = false,
-    --project = { limit = 8, action = [[:e]] },
-    --shortcut = {
-      --{ desc = ' Update Plugins', group = '@property', action = 'PaqSync', key = 'u' },
-      --{
-        --desc = ' Files',
-        --group = 'Label',
-        --action = [[call fzf#vim#files('.', {'options': '--prompt "" --layout=reverse --preview="bat --style=numbers --color=always {}"'})]],
-        --key = 'f',
-      --},
-    --},
-  --},
---});
+require('dashboard').setup({
+  theme = 'hyper',
+  config = {
+    week_header = {
+      enable = true,
+    },
+    disable_move = false,
+    project = { limit = 8, action = [[:e]] },
+    shortcut = {
+      { desc = ' Update Plugins', group = '@property', action = 'PaqSync', key = 'u' },
+      {
+        desc = ' Files',
+        group = 'Label',
+        action = [[call fzf#vim#files('.', {'options': '--prompt "" --layout=reverse --preview="bat --style=numbers --color=always {}"'})]],
+        key = 'f',
+      },
+    },
+  },
+});
 
 
 -------------------
@@ -442,7 +442,9 @@ require'copilot'.setup({
   panel = { enabled = false },
 })
 
-require'copilot_cmp'.setup({})
+require'copilot_cmp'.setup({
+  fix_pairs = true,
+})
 
 ---------------------
 -- colorizer setup --
