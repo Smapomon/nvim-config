@@ -21,6 +21,12 @@ require"paq"{
   'andymass/vim-matchup';                               -- better % matcher
   'folke/trouble.nvim';                                 -- diagnostic listing
 
+  -- can enable once on neovim 0.10+
+  --{
+    --'mikesmithgh/kitty-scrollback.nvim',
+    --run='KittyScrollbackGenerateKittens; KittyScrollbackCheckHealth'
+  --};                  -- kitty scrollback
+
   --LSP and dependencies
   "neovim/nvim-lspconfig";                           -- Use native LSP
   'gfanto/fzf-lsp.nvim';                             -- fuzzy over lsp

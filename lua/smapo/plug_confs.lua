@@ -7,6 +7,9 @@ require("notify").setup({
 
 editor.notify = require("notify")
 
+-- can enable once on neovim 0.10+
+--require("kitty-scrollback").setup()
+
 ----------------------
 -- nvim-tree setup --
 ----------------------
@@ -62,7 +65,7 @@ require"nvim-treesitter.configs".setup {
     "css", "scss", "html", "javascript", "gitcommit",
     "typescript", "json", "yaml", "python", "gitignore",
     "dockerfile", "bash", "regex", "jq", "jsonc", "markdown",
-    "git_config", "sql", "tsx", "terraform"
+    "git_config", "sql", "tsx", "terraform", "embedded_template"
   },
   sync_install     = false,
 
