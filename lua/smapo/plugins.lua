@@ -8,7 +8,7 @@ require"paq"{
   "nvim-lualine/lualine.nvim";
   "ryanoasis/vim-webdevicons";
   "kyazdani42/nvim-web-devicons"; --for coloured icons
-  "rcarriga/nvim-notify"; -- notifications
+  "rcarriga/nvim-notify";         -- notifications
 
   {"glepnir/dashboard-nvim", event="VimEnter"};
 
@@ -16,25 +16,25 @@ require"paq"{
   "octol/vim-cpp-enhanced-highlight";
   "godlygeek/tabular";
   "norcalli/nvim-colorizer.lua";
-  "iamcco/markdown-preview.nvim",
-  {"nvim-treesitter/nvim-treesitter", run=':TSUpdate'};
+  {"toppair/peek.nvim", build='deno task --quiet build:fast'};
+  {"nvim-treesitter/nvim-treesitter", build=':TSUpdate'};
   'andymass/vim-matchup';                               -- better % matcher
   'folke/trouble.nvim';                                 -- diagnostic listing
 
   -- can enable once on neovim 0.10+
   --{
     --'mikesmithgh/kitty-scrollback.nvim',
-    --run='KittyScrollbackGenerateKittens; KittyScrollbackCheckHealth'
+    --build='KittyScrollbackGenerateKittens; KittyScrollbackCheckHealth'
   --};                  -- kitty scrollback
 
   --LSP and dependencies
-  "neovim/nvim-lspconfig";                           -- Use native LSP
-  'gfanto/fzf-lsp.nvim';                             -- fuzzy over lsp
-  'nvim-lua/plenary.nvim';                           -- for fzf-lsp
-  'mrded/nvim-lsp-notify';                           -- lsp progress
-  { 'williamboman/mason.nvim', run=':MasonUpdate' }; -- lsp installer'
-  'williamboman/mason-lspconfig.nvim';               -- LSP connection for mason
-  'jose-elias-alvarez/null-ls.nvim';                 -- lsp helper
+  "neovim/nvim-lspconfig";                             -- Use native LSP
+  'gfanto/fzf-lsp.nvim';                               -- fuzzy over lsp
+  'nvim-lua/plenary.nvim';                             -- for fzf-lsp
+  'mrded/nvim-lsp-notify';                             -- lsp progress
+  { 'williamboman/mason.nvim', build=':MasonUpdate' }; -- lsp installer'
+  'williamboman/mason-lspconfig.nvim';                 -- LSP connection for mason
+  'jose-elias-alvarez/null-ls.nvim';                   -- lsp helper
 
   --git integrations
   "tpope/vim-fugitive";
@@ -47,19 +47,19 @@ require"paq"{
   "akinsho/bufferline.nvim";
 
   --auto completion
-  'windwp/nvim-autopairs';               -- Autopairs
-  'windwp/nvim-ts-autotag';              -- Auto close and rename html tags
-  "hrsh7th/nvim-cmp";                    -- Autocompletion for LSP
-  'hrsh7th/cmp-nvim-lsp';                -- LSP source for nvim-cmp
+  'windwp/nvim-autopairs';
+  'windwp/nvim-ts-autotag';
+  "hrsh7th/nvim-cmp";
+  'hrsh7th/cmp-nvim-lsp';
   'hrsh7th/cmp-buffer';
   'hrsh7th/cmp-nvim-lua';
   'hrsh7th/cmp-path';
   'hrsh7th/cmp-cmdline',
   'hrsh7th/cmp-nvim-lsp-signature-help';
-  'saadparwaiz1/cmp_luasnip';            -- Snippets source for nvim-cmp
-  'lukas-reineke/cmp-rg';                -- ripgrep source for nvim-cmp
-  'zbirenbaum/copilot.lua';              -- github copilot lua version
-  'zbirenbaum/copilot-cmp';              -- use copilot as a CMP source
+  'saadparwaiz1/cmp_luasnip';
+  'lukas-reineke/cmp-rg';
+  'zbirenbaum/copilot.lua';
+  'zbirenbaum/copilot-cmp';
 
   --comment code
   "preservim/nerdcommenter";
