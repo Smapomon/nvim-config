@@ -17,14 +17,14 @@ require"paq"{
   "godlygeek/tabular";
   "norcalli/nvim-colorizer.lua";
   "iamcco/markdown-preview.nvim",
-  {"nvim-treesitter/nvim-treesitter", run=':TSUpdate'};
+  {"nvim-treesitter/nvim-treesitter", build=':TSUpdate'};
   'andymass/vim-matchup';                               -- better % matcher
   'folke/trouble.nvim';                                 -- diagnostic listing
 
   -- can enable once on neovim 0.10+
   --{
     --'mikesmithgh/kitty-scrollback.nvim',
-    --run='KittyScrollbackGenerateKittens; KittyScrollbackCheckHealth'
+    --build='KittyScrollbackGenerateKittens; KittyScrollbackCheckHealth'
   --};                  -- kitty scrollback
 
   --LSP and dependencies
@@ -32,7 +32,7 @@ require"paq"{
   'gfanto/fzf-lsp.nvim';                             -- fuzzy over lsp
   'nvim-lua/plenary.nvim';                           -- for fzf-lsp
   'mrded/nvim-lsp-notify';                           -- lsp progress
-  { 'williamboman/mason.nvim', run=':MasonUpdate' }; -- lsp installer'
+  { 'williamboman/mason.nvim', build=':MasonUpdate' }; -- lsp installer'
   'williamboman/mason-lspconfig.nvim';               -- LSP connection for mason
   'jose-elias-alvarez/null-ls.nvim';                 -- lsp helper
 
