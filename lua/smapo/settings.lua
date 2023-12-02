@@ -13,13 +13,6 @@ o.termguicolors = true -- match term colors
 cmd([[colorscheme ayu]])
 cmd([[let ayucolor="mirage"]])
 
--- POSSIBLY USELESS COLORING
--- cmd([[hi CursorLine cterm=NONE ctermbg=darkgrey ctermfg=cyan]])
--- cmd[[highlight CursorLine cterm=NONE ctermbg=darkgrey ctermfg=cyan]]
--- editor.api.nvim_set_hl('Directory', {guifg='#ff0000', ctermfg=green}, false)
--- cmd([[hi Directory guifg=#ff0000 cftermfg=green]])
- --editor.highlight.create('Directory', {guifg='#ff0000', ctermfg=green}, false)
-
 -- linux terminal is set to transparent
 -- make use of that
 if editor.fn.has('unix')
@@ -62,7 +55,7 @@ o.splitbelow = true
 o.splitright = true
 
 o.laststatus = 3 -- disable multiple statusbars
---o.signcolumn = true
+o.signcolumn = "yes" -- always show sign column so that width stays constant
 
 -- shiftwidth sets the the correct indentation
 -- on << and >> operations
