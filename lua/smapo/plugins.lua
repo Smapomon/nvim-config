@@ -20,6 +20,8 @@ require"paq"{
   {"nvim-treesitter/nvim-treesitter", build=':TSUpdate'};
   'andymass/vim-matchup';                               -- better % matcher
   'folke/trouble.nvim';                                 -- diagnostic listing
+  'm-demare/hlargs.nvim';                               -- better highlights for args
+  'm00qek/baleia.nvim';                                 -- read ansi color coded (for logs and term scrollback)
 
   -- can enable once on neovim 0.10+
   --{

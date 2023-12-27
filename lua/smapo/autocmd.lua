@@ -171,5 +171,11 @@ A.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
   command = [[set syntax=nasm filetype=nasm]],
 })
 
+cmd[[
+let s:baleia = luaeval("require('baleia').setup { }")
+autocmd FileType ansi call s:baleia.once(bufnr('%'))
+]]
+
+
 cmd[[autocmd FileType dashboard match none]]
 cmd[[command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)]]

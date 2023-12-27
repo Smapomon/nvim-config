@@ -34,6 +34,10 @@ cmd[[highlight MatchParen ctermbg=none guibg=none ctermfg=darkgreen guifg=darkgr
 cmd[[highlight ExtraWhitespace ctermbg=darkgreen guibg=darkcyan]]
 cmd[[match ExtraWhitespace /\s\+$/]]
 
+cmd[[
+autocmd filetype ansi highlight ExtraWhitespace ctermbg=NONE guibg=NONE
+]]
+
 
 ----------------
 -- O Settings --

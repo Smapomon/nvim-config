@@ -61,7 +61,7 @@ require"nvim-tree".setup {
 ----------------------------
 require"nvim-treesitter.configs".setup {
   ensure_installed = {
-    "c", "lua", "vim", "vimdoc", "query", "ruby",
+    "c", "cpp", "lua", "vim", "vimdoc", "query", "ruby",
     "css", "scss", "html", "javascript", "gitcommit",
     "typescript", "json", "yaml", "python", "gitignore",
     "dockerfile", "bash", "regex", "jq", "jsonc", "markdown",
@@ -92,6 +92,8 @@ require"nvim-treesitter.configs".setup {
     enable_close_on_slash = true,
   }
 }
+
+require('hlargs').setup()
 
 require'fzf_lsp'.setup()
 
