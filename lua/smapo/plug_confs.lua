@@ -7,6 +7,15 @@ require("notify").setup({
 
 editor.notify = require("notify")
 
+local notify = editor.notify
+editor.notify = function(msg, ...)
+  if msg:match("warning: multiple different client offset_encodings") then
+    return
+  end
+
+  notify(msg, ...)
+end
+
 -- can enable once on neovim 0.10+
 --require("kitty-scrollback").setup()
 
