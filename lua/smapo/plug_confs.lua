@@ -7,14 +7,15 @@ require("notify").setup({
 
 editor.notify = require("notify")
 
-local notify = editor.notify
-editor.notify = function(msg, ...)
-  if msg:match("warning: multiple different client offset_encodings") then
-    return
-  end
+-- breaks lsp notifications
+--local notify = editor.notify
+--editor.notify = function(msg, ...)
+  --if msg:match("warning: multiple different client offset_encodings") then
+    --return
+  --end
 
-  notify(msg, ...)
-end
+  --notify(msg, ...)
+--end
 
 -- can enable once on neovim 0.10+
 --require("kitty-scrollback").setup()
@@ -396,4 +397,25 @@ require('peek').setup({
 })
 editor.api.nvim_create_user_command('MarkdownPeek', require('peek').open, {})
 editor.api.nvim_create_user_command('MarkdownClose', require('peek').close, {})
+
+--------------------
+-- cloak setup --
+--------------------
+require('cloak').setup({
+  enabled = true,
+  cloak_character = '*',
+  highlight_group = 'Comment',
+  cloak_length = nil, -- Provide a number if you want to hide the true length of the value.
+  try_all_patterns = true,
+  patterns = {
+    {
+      file_pattern = {
+        ".env*",
+        "*.tfvars*"
+      },
+      cloak_pattern = '=.+',
+      replace = nil,
+    },
+  },
+})
 

@@ -23,12 +23,6 @@ require"paq"{
   'm-demare/hlargs.nvim';                               -- better highlights for args
   'm00qek/baleia.nvim';                                 -- read ansi color coded (for logs and term scrollback)
 
-  -- can enable once on neovim 0.10+
-  --{
-    --'mikesmithgh/kitty-scrollback.nvim',
-    --build='KittyScrollbackGenerateKittens; KittyScrollbackCheckHealth'
-  --};                  -- kitty scrollback
-
   --LSP and dependencies
   "neovim/nvim-lspconfig";                             -- Use native LSP
   'gfanto/fzf-lsp.nvim';                               -- fuzzy over lsp
@@ -76,5 +70,8 @@ require"paq"{
   -- Folding code
   "kevinhwang91/promise-async";
   "kevinhwang91/nvim-ufo";
+
+  -- convenience
+  "laytan/cloak.nvim";
 }
 
