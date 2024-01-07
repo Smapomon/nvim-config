@@ -44,7 +44,7 @@ autocmd filetype ansi highlight ExtraWhitespace ctermbg=NONE guibg=NONE
 ----------------
 o.showtabline    = 2 -- always show tabs
 --o.transparent    = true
-opt.mouse        = nil
+opt.mouse        = ""
 
 o.ignorecase     = true
 o.smartcase      = true
