@@ -73,5 +73,7 @@ require"paq"{
 
   -- convenience
   "laytan/cloak.nvim";
+  "b0o/incline.nvim";
+  "stevearc/oil.nvim";
 }
 

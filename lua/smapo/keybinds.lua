@@ -26,8 +26,13 @@ map('n', '<F3>', 'ggg?G``') -- obfuscate buffer
 map('n', '*', '*N') -- Keep cursor position when starting search
 
 map('n', '<C-t>', function()
-	editor.cmd[[NvimTreeToggle]]
-	editor.cmd[[wincmd p]]
+  local buf_type = editor.o.filetype
+  if buf_type == "oil" then
+    editor.cmd("close")
+  else
+    editor.cmd("vsplit | wincmd h | vertical resize -50")
+    require("oil").open()
+  end
 end)
 
 map('n', '<C-p>', function()

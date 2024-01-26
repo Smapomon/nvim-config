@@ -17,55 +17,6 @@ editor.notify = require("notify")
   --notify(msg, ...)
 --end
 
--- can enable once on neovim 0.10+
---require("kitty-scrollback").setup()
-
-----------------------
--- nvim-tree setup --
-----------------------
-require"nvim-tree".setup {
-	disable_netrw      = true,
-	hijack_netrw       = true,
-	update_cwd         = true,
-	open_on_tab        = false,
-	reload_on_bufenter = true,
-	hijack_cursor      = true,
-
-	renderer                 = {
-		highlight_git          = true,
-		highlight_opened_files = "none",
-		full_name              = true,
-		group_empty            = true,
-
-		icons           = {
-			git_placement = "before",
-			padding       = "  ",
-		}
-	},
-
-	hijack_directories = {
-		enable          = true,
-		auto_open       = true
-	},
-
-	view = {
-		width = 30
-	},
-
-	git = {
-		ignore = false
-	},
-
-	filters = {
-		dotfiles = false
-	},
-
-	update_focused_file = {
-		enable = true,
-	},
-}
-
-
 ----------------------------
 -- nvim-treesitter setup --
 ----------------------------
@@ -417,5 +368,29 @@ require('cloak').setup({
       replace = nil,
     },
   },
+})
+
+----------------------
+-- file stuff setup --
+----------------------
+require('incline').setup()
+require('oil').setup({
+  keymaps = {
+    ["g?"] = "actions.show_help",
+    ["<CR>"] = "actions.select",
+    ["<C-s>"] = "actions.select_vsplit",
+    ["<C-h>"] = "actions.select_split",
+    ["<C-c>"] = "actions.close",
+    ["<C-l>"] = "actions.refresh",
+    ["-"] = "actions.parent",
+    ["_"] = "actions.open_cwd",
+    ["`"] = "actions.cd",
+    ["~"] = "actions.tcd",
+    ["gs"] = "actions.change_sort",
+    ["gx"] = "actions.open_external",
+    ["g."] = "actions.toggle_hidden",
+    ["g\\"] = "actions.toggle_trash",
+  },
+  use_default_keymaps = false,
 })
 
