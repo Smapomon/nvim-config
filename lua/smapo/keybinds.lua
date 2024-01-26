@@ -30,8 +30,7 @@ map('n', '<C-t>', function()
   if buf_type == "oil" then
     editor.cmd("close")
   else
-    editor.cmd("vsplit | wincmd h | vertical resize -50")
-    require("oil").open()
+    require("oil").open_float()
   end
 end)
 
