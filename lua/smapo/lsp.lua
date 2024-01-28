@@ -2,6 +2,8 @@
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local key_map_opts = { noremap=true, silent=true }
 local editor = vim;
+local navic = require('nvim-navic')
+
 editor.keymap.set('n', '<Leader>e', editor.diagnostic.open_float, key_map_opts)
 editor.keymap.set('n', '<Leader>D', editor.diagnostic.goto_prev, key_map_opts)
 editor.keymap.set('n', '<Leader>d', editor.diagnostic.goto_next, key_map_opts)
@@ -14,6 +16,10 @@ editor.o.updatetime = 300 -- updatetime affects the CursorHold event
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   editor.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+  end
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -75,7 +81,7 @@ require("mason").setup()
 require("mason-lspconfig").setup()
 
 -- Setup lsp default servers
-local servers = { 'solargraph', 'tsserver', 'rust_analyzer', 'lua_ls', 'clangd' }
+local servers = { 'solargraph', 'tsserver', 'rust_analyzer', 'lua_ls', 'clangd', 'yamlls' }
 for _, lsp in ipairs(servers) do
   require('lspconfig')[lsp].setup{
     capabilities = Capabilities,

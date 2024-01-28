@@ -121,7 +121,14 @@ require"lualine".setup {
       {color = { fg = '#c151cc' }, 'filename', file_status = true, path = 1},
       'filesize'
     },
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_x = {
+      {
+        "navic",
+        color_correction = nil,
+        navic_opts       = nil
+      },
+      {'encoding', 'fileformat', 'filetype'}
+    },
     lualine_y = {'progress', 'location', {function() return (tostring(editor.api.nvim_buf_line_count(0))) end}},
     lualine_z = {},
   },

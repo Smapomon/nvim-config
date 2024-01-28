@@ -75,5 +75,6 @@ require"paq"{
   "laytan/cloak.nvim";
   "b0o/incline.nvim";
   "stevearc/oil.nvim";
+  "SmiteshP/nvim-navic";
 }
 
