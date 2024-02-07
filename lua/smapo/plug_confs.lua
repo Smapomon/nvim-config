@@ -7,16 +7,6 @@ require("notify").setup({
 
 editor.notify = require("notify")
 
--- breaks lsp notifications
---local notify = editor.notify
---editor.notify = function(msg, ...)
-  --if msg:match("warning: multiple different client offset_encodings") then
-    --return
-  --end
-
-  --notify(msg, ...)
---end
-
 ----------------------------
 -- nvim-treesitter setup --
 ----------------------------
@@ -382,12 +372,23 @@ require('cloak').setup({
 ----------------------
 require('incline').setup()
 require('oil').setup({
+  default_file_explorer = true,
+  skip_confirm_for_simple_edits = true,
+  constrain_cursor = "name",
+
+  columns = {
+    "mtime",
+    "size",
+    "icon",
+  },
+
   keymaps = {
     ["g?"] = "actions.show_help",
     ["<CR>"] = "actions.select",
     ["<C-s>"] = "actions.select_vsplit",
     ["<C-h>"] = "actions.select_split",
     ["<C-c>"] = "actions.close",
+    ["q"] = "actions.close",
     ["<C-l>"] = "actions.refresh",
     ["-"] = "actions.parent",
     ["_"] = "actions.open_cwd",

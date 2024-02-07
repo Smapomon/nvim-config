@@ -27,11 +27,13 @@ map('n', '*', '*N') -- Keep cursor position when starting search
 
 map('n', '<C-t>', function()
   local buf_type = editor.o.filetype
+
   if buf_type == "oil" then
-    editor.cmd("close")
-  else
-    require("oil").open_float()
+    require("oil").close()
+    return
   end
+
+  require("oil").open()
 end)
 
 map('n', '<C-p>', function()
