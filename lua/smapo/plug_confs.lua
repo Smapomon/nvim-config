@@ -341,7 +341,8 @@ require('colorizer').setup {
 -- markdown setup --
 --------------------
 require('peek').setup({
-  app = 'browser'
+  app = 'browser',
+  filetype = { 'markdown', 'lsp_markdown' }
 })
 editor.api.nvim_create_user_command('MarkdownPeek', require('peek').open, {})
 editor.api.nvim_create_user_command('MarkdownClose', require('peek').close, {})
