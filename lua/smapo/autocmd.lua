@@ -177,6 +177,12 @@ A.nvim_create_autocmd({'BufNewFile', 'BufFilePre', 'BufRead'}, {
   command = [[set syntax=lsp_markdown filetype=lsp_markdown]],
 })
 
+A.nvim_create_autocmd({'BufNewFile', 'BufFilePre', 'BufRead'}, {
+  group = smapo_au,
+  pattern = {'*.tfvars'},
+  command = [[set syntax=fish]],
+})
+
 cmd[[
 let s:baleia = luaeval("require('baleia').setup { }")
 autocmd FileType ansi call s:baleia.once(bufnr('%'))

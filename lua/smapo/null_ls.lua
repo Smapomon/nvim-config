@@ -36,7 +36,6 @@ null_ls.setup({
 -- BUILTIN SOURCES
   sources = {
     null_ls.builtins.formatting.prettier,
-    null_ls.builtins.diagnostics.terraform_validate,
     null_ls.builtins.formatting.black,
     null_ls.builtins.diagnostics.pylint,
   }
