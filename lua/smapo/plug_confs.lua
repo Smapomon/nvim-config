@@ -77,7 +77,7 @@ npairs.add_rules({
 require"lualine".setup {
   options = {
     icons_enabled        = true,
-    theme                = 'auto',
+    theme                = 'nightfly',
     component_separators = { left  = '', right = ''},
     section_separators   = { left  = '', right = ''},
     show_file_names_only = false,
@@ -117,10 +117,31 @@ require"lualine".setup {
         color_correction = nil,
         navic_opts       = nil
       },
-      {'encoding', 'fileformat', 'filetype'}
     },
-    lualine_y = {'progress', 'location', {function() return (tostring(editor.api.nvim_buf_line_count(0))) end}},
-    lualine_z = {},
+    lualine_y = {
+      {
+        'copilot',
+        symbols = {
+          spinners = require('copilot-lualine.spinners').dots,
+          spinner_color = '#6272A4',
+
+          status = {
+            hl = {
+              enabled = "#50FAAF",
+              sleep = "#50FA7B",
+              disabled = "#6272A4",
+              warning = "#FFB86C",
+              unknown = "#FF5555"
+            }
+          },
+        },
+        show_colors = true,
+        show_loading = true,
+      },
+
+      'encoding', 'fileformat', 'filetype'
+    },
+    lualine_z = {'progress', 'location', {function() return (tostring(editor.api.nvim_buf_line_count(0))) end}},
   },
 
   inactive_sections = {
@@ -322,7 +343,7 @@ require'trouble'.setup({
 -- copilot setup --
 -------------------
 require'copilot'.setup({
-  suggestion = { enabled = false },
+  suggestion = { enabled = true },
   panel = { enabled = false },
 })
 
