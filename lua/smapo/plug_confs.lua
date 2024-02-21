@@ -206,10 +206,13 @@ require"gitsigns".setup {
 ---------------
 -- FZF setup --
 ---------------
+--let $FZF_DEFAULT_COMMAND='rg --files --follow --no-ignore-vcs --hidden -g "!{tmp/cache/*,node_modules/*,**/node_modules/*,.git/*,public/*/upload_items/*,public/*/file_chunk_trackers/*,vendor/assets/javascripts/*}"'
+
 editor.cmd[[
 let g:fzf_buffers_jump = 1
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
-let $FZF_DEFAULT_COMMAND='rg --files --follow --no-ignore-vcs --hidden -g "!{tmp/cache/*,node_modules/*,**/node_modules/*,.git/*,public/*/upload_items/*,vendor/assets/javascripts/*}"'
+let $FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --no-ignore-vcs --exclude .git'
+
 let $FZF_DEFAULT_OPTS=' --layout=reverse'
 ]]
 
