@@ -37,7 +37,7 @@ map('n', '<C-t>', function()
 end)
 
 map('n', '<C-p>', function()
-  editor.cmd[[ :call fzf#vim#files('.', {'options': '--prompt "" --layout=reverse --preview="bat --style=numbers --color=always {}"'}) ]]
+  editor.cmd[[ :call fzf#vim#files('.', {'options': '--prompt "" --layout=reverse --preview="~/.config/nvim/fzf/preview_window.sh {}"'}) ]]
 end)
 
 map('n', '<Leader>b', ':Buffers<CR>')
