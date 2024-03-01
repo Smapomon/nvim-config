@@ -40,8 +40,6 @@ map('n', '<C-p>', function()
   editor.cmd[[ :call fzf#vim#files('.', {'options': '--prompt "" --layout=reverse --preview="~/.config/nvim/fzf/preview_window.sh {}"'}) ]]
 end)
 
-map('n', '<Leader>b', ':Buffers<CR>')
-
 map('n', '<C-ö>', '<cmd>TroubleToggle<CR>')
 map ('n', '<Leader>gf', 'gf')
 

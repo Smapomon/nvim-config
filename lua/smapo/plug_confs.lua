@@ -1,6 +1,18 @@
 local editor = vim
 --local o = editor.o
 
+local function kmap(mode, keys, mapping, silent)
+	silent = silent or false
+	if type(mode) == 'string'
+	then
+		editor.keymap.set(mode, keys, mapping, { silent = silent })
+	else
+		for i, ext_mode in ipairs(mode) do
+			editor.keymap.set(ext_mode, keys, mapping, { silent = silent })
+		end
+	end
+end
+
 require("notify").setup({
   background_colour = "#000000",
 })
@@ -426,4 +438,26 @@ require('oil').setup({
   },
   use_default_keymaps = false,
 })
+
+--------------------
+-- Debugger setup --
+--------------------
+require('dap-go').setup()
+
+------------------
+-- Gopher setup --
+------------------
+require('gopher').setup({
+  commands = {
+    go = "go",
+    gomodifytags = "gomodifytags",
+    gotests = "~/go/bin/gotests",
+    impl = "impl",
+    iferr = "iferr",
+  }
+})
+
+-- gopher keybinds
+kmap('n', '<Leader>gsj', '<cmd> GoTagAdd json <CR>')
+kmap('n', '<Leader>gsy', '<cmd> GoTagAdd yaml <CR>')
 

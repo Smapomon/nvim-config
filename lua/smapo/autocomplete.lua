@@ -8,11 +8,7 @@ Capabilities = require('cmp_nvim_lsp').default_capabilities()
 local editor = vim
 local cmp     = require'cmp'
 local luasnip = require("luasnip")
-
---local has_words_before = function()
-  --local line, col = unpack(editor.api.nvim_win_get_cursor(0))
-  --return col ~= 0 and editor.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
---end
+local lspkind = require("lspkind")
 
 editor.opt.completeopt = {'menu', 'menuone', 'noselect'}
 
@@ -27,10 +23,7 @@ cmp.setup({
       luasnip.lsp_expand(args.body) -- For `luasnip` users.
     end,
   },
-  window = {
-    -- completion = cmp.config.window.bordered(),
-    -- documentation = cmp.config.window.bordered(),
-  },
+  window = {},
   mapping = cmp.mapping.preset.insert({
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -52,12 +45,13 @@ cmp.setup({
   }),
   experimental = {
     native_menu = false,
-    ghost_text = true,
+    ghost_text = false,
   },
   formatting = {
     fields = {'abbr', 'kind', 'menu'},
-    format = function(entry, item)
-      local menu_icon = {
+    format = lspkind.cmp_format({
+      mode = 'symbol_text',
+      menu = ({
         copilot = '[COPILOT]',
         nvim_lsp = '[LSP]',
         nvim_lua = '[LUA]',
@@ -66,11 +60,8 @@ cmp.setup({
         path = '[PATH]',
         keyword_pattern = '[KeyWordPattern]',
         rg = '[RIPGREP]',
-      }
-
-      item.menu = menu_icon[entry.source.name]
-      return item
-    end,
+      })
+    }),
   }
 })
 

@@ -81,13 +81,33 @@ require("mason").setup()
 require("mason-lspconfig").setup()
 
 -- Setup lsp default servers
-local servers = { 'solargraph', 'tsserver', 'rust_analyzer', 'lua_ls', 'clangd', 'yamlls', 'terraformls' }
+local servers = { 'solargraph', 'gopls', 'tsserver', 'rust_analyzer', 'lua_ls', 'clangd', 'yamlls', 'terraformls' }
 for _, lsp in ipairs(servers) do
-  require('lspconfig')[lsp].setup{
-    capabilities = Capabilities,
-    on_attach = on_attach,
-    flags = lsp_flags,
-  }
+  if lsp == 'gopls' then
+    require('lspconfig')[lsp].setup{
+      capabilities = Capabilities,
+      on_attach = on_attach,
+      flags = lsp_flags,
+      cmd = { 'gopls'},
+      filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+      root_dir = require('lspconfig/util').root_pattern('go.work', 'go.mod', '.git'),
+      settings = {
+        gopls = {
+          completeUnimported = true,
+          usePlaceholders = true,
+          analyses = {
+            unusedparams = true,
+          },
+        }
+      }
+    }
+  else
+    require('lspconfig')[lsp].setup{
+      capabilities = Capabilities,
+      on_attach = on_attach,
+      flags = lsp_flags,
+    }
+  end
 end
 
 -- Format mappings
