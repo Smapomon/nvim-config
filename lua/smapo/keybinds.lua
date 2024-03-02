@@ -212,12 +212,8 @@ map({'n', 'i', 'v'}, '<Leader>N', [[:lnext<CR>]])
 map({'n', 'i', 'v'}, '<Leader>p', [[:cp<CR>]])
 map({'n', 'i', 'v'}, '<Leader>P', [[:lprevious<CR>]])
 
-map('n', 'gn', function()
-  require("trouble").next({skip_groups = true, jump = true});
-end)
-map('n', 'gp', function()
-  require("trouble").previous({skip_groups = true, jump = true});
-end)
+map('n', 'gn', editor.diagnostic.goto_next)
+map('n', 'gp', editor.diagnostic.goto_prev)
 
 
 -------------

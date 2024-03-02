@@ -367,8 +367,8 @@ require('ayu').setup({
     CursorColumn  = { bg = "None" },
     WhichKeyFloat = { bg = "None" },
     VertSplit     = { bg = "None" },
-    CurSearch     = { bg = "#3887b5", fg = "#000000" },
-    Search        = { bg = "#1c4963", fg = "#000000" },
+    --CurSearch     = { bg = "#3887b5", fg = "#000000" },
+    --Search        = { bg = "#1c4963", fg = "#000000" },
 
     DiffAdd    = { bg = "None", fg = "#50FA7B" },
     DiffChange = { bg = "None", fg = "#FFB86C" },
