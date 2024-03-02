@@ -4,7 +4,7 @@ require"paq"{
   "savq/paq-nvim";
 
   --theme (bleep bloop)
-  "ayu-theme/ayu-vim";
+  "shatur/neovim-ayu";
   "nvim-lualine/lualine.nvim";
   "ryanoasis/vim-webdevicons";
   "kyazdani42/nvim-web-devicons"; --for coloured icons
@@ -76,7 +76,6 @@ require"paq"{
 
   -- convenience
   "laytan/cloak.nvim";
-  "b0o/incline.nvim";
   "stevearc/oil.nvim";
   "SmiteshP/nvim-navic";
 

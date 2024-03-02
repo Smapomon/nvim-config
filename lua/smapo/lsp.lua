@@ -111,11 +111,8 @@ for _, lsp in ipairs(servers) do
 end
 
 -- Format mappings
-editor.keymap.set({"n"}, "gf", editor.lsp.buf.format)
-editor.keymap.set({"v"}, "gf", function()
-    editor.api.nvim_input('V')
-    editor.lsp.buf.format({ async = true })
-    editor.api.nvim_input('<ESC>')
+editor.keymap.set({'n', 'v'}, 'gf', function()
+  editor.lsp.buf.format()
 end)
 
 require'lsp-notify'.setup({})

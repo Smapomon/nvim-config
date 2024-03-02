@@ -10,8 +10,6 @@ editor.api.nvim_command('filetype plugin indent on')
 -- Highlights & Colors --
 -------------------------
 o.termguicolors = true -- match term colors
-cmd([[colorscheme ayu]])
-cmd([[let ayucolor="mirage"]])
 
 -- linux terminal is set to transparent
 -- make use of that
