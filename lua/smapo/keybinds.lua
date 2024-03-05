@@ -161,7 +161,7 @@ function FugitiveToggle() abort
     exe filter(getwininfo(), "get(v:val['variables'], 'fugitive_status', v:false) != v:false")[0].winnr .. "wincmd c"
   catch /E684/
     vertical Git
-    vertical resize 150
+    vertical resize 60
   endtry
 endfunction
 nnoremap <C-g> <cmd>call FugitiveToggle()<CR>
