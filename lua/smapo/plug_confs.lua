@@ -110,7 +110,9 @@ require"lualine".setup {
   },
 
   sections = {
-    lualine_a = {'mode'},
+    lualine_a = {
+      { 'mode', fmt = function(str) return str:sub(1,3) end  }
+    },
     lualine_b = {{color = {fg = '#25cc08'}, 'branch'}, 'diff'},
     lualine_c = {
       {
@@ -125,8 +127,6 @@ require"lualine".setup {
     lualine_x = {
       {
         "navic",
-        color_correction = nil,
-        navic_opts       = nil
       },
     },
     lualine_y = {
@@ -150,9 +150,9 @@ require"lualine".setup {
         show_loading = true,
       },
 
-      'encoding', 'fileformat', 'filetype'
+      'filetype'
     },
-    lualine_z = {'progress', 'location', {function() return (tostring(editor.api.nvim_buf_line_count(0))) end}},
+    lualine_z = {'encoding', 'fileformat', 'location', {function() return (tostring(editor.api.nvim_buf_line_count(0))) end}},
   },
 
   inactive_sections = {

@@ -4,6 +4,69 @@ local key_map_opts = { noremap=true, silent=true }
 local editor = vim;
 local navic = require('nvim-navic')
 
+navic.setup {
+  icons = {
+    File          = "󰈙 ",
+    Module        = " ",
+    Namespace     = "󰌗 ",
+    Package       = " ",
+    Class         = "󰌗 ",
+    Method        = "󰆧 ",
+    Property      = " ",
+    Field         = " ",
+    Constructor   = " ",
+    Enum          = "󰕘",
+    Interface     = "󰕘",
+    Function      = "󰊕 ",
+    Variable      = "󰆧 ",
+    Constant      = "󰏿 ",
+    String        = "󰀬 ",
+    Number        = "󰎠 ",
+    Boolean       = "◩ ",
+    Array         = "󰅪 ",
+    Object        = "󰅩 ",
+    Key           = "󰌋 ",
+    Null          = "󰟢 ",
+    EnumMember    = " ",
+    Struct        = "󰌗 ",
+    Event         = " ",
+    Operator      = "󰆕 ",
+    TypeParameter = "󰊄 ",
+  },
+  highlight = true,
+  separator = ' -> ',
+}
+
+editor.api.nvim_set_hl(0, "NavicIconsFile",          {default = true, bg = "#000000", fg = "#33b5c6"})
+editor.api.nvim_set_hl(0, "NavicIconsModule",        {default = true, bg = "#000000", fg = "#4933c6"})
+editor.api.nvim_set_hl(0, "NavicIconsNamespace",     {default = true, bg = "#000000", fg = "#c6334c"})
+editor.api.nvim_set_hl(0, "NavicIconsPackage",       {default = true, bg = "#000000", fg = "#c6bf33"})
+editor.api.nvim_set_hl(0, "NavicIconsClass",         {default = true, bg = "#000000", fg = "#36c633"})
+editor.api.nvim_set_hl(0, "NavicIconsMethod",        {default = true, bg = "#000000", fg = "#3389c6"})
+editor.api.nvim_set_hl(0, "NavicIconsProperty",      {default = true, bg = "#000000", fg = "#c63373"})
+editor.api.nvim_set_hl(0, "NavicIconsField",         {default = true, bg = "#000000", fg = "#c633bd"})
+editor.api.nvim_set_hl(0, "NavicIconsConstructor",   {default = true, bg = "#000000", fg = "#33c6b5"})
+editor.api.nvim_set_hl(0, "NavicIconsEnum",          {default = true, bg = "#000000", fg = "#98c633"})
+editor.api.nvim_set_hl(0, "NavicIconsInterface",     {default = true, bg = "#000000", fg = "#98c633"})
+editor.api.nvim_set_hl(0, "NavicIconsFunction",      {default = true, bg = "#000000", fg = "#c68933"})
+editor.api.nvim_set_hl(0, "NavicIconsVariable",      {default = true, bg = "#000000", fg = "#c633b0"})
+editor.api.nvim_set_hl(0, "NavicIconsConstant",      {default = true, bg = "#000000", fg = "#9f33c6"})
+editor.api.nvim_set_hl(0, "NavicIconsString",        {default = true, bg = "#000000", fg = "#b333c6"})
+editor.api.nvim_set_hl(0, "NavicIconsNumber",        {default = true, bg = "#000000", fg = "#b333c6"})
+editor.api.nvim_set_hl(0, "NavicIconsBoolean",       {default = true, bg = "#000000", fg = "#b333c6"})
+editor.api.nvim_set_hl(0, "NavicIconsArray",         {default = true, bg = "#000000", fg = "#b333c6"})
+editor.api.nvim_set_hl(0, "NavicIconsObject",        {default = true, bg = "#000000", fg = "#b333c6"})
+editor.api.nvim_set_hl(0, "NavicIconsKey",           {default = true, bg = "#000000", fg = "#b333c6"})
+editor.api.nvim_set_hl(0, "NavicIconsNull",          {default = true, bg = "#000000", fg = "#b333c6"})
+editor.api.nvim_set_hl(0, "NavicIconsEnumMember",    {default = true, bg = "#000000", fg = "#b333c6"})
+editor.api.nvim_set_hl(0, "NavicIconsStruct",        {default = true, bg = "#000000", fg = "#b333c6"})
+editor.api.nvim_set_hl(0, "NavicIconsEvent",         {default = true, bg = "#000000", fg = "#b333c6"})
+editor.api.nvim_set_hl(0, "NavicIconsOperator",      {default = true, bg = "#000000", fg = "#b333c6"})
+editor.api.nvim_set_hl(0, "NavicIconsTypeParameter", {default = true, bg = "#000000", fg = "#b333c6"})
+editor.api.nvim_set_hl(0, "NavicText",               {default = true, bg = "#000000", fg = "#333333"})
+editor.api.nvim_set_hl(0, "NavicSeparator",          {default = true, bg = "#000000", fg = "#a87e43"})
+
+
 editor.keymap.set('n', '<Leader>e', editor.diagnostic.open_float, key_map_opts)
 editor.keymap.set('n', '<Leader>D', editor.diagnostic.goto_prev, key_map_opts)
 editor.keymap.set('n', '<Leader>d', editor.diagnostic.goto_next, key_map_opts)

@@ -36,7 +36,6 @@ cmd[[
 autocmd filetype ansi highlight ExtraWhitespace ctermbg=NONE guibg=NONE
 ]]
 
-
 ----------------
 -- O Settings --
 ----------------
