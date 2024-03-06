@@ -394,13 +394,11 @@ require'trouble'.setup({
 -- copilot setup --
 -------------------
 require'copilot'.setup({
-  suggestion = { enabled = true },
+  suggestion = { enabled = false },
   panel = { enabled = false },
 })
 
-require'copilot_cmp'.setup({
-  fix_pairs = true,
-})
+require'copilot_cmp'.setup()
 
 ---------------------
 -- colorizer setup --

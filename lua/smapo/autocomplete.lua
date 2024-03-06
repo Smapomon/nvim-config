@@ -50,10 +50,11 @@ cmp.setup({
         fallback()
       end
     end, { "i", "s" }),
+    ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+    ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
 
   }),
   sources = cmp.config.sources({
-    { name = 'copilot', group_index = 1, max_item_count = 10 },
     { name = 'nvim_lsp', group_index = 1, max_item_count = 10 },
     { name = 'nvim_lua', group_index = 2, max_item_count = 10 },
     { name = 'nvim_lsp_signature_help', group_index = 2 }, -- method help window
@@ -62,6 +63,7 @@ cmp.setup({
     { name = 'buffer', group_index = 3, max_item_count = 10 },
     { name = 'rg', keyword_length = 4, max_item_count = 10, group_index = 3 },
     { name = 'luasnip', group_index = 4, max_item_count = 10 }, -- For luasnip users.
+    { name = 'copilot', group_index = 5, max_item_count = 3 },
   }),
   experimental = {
     native_menu = false,
@@ -72,7 +74,6 @@ cmp.setup({
     format = lspkind.cmp_format({
       mode = 'symbol_text',
       menu = ({
-        copilot = '[COPILOT]',
         nvim_lsp = '[LSP]',
         nvim_lua = '[LUA]',
         luasnip = '[SNIP]',
@@ -80,6 +81,7 @@ cmp.setup({
         path = '[PATH]',
         keyword_pattern = '[KeyWordPattern]',
         rg = '[RIPGREP]',
+        copilot = '[COPILOT]',
       })
     }),
   }
