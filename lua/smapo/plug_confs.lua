@@ -1,5 +1,16 @@
 local editor = vim
---local o = editor.o
+
+local function kmap(mode, keys, mapping, silent)
+	silent = silent or false
+	if type(mode) == 'string'
+	then
+		editor.keymap.set(mode, keys, mapping, { silent = silent })
+	else
+		for i, ext_mode in ipairs(mode) do
+			editor.keymap.set(ext_mode, keys, mapping, { silent = silent })
+		end
+	end
+end
 
 require("notify").setup({
   background_colour = "#000000",
@@ -77,7 +88,7 @@ npairs.add_rules({
 require"lualine".setup {
   options = {
     icons_enabled        = true,
-    theme                = 'nightfly',
+    theme                = 'ayu',
     component_separators = { left  = '', right = ''},
     section_separators   = { left  = '', right = ''},
     show_file_names_only = false,
@@ -99,7 +110,9 @@ require"lualine".setup {
   },
 
   sections = {
-    lualine_a = {'mode'},
+    lualine_a = {
+      { 'mode', fmt = function(str) return str:sub(1,3) end  }
+    },
     lualine_b = {{color = {fg = '#25cc08'}, 'branch'}, 'diff'},
     lualine_c = {
       {
@@ -114,8 +127,6 @@ require"lualine".setup {
     lualine_x = {
       {
         "navic",
-        color_correction = nil,
-        navic_opts       = nil
       },
     },
     lualine_y = {
@@ -139,9 +150,9 @@ require"lualine".setup {
         show_loading = true,
       },
 
-      'encoding', 'fileformat', 'filetype'
+      'filetype'
     },
-    lualine_z = {'progress', 'location', {function() return (tostring(editor.api.nvim_buf_line_count(0))) end}},
+    lualine_z = {'encoding', 'fileformat', 'location', {function() return (tostring(editor.api.nvim_buf_line_count(0))) end}},
   },
 
   inactive_sections = {
@@ -167,12 +178,21 @@ require"gitsigns".setup {
   current_line_blame = true,
   signcolumn         = true,
 
+  signs = {
+    add          = { text = '+' },
+    change       = { text = '~' },
+    delete       = { text = '-' },
+    topdelete    = { text = '‾' },
+    changedelete = { text = '~' },
+    untracked    = { text = '┆' },
+  },
+
+  current_line_blame_formatter = '<author>, <author_time:%d.%m.%Y> - <summary>',
+
   preview_config = {
     border    = 'rounded',
     style     = 'minimal',
     relative  = 'cursor',
-    --title     = "Hunk Preview:",
-    --title_pos = "center",
   },
 
   on_attach = function(bufnr)
@@ -332,6 +352,34 @@ require('dashboard').setup({
 });
 
 
+local colors = require('ayu.colors')
+colors.generate(true)
+
+require('ayu').setup({
+  mirage          = false,
+  overrides       = {
+    Normal        = { bg = "None" },
+    ColorColumn   = { bg = "None" },
+    SignColumn    = { bg = "None" },
+    Folded        = { bg = "None" },
+    FoldColumn    = { bg = "None" },
+    CursorLine    = { bg = "None" },
+    CursorColumn  = { bg = "None" },
+    WhichKeyFloat = { bg = "None" },
+    VertSplit     = { bg = "None" },
+    --CurSearch     = { bg = "#3887b5", fg = "#000000" },
+    --Search        = { bg = "#1c4963", fg = "#000000" },
+
+    DiffAdd    = { bg = "None", fg = "#50FA7B" },
+    DiffChange = { bg = "None", fg = "#FFB86C" },
+    DiffDelete = { bg = "None", fg = "#FF5555" },
+    DiffText   = { bg = "None", fg = "#8BE9FD" },
+
+  },
+})
+
+editor.cmd.colorscheme "ayu"
+
 -------------------
 -- diagnostic setup --
 -------------------
@@ -346,13 +394,11 @@ require'trouble'.setup({
 -- copilot setup --
 -------------------
 require'copilot'.setup({
-  suggestion = { enabled = true },
+  suggestion = { enabled = false },
   panel = { enabled = false },
 })
 
-require'copilot_cmp'.setup({
-  fix_pairs = true,
-})
+require'copilot_cmp'.setup()
 
 ---------------------
 -- colorizer setup --
@@ -395,7 +441,6 @@ require('cloak').setup({
 ----------------------
 -- file stuff setup --
 ----------------------
-require('incline').setup()
 require('oil').setup({
   default_file_explorer = true,
   skip_confirm_for_simple_edits = true,
@@ -426,4 +471,26 @@ require('oil').setup({
   },
   use_default_keymaps = false,
 })
+
+--------------------
+-- Debugger setup --
+--------------------
+require('dap-go').setup()
+
+------------------
+-- Gopher setup --
+------------------
+require('gopher').setup({
+  commands = {
+    go = "go",
+    gomodifytags = "gomodifytags",
+    gotests = "~/go/bin/gotests",
+    impl = "impl",
+    iferr = "iferr",
+  }
+})
+
+-- gopher keybinds
+kmap('n', '<Leader>gsj', '<cmd> GoTagAdd json <CR>') -- add json struct tags
+kmap('n', '<Leader>gsy', '<cmd> GoTagAdd yaml <CR>')
 

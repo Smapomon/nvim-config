@@ -37,10 +37,8 @@ map('n', '<C-t>', function()
 end)
 
 map('n', '<C-p>', function()
-  editor.cmd[[ :call fzf#vim#files('.', {'options': '--prompt "" --layout=reverse --preview="bat --style=numbers --color=always {}"'}) ]]
+  editor.cmd[[ :call fzf#vim#files('.', {'options': '--prompt "" --layout=reverse --preview="~/.config/nvim/fzf/preview_window.sh {}"'}) ]]
 end)
-
-map('n', '<Leader>b', ':Buffers<CR>')
 
 map('n', '<C-ö>', '<cmd>TroubleToggle<CR>')
 map ('n', '<Leader>gf', 'gf')
@@ -162,7 +160,7 @@ function FugitiveToggle() abort
     exe filter(getwininfo(), "get(v:val['variables'], 'fugitive_status', v:false) != v:false")[0].winnr .. "wincmd c"
   catch /E684/
     vertical Git
-    vertical resize 150
+    vertical resize 60
   endtry
 endfunction
 nnoremap <C-g> <cmd>call FugitiveToggle()<CR>
@@ -213,12 +211,8 @@ map({'n', 'i', 'v'}, '<Leader>N', [[:lnext<CR>]])
 map({'n', 'i', 'v'}, '<Leader>p', [[:cp<CR>]])
 map({'n', 'i', 'v'}, '<Leader>P', [[:lprevious<CR>]])
 
-map('n', 'gn', function()
-  require("trouble").next({skip_groups = true, jump = true});
-end)
-map('n', 'gp', function()
-  require("trouble").previous({skip_groups = true, jump = true});
-end)
+map('n', 'gn', editor.diagnostic.goto_next)
+map('n', 'gp', editor.diagnostic.goto_prev)
 
 
 -------------
@@ -255,7 +249,7 @@ cmd[[xnoremap <leader>f "zy :let cmd = 'Ag ' . @z <bar> call histadd("cmd", cmd)
 ---------------
 -- replacing --
 ---------------
-cmd[[nnoremap <Leader>r :%s/\<<C-r><C-w>\>/<C-r><C-w>/gi<left><left><left>]]
+cmd[[nnoremap <Leader>cr :%s/\<<C-r><C-w>\>/<C-r><C-w>/gi<left><left><left>]]
 
 -- move each . to new line in visual selection
 map({'n', 'v'}, '<Leader>td', ':s/\\m\\%(\\..*\\)\\@<=\\./\\r\\./g<CR>:noh<CR>')

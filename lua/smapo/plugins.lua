@@ -4,7 +4,7 @@ require"paq"{
   "savq/paq-nvim";
 
   --theme (bleep bloop)
-  "ayu-theme/ayu-vim";
+  "shatur/neovim-ayu";
   "nvim-lualine/lualine.nvim";
   "ryanoasis/vim-webdevicons";
   "kyazdani42/nvim-web-devicons"; --for coloured icons
@@ -23,6 +23,7 @@ require"paq"{
   'folke/trouble.nvim';                                 -- diagnostic listing
   'm-demare/hlargs.nvim';                               -- better highlights for args
   'm00qek/baleia.nvim';                                 -- read ansi color coded (for logs and term scrollback)
+  "olexsmir/gopher.nvim";                               -- golang support
 
   --LSP and dependencies
   "neovim/nvim-lspconfig";                             -- Use native LSP
@@ -32,6 +33,7 @@ require"paq"{
   { 'williamboman/mason.nvim', build=':MasonUpdate' }; -- lsp installer'
   'williamboman/mason-lspconfig.nvim';                 -- LSP connection for mason
   'jose-elias-alvarez/null-ls.nvim';                   -- lsp helper
+  'onsails/lspkind-nvim';                              -- lsp icons
 
   --git integrations
   "tpope/vim-fugitive";
@@ -74,8 +76,11 @@ require"paq"{
 
   -- convenience
   "laytan/cloak.nvim";
-  "b0o/incline.nvim";
   "stevearc/oil.nvim";
   "SmiteshP/nvim-navic";
+
+  -- debugging
+  "mfussenegger/nvim-dap";
+  "leoluz/nvim-dap-go";
 }
 

@@ -8,13 +8,15 @@ Capabilities = require('cmp_nvim_lsp').default_capabilities()
 local editor = vim
 local cmp     = require'cmp'
 local luasnip = require("luasnip")
-
---local has_words_before = function()
-  --local line, col = unpack(editor.api.nvim_win_get_cursor(0))
-  --return col ~= 0 and editor.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
---end
+local lspkind = require("lspkind")
 
 editor.opt.completeopt = {'menu', 'menuone', 'noselect'}
+
+local has_words_before = function()
+  unpack = unpack or table.unpack
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
 
 cmp.setup({
   performance = {
@@ -27,20 +29,33 @@ cmp.setup({
       luasnip.lsp_expand(args.body) -- For `luasnip` users.
     end,
   },
-  window = {
-    -- completion = cmp.config.window.bordered(),
-    -- documentation = cmp.config.window.bordered(),
-  },
+  window = {},
   mapping = cmp.mapping.preset.insert({
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<Leader>c'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm({ select = false, behavior = cmp.ConfirmBehavior.Replace, }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['<Space>'] = cmp.mapping.confirm({ select = false, behavior = cmp.ConfirmBehavior.Replace, }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      if luasnip.expand_or_locally_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+    ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+    ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
 
   }),
   sources = cmp.config.sources({
-    { name = 'copilot', group_index = 1, max_item_count = 10 },
     { name = 'nvim_lsp', group_index = 1, max_item_count = 10 },
     { name = 'nvim_lua', group_index = 2, max_item_count = 10 },
     { name = 'nvim_lsp_signature_help', group_index = 2 }, -- method help window
@@ -49,16 +64,17 @@ cmp.setup({
     { name = 'buffer', group_index = 3, max_item_count = 10 },
     { name = 'rg', keyword_length = 4, max_item_count = 10, group_index = 3 },
     { name = 'luasnip', group_index = 4, max_item_count = 10 }, -- For luasnip users.
+    { name = 'copilot', group_index = 5, max_item_count = 3 },
   }),
   experimental = {
     native_menu = false,
-    ghost_text = true,
+    ghost_text = false,
   },
   formatting = {
     fields = {'abbr', 'kind', 'menu'},
-    format = function(entry, item)
-      local menu_icon = {
-        copilot = '[COPILOT]',
+    format = lspkind.cmp_format({
+      mode = 'symbol_text',
+      menu = ({
         nvim_lsp = '[LSP]',
         nvim_lua = '[LUA]',
         luasnip = '[SNIP]',
@@ -66,11 +82,9 @@ cmp.setup({
         path = '[PATH]',
         keyword_pattern = '[KeyWordPattern]',
         rg = '[RIPGREP]',
-      }
-
-      item.menu = menu_icon[entry.source.name]
-      return item
-    end,
+        copilot = '[COPILOT]',
+      })
+    }),
   }
 })
 
