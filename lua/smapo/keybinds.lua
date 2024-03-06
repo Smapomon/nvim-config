@@ -45,8 +45,7 @@ map('n', '<Leader>b', ':Buffers<CR>')
 map('n', '<C-ö>', '<cmd>TroubleToggle<CR>')
 map ('n', '<Leader>gf', 'gf')
 
-map('n', 'gx', [[:!brave <c-r><c-a><CR>]])
-
+map('n', 'gx', ':!brave <c-r><c-a><CR>')
 -------------------
 -- unbind arrows --
 -------------------

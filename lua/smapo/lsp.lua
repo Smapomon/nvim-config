@@ -81,7 +81,7 @@ require("mason").setup()
 require("mason-lspconfig").setup()
 
 -- Setup lsp default servers
-local servers = { 'solargraph', 'tsserver', 'rust_analyzer', 'lua_ls', 'clangd', 'yamlls', 'terraformls' }
+local servers = { 'solargraph', 'rubocop', 'tsserver', 'rust_analyzer', 'lua_ls', 'clangd', 'yamlls', 'terraformls' }
 for _, lsp in ipairs(servers) do
   require('lspconfig')[lsp].setup{
     capabilities = Capabilities,
