@@ -124,11 +124,7 @@ require"lualine".setup {
       {color = { fg = '#c151cc' }, 'filename', file_status = true, path = 1},
       'filesize'
     },
-    lualine_x = {
-      {
-        "navic",
-      },
-    },
+    lualine_x = { },
     lualine_y = {
       {
         'copilot',
@@ -164,7 +160,10 @@ require"lualine".setup {
     lualine_z = {},
   },
 
-  tabline         = {},
+  tabline         = {
+    lualine_c = {'navic'},
+    lualine_x = {'progress'},
+  },
   winbar          = {},
   inactive_winbar = {},
   extensions      = {}
