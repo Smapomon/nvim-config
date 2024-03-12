@@ -160,12 +160,15 @@ require"lualine".setup {
     lualine_z = {},
   },
 
-  tabline         = {
+  tabline         = {},
+  winbar          = {
     lualine_c = {'navic'},
     lualine_x = {'progress'},
   },
-  winbar          = {},
-  inactive_winbar = {},
+  inactive_winbar = {
+    lualine_c = {},
+    lualine_x = { function() return '_' end},
+  },
   extensions      = {}
 }
 
@@ -267,13 +270,6 @@ let g:closetag_close_shortcut = '<leader>>'
 ---------------------
 require"bufferline".setup {
   options = {
-    offsets = {
-      {
-        filetype = "NvimTree",
-        text = "",
-        padding = 1
-      }
-    },
     diagnostic = "nvim_lsp"
   }
 }
