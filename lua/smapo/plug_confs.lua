@@ -121,11 +121,13 @@ require"lualine".setup {
         symbols = { error = ' ', warn = ' ', info = ' ' },
         colored = true, update_in_insert = true, always_visible = true
       },
-      {color = { fg = '#c151cc' }, 'filename', file_status = true, path = 1},
+    },
+    lualine_x = {
+      {'filename', color = { fg = '#c151cc' }, file_status = true, path = 1},
       'filesize'
     },
-    lualine_x = { },
     lualine_y = {
+      'filetype',
       {
         'copilot',
         symbols = {
@@ -145,10 +147,8 @@ require"lualine".setup {
         show_colors = true,
         show_loading = true,
       },
-
-      'filetype'
     },
-    lualine_z = {'encoding', 'fileformat', 'location', {function() return (tostring(editor.api.nvim_buf_line_count(0))) end}},
+    lualine_z = {'fileformat', 'location', {function() return (tostring(editor.api.nvim_buf_line_count(0))) end}},
   },
 
   inactive_sections = {

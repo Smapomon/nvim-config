@@ -200,7 +200,7 @@ map('n', '<Tab>', ':BufferLineCycleNext<CR>', true)
 map('n', '<S-Tab>', ':BufferLineCyclePrev<CR>', true)
 
 -- for keeping windows open
-cmd[[cnoreabbrev <expr> q getcmdtype() == ":" && getcmdline() == 'q' && len(getbufinfo({'buflisted':1})) > winnr('$') ? 'bd' : 'q']]
+cmd[[cnoreabbrev <expr> q getcmdtype() == ":" && getcmdline() == 'q' && len(getbufinfo({'buflisted':1})) > 1 ? 'bd' : 'q']]
 
 ---------------
 -- list navs --
