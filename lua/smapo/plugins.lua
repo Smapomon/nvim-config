@@ -11,8 +11,6 @@ require"paq"{
   "rcarriga/nvim-notify";         -- notifications
   "AndreM222/copilot-lualine";    -- copilot status for lualine
 
-  {"glepnir/dashboard-nvim", event="VimEnter"};
-
   --syntax highlighting + lint/hint + language specifics
   "octol/vim-cpp-enhanced-highlight";
   "godlygeek/tabular";

@@ -116,7 +116,15 @@ A.nvim_create_user_command(
   function ()
     local yaml_key = fetch_yaml_key()
 
-    require('notify')('"'.. yaml_key .. '"')
+
+    local contents = yaml_key
+    contents       = string.gsub(contents, "'", "''")
+    contents       = string.gsub(contents, "\n", ", ")
+    contents       = string.gsub(contents, "\r", "")
+
+    vim.fn.setreg('+', contents)
+
+    require('notify')('Copied to + register "'.. contents .. '"')
   end,
   {bang = false}
 )
@@ -189,5 +197,4 @@ autocmd FileType ansi call s:baleia.once(bufnr('%'))
 ]]
 
 
-cmd[[autocmd FileType dashboard match none]]
 cmd[[command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)]]
