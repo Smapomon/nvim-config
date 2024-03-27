@@ -144,7 +144,7 @@ require("mason").setup()
 require("mason-lspconfig").setup()
 
 -- Setup lsp default servers
-local servers = { 'solargraph', 'gopls', 'templ', 'tsserver', 'rust_analyzer', 'lua_ls', 'clangd', 'yamlls', 'terraformls' }
+local servers = { 'solargraph', 'kotlin_language_server', 'gopls', 'templ', 'tsserver', 'rust_analyzer', 'lua_ls', 'clangd', 'yamlls', 'terraformls' }
 for _, lsp in ipairs(servers) do
   if lsp == 'gopls' then
     require('lspconfig')[lsp].setup{
