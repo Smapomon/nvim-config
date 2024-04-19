@@ -468,3 +468,8 @@ require('gopher').setup({
 kmap('n', '<Leader>gsj', '<cmd> GoTagAdd json <CR>') -- add json struct tags
 kmap('n', '<Leader>gsy', '<cmd> GoTagAdd yaml <CR>')
 
+---------------------
+-- Screenkey setup --
+---------------------
+require("screenkey").setup()
+

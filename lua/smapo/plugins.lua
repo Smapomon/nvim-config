@@ -76,6 +76,7 @@ require"paq"{
   "laytan/cloak.nvim";
   "stevearc/oil.nvim";
   "SmiteshP/nvim-navic";
+  "NStefan002/screenkey.nvim";
 
   -- debugging
   "mfussenegger/nvim-dap";
