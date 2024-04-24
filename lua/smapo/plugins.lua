@@ -9,7 +9,6 @@ require"paq"{
   "ryanoasis/vim-webdevicons";
   "kyazdani42/nvim-web-devicons"; --for coloured icons
   "rcarriga/nvim-notify";         -- notifications
-  "AndreM222/copilot-lualine";    -- copilot status for lualine
 
   --syntax highlighting + lint/hint + language specifics
   "octol/vim-cpp-enhanced-highlight";
@@ -55,8 +54,6 @@ require"paq"{
   'hrsh7th/cmp-nvim-lsp-signature-help';
   'saadparwaiz1/cmp_luasnip';
   'lukas-reineke/cmp-rg';
-  'zbirenbaum/copilot.lua';
-  'zbirenbaum/copilot-cmp';
 
   --comment code
   "preservim/nerdcommenter";
