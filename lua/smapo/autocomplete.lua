@@ -63,7 +63,6 @@ cmp.setup({
     { name = 'buffer', group_index = 3, max_item_count = 10 },
     { name = 'rg', keyword_length = 4, max_item_count = 10, group_index = 3 },
     { name = 'luasnip', group_index = 4, max_item_count = 10 }, -- For luasnip users.
-    { name = 'copilot', group_index = 5, max_item_count = 3 },
   }),
   experimental = {
     native_menu = false,
@@ -81,7 +80,6 @@ cmp.setup({
         path = '[PATH]',
         keyword_pattern = '[KeyWordPattern]',
         rg = '[RIPGREP]',
-        copilot = '[COPILOT]',
       })
     }),
   }

@@ -128,25 +128,6 @@ require"lualine".setup {
     },
     lualine_y = {
       'filetype',
-      {
-        'copilot',
-        symbols = {
-          spinners = require('copilot-lualine.spinners').dots,
-          spinner_color = '#6272A4',
-
-          status = {
-            hl = {
-              enabled = "#50FAAF",
-              sleep = "#50FA7B",
-              disabled = "#6272A4",
-              warning = "#FFB86C",
-              unknown = "#FF5555"
-            }
-          },
-        },
-        show_colors = true,
-        show_loading = true,
-      },
     },
     lualine_z = {'fileformat', 'location', {function() return (tostring(editor.api.nvim_buf_line_count(0))) end}},
   },
@@ -161,10 +142,12 @@ require"lualine".setup {
   },
 
   tabline         = {},
+
   winbar          = {
     lualine_c = {'navic'},
     lualine_x = {'progress'},
   },
+
   inactive_winbar = {
     lualine_c = {},
     lualine_x = { function() return '_' end},
@@ -224,6 +207,11 @@ require"gitsigns".setup {
   end
 }
 
+---------------------
+-- buffeline setup --
+---------------------
+require"bufferline".setup{}
+
 
 ---------------
 -- FZF setup --
@@ -264,16 +252,6 @@ let g:closetag_shortcut = '>'
 let g:closetag_close_shortcut = '<leader>>'
 
 ]]
-
----------------------
--- buffeline setup --
----------------------
-require"bufferline".setup {
-  options = {
-    diagnostic = "nvim_lsp"
-  }
-}
-
 
 ---------------------
 -- nvim-ufo setup --
@@ -363,16 +341,6 @@ require'trouble'.setup({
   auto_preview = false,
   auto_open = false,
 });
-
--------------------
--- copilot setup --
--------------------
-require'copilot'.setup({
-  suggestion = { enabled = false },
-  panel = { enabled = false },
-})
-
-require'copilot_cmp'.setup()
 
 ---------------------
 -- colorizer setup --
