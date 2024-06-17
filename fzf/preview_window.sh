@@ -72,7 +72,7 @@ fi
 if [ -z "$FZF_PREVIEW_COMMAND" ] && [ "${BATNAME:+x}" ]; then
   # Don't show sensitive file contents in the preview window
   case "$FILE" in
-    *tfvars | *.env | *.tfstate | *.pub | *.pem)
+    *tfvars | *.env | *.tfstate | *.pub | *.pem | *.asc)
       echo "$FILE: file contains sensitive information"
       exit $?
       ;;
