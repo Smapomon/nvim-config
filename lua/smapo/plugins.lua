@@ -29,7 +29,6 @@ require"paq"{
   'mrded/nvim-lsp-notify';                             -- lsp progress
   { 'williamboman/mason.nvim', build=':MasonUpdate' }; -- lsp installer'
   'williamboman/mason-lspconfig.nvim';                 -- LSP connection for mason
-  'jose-elias-alvarez/null-ls.nvim';                   -- lsp helper
   'onsails/lspkind-nvim';                              -- lsp icons
 
   --git integrations
