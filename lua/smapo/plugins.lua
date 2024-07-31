@@ -13,7 +13,6 @@ require"paq"{
   --syntax highlighting + lint/hint + language specifics
   "octol/vim-cpp-enhanced-highlight";
   "godlygeek/tabular";
-  "norcalli/nvim-colorizer.lua";
   {"toppair/peek.nvim", build='deno task --quiet build:fast'};
   {"nvim-treesitter/nvim-treesitter", build=':TSUpdate'};
   'andymass/vim-matchup';                               -- better % matcher

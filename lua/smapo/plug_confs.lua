@@ -344,13 +344,6 @@ require'trouble'.setup({
   auto_open = false,
 });
 
----------------------
--- colorizer setup --
----------------------
-require('colorizer').setup {
-  css = { css = true; };
-}
-
 --------------------
 -- markdown setup --
 --------------------

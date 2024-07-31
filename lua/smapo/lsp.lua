@@ -104,21 +104,18 @@ local on_attach = function(client, bufnr)
   editor.keymap.set('n', '<space>f', function() editor.lsp.buf.format { async = true } end, bufopts)
 
   -- Visual options
+  local err_sev = editor.diagnostic.severity
   editor.diagnostic.config({
     virtual_text = false,
-    signs = true,
+    signs = {
+      text = { [err_sev.ERROR] = "⛔", [err_sev.WARN] = "⚠️", [err_sev.HINT] = "💡", [err_sev.INFO] = "🔎" }
+    },
     update_in_insert = true,
     float = {
       source = "always",
     },
     severity_sort = true,
   })
-
-  local signs = { Error = "⛔", Warn = "⚠️", Hint = "💡", Info = "🔎" }
-  for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    editor.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-  end
 
   editor.api.nvim_create_autocmd("CursorHold", {
     buffer = bufnr,
