@@ -167,7 +167,7 @@ nnoremap <C-g> <cmd>call FugitiveToggle()<CR>
 ]]
 
 -- changed files in quickfix list, by default use master for diff
-map('n', 'gcf', ':G diff --name-only master')
+map('n', 'gcf', ':G difftool --name-status master')
 
 
 -------------------------------
