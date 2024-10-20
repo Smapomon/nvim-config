@@ -57,12 +57,12 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp', group_index = 1, max_item_count = 10 },
     { name = 'nvim_lua', group_index = 2, max_item_count = 10 },
+    { name = 'luasnip', group_index = 2, max_item_count = 5 }, -- For luasnip users.
     { name = 'nvim_lsp_signature_help', group_index = 2 }, -- method help window
     { name = 'path', group_index = 2, max_item_count = 10 },
     { name = 'keyword_pattern', group_index = 2, max_item_count = 10 },
-    { name = 'buffer', group_index = 3, max_item_count = 10 },
-    { name = 'rg', keyword_length = 4, max_item_count = 10, group_index = 3 },
-    { name = 'luasnip', group_index = 4, max_item_count = 10 }, -- For luasnip users.
+    { name = 'buffer', group_index = 3, max_item_count = 5 },
+    { name = 'rg', keyword_length = 4, max_item_count = 5, group_index = 3 },
   }),
   experimental = {
     native_menu = false,
