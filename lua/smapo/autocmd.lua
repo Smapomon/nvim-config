@@ -112,6 +112,12 @@ A.nvim_create_user_command(
 )
 
 A.nvim_create_user_command(
+  'FileHist',
+  [[:G log -p %]],
+  {bang = false}
+)
+
+A.nvim_create_user_command(
   'YamlCursorKey',
   function ()
     local yaml_key = fetch_yaml_key()
