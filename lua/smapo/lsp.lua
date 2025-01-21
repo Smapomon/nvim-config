@@ -194,7 +194,13 @@ local function get_notif_data(client_id, token)
 end
 
 local function format_title(title, client_name)
-  return client_name .. (#title > 0 and ": " .. title or "")
+  if not title then
+    title = ""
+  else
+    title = " " .. title
+  end
+
+  return "LSP -- " .. client_name .. title .. ": "
 end
 
 local function format_message(message, percentage)
@@ -209,19 +215,24 @@ editor.lsp.handlers["$/progress"] = function(_, result, ctx)
     return
   end
 
-  local notif_data = get_notif_data(client_id, result.token)
-  local title      = format_title(val.title or "LSP", editor.lsp.get_client_by_id(client_id).name)
+  local notif_data    = get_notif_data(client_id, result.token)
+  local title         = format_title(val.title, editor.lsp.get_client_by_id(client_id).name)
+  local message       = ""
+  local print_message = ""
 
   if val.kind == "begin" then
-    local message = format_message(val.message, val.percentage)
-    local print_message = title .. " || " .. message
-    print(print_message)
+    message = format_message(val.message, val.percentage)
   elseif val.kind == "report" and notif_data then
-    local print_message = title .. " || " .. format_message(val.message, val.percentage)
-    print(print_message)
+    message = format_message(val.message, val.percentage)
   elseif val.kind == "end" and notif_data then
-    local print_message = title .. " || " .. val.message and format_message(val.message) or "Complete"
-    print(print_message)
+    if not val.message then
+      message = "Complete"
+    else
+      message = format_message(val.message)
+    end
   end
+
+  print_message = title .. message
+  print(print_message)
 end
 
