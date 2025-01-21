@@ -8,7 +8,6 @@ require"paq"{
   "nvim-lualine/lualine.nvim";
   "ryanoasis/vim-webdevicons";
   "kyazdani42/nvim-web-devicons"; --for coloured icons
-  "rcarriga/nvim-notify";         -- notifications
 
   --syntax highlighting + lint/hint + language specifics
   "octol/vim-cpp-enhanced-highlight";
@@ -25,7 +24,6 @@ require"paq"{
   "neovim/nvim-lspconfig";                             -- Use native LSP
   'gfanto/fzf-lsp.nvim';                               -- fuzzy over lsp
   'nvim-lua/plenary.nvim';                             -- for fzf-lsp
-  'mrded/nvim-lsp-notify';                             -- lsp progress
   { 'williamboman/mason.nvim', build=':MasonUpdate' }; -- lsp installer'
   'williamboman/mason-lspconfig.nvim';                 -- LSP connection for mason
   'onsails/lspkind-nvim';                              -- lsp icons

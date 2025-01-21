@@ -12,12 +12,6 @@ local function kmap(mode, keys, mapping, silent)
 	end
 end
 
-require("notify").setup({
-  background_colour = "#000000",
-})
-
-editor.notify = require("notify")
-
 ----------------------------
 -- nvim-treesitter setup --
 ----------------------------

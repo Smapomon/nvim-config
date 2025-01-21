@@ -175,5 +175,53 @@ editor.keymap.set({'n', 'v'}, 'gf', function()
   editor.lsp.buf.format()
 end)
 
-require'lsp-notify'.setup({})
+-- ########################## --
+-- ###### LSP MESSAGES ###### --
+-- ########################## --
+
+local client_notifs = {}
+
+local function get_notif_data(client_id, token)
+  if not client_notifs[client_id] then
+    client_notifs[client_id] = {}
+  end
+
+  if not client_notifs[client_id][token] then
+    client_notifs[client_id][token] = {}
+  end
+
+  return client_notifs[client_id][token]
+end
+
+local function format_title(title, client_name)
+  return client_name .. (#title > 0 and ": " .. title or "")
+end
+
+local function format_message(message, percentage)
+  return (percentage and percentage .. "%\t" or "") .. (message or "")
+end
+
+editor.lsp.handlers["$/progress"] = function(_, result, ctx)
+  local client_id = ctx.client_id
+  local val       = result.value
+
+  if not val.kind then
+    return
+  end
+
+  local notif_data = get_notif_data(client_id, result.token)
+  local title      = format_title(val.title or "LSP", editor.lsp.get_client_by_id(client_id).name)
+
+  if val.kind == "begin" then
+    local message = format_message(val.message, val.percentage)
+    local print_message = title .. " || " .. message
+    print(print_message)
+  elseif val.kind == "report" and notif_data then
+    local print_message = title .. " || " .. format_message(val.message, val.percentage)
+    print(print_message)
+  elseif val.kind == "end" and notif_data then
+    local print_message = title .. " || " .. val.message and format_message(val.message) or "Complete"
+    print(print_message)
+  end
+end
 

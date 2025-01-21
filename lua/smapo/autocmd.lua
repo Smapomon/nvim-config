@@ -130,7 +130,7 @@ A.nvim_create_user_command(
 
     vim.fn.setreg('+', contents)
 
-    require('notify')('Copied to + register "'.. contents .. '"')
+    print('Copied to + register "'.. contents .. '"')
   end,
   {bang = false}
 )
