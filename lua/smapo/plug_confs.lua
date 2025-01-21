@@ -430,3 +430,8 @@ kmap('n', '<Leader>gsy', '<cmd> GoTagAdd yaml <CR>')
 ---------------------
 require("screenkey").setup()
 
+-------------------------
+-- flutter-tools setup --
+-------------------------
+require("flutter-tools").setup()
+

@@ -27,6 +27,7 @@ require"paq"{
   { 'williamboman/mason.nvim', build=':MasonUpdate' }; -- lsp installer'
   'williamboman/mason-lspconfig.nvim';                 -- LSP connection for mason
   'onsails/lspkind-nvim';                              -- lsp icons
+  'nvim-flutter/flutter-tools.nvim';
 
   --git integrations
   "tpope/vim-fugitive";
