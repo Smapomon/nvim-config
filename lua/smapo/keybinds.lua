@@ -36,11 +36,8 @@ map('n', '<C-t>', function()
   require("oil").open()
 end)
 
-map('n', '<C-p>', function()
-  editor.cmd[[ :call fzf#vim#files('.', {'options': '--prompt "" --layout=reverse --preview="~/.config/nvim/fzf/preview_window.sh {}"'}) ]]
-end)
-
 map('n', '<Leader>t', '<cmd>Trouble diagnostics toggle filter.buf=0<CR>')
+
 map ('n', '<Leader>gf', 'gf')
 
 map('n', 'gx', ':!brave <c-r><c-a><CR>')
@@ -239,14 +236,8 @@ map('n', '<Leader>hw', ':%!xxd -r<CR> :set binary<CR> :set filetype=<CR>')
 ---------------
 -- searching --
 ---------------
-cmd[[vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>]]
-map('n', '<Leader>f', ':Ag<CR>')
-map('n', '<Leader>F', ':Ag ')
 map('n', 'n', 'nzzzv')
 map('n', 'N', 'Nzzzv')
-
--- Search files for visually selected text
-cmd[[xnoremap <leader>f "zy :let cmd = 'Ag ' . @z <bar> call histadd("cmd", cmd) <bar> execute cmd <cr>]]
 
 ---------------
 -- replacing --

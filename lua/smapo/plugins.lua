@@ -8,6 +8,7 @@ require"paq"{
   "nvim-lualine/lualine.nvim";
   "ryanoasis/vim-webdevicons";
   "kyazdani42/nvim-web-devicons"; --for coloured icons
+  "nvim-tree/nvim-web-devicons"; --for coloured icons
 
   --syntax highlighting + lint/hint + language specifics
   "octol/vim-cpp-enhanced-highlight";
@@ -34,8 +35,7 @@ require"paq"{
   "lewis6991/gitsigns.nvim";
 
   --File Navigation & Search
-  "junegunn/fzf.vim";
-  "junegunn/fzf";
+  "ibhagwan/fzf-lua";
   "kyazdani42/nvim-tree.lua";
   "akinsho/bufferline.nvim";
 

@@ -212,19 +212,49 @@ require"bufferline".setup{}
 ---------------
 -- FZF setup --
 ---------------
---let $FZF_DEFAULT_COMMAND='rg --files --follow --no-ignore-vcs --hidden -g "!{tmp/cache/*,node_modules/*,**/node_modules/*,.git/*,public/*/upload_items/*,public/*/file_chunk_trackers/*,vendor/assets/javascripts/*}"'
 
-editor.cmd[[
-let g:fzf_buffers_jump = 1
-set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
-let $FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --no-ignore-vcs --exclude .git'
+--local actions = require("fzf-lua").actions
+require"fzf-lua".setup{
+  previewers = {
+    builtin = {
+      extensions = {
+        ["tfvars"]  = { "echo", "File contains sensitive information" },
+        ["env"]     = { "echo", "File contains sensitive information" },
+        ["tfstate"] = { "echo", "File contains sensitive information" },
+        ["pub"]     = { "echo", "File contains sensitive information" },
+        ["pem"]     = { "echo", "File contains sensitive information" },
+        ["asc"]     = { "echo", "File contains sensitive information" },
+      }
+    },
+  },
 
-let $FZF_DEFAULT_OPTS=' --layout=reverse'
-]]
+  files = { hidden = true, no_ignore = true },
 
-editor.cmd[[
-command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
-]]
+  grep = {
+    hidden    = true,
+    no_ignore = true,
+
+    actions = {
+      ["alt-i"]   = { require("fzf-lua").actions.toggle_ignore }
+    }
+  }
+}
+
+kmap('n', '<C-p>', function()
+  require"fzf-lua".files{}
+end
+)
+
+kmap('n', '<Leader>f', function()
+  --require"fzf-lua".grep{ search = "", fzf_opts = { ['--nth'] = '2..' } }
+  require"fzf-lua".live_grep{}
+end
+)
+
+kmap('v', '<Leader>f', function()
+  require"fzf-lua".grep_visual{}
+end
+)
 
 --------------------
 -- autopair setup --

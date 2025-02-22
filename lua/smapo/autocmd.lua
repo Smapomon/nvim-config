@@ -173,6 +173,12 @@ A.nvim_create_autocmd('BufEnter', {
   command = [[set ft=yaml]],
 })
 
+A.nvim_create_autocmd('BufEnter', {
+  group = smapo_au,
+  pattern = {'*.arb'},
+  command = [[set ft=json]],
+})
+
 A.nvim_create_autocmd('BufReadPost', {
   group = smapo_au,
   pattern = {'*.erb'},
