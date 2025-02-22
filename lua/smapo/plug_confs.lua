@@ -215,6 +215,12 @@ require"bufferline".setup{}
 
 --local actions = require("fzf-lua").actions
 require"fzf-lua".setup{
+  winopts = {
+    preview = {
+      horizontal = "right:45%"
+    }
+  },
+
   previewers = {
     builtin = {
       extensions = {
@@ -463,5 +469,14 @@ require("screenkey").setup()
 -------------------------
 -- flutter-tools setup --
 -------------------------
-require("flutter-tools").setup()
+require("flutter-tools").setup{
+  closing_tags = {
+    enabled = false
+  },
+  lsp = {
+    color = {
+      enabled = true
+    }
+  }
+}
 

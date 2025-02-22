@@ -68,8 +68,8 @@ editor.api.nvim_set_hl(0, "NavicSeparator",          {default = true, bg = "#000
 
 
 editor.keymap.set('n', '<Leader>e', editor.diagnostic.open_float, key_map_opts)
-editor.keymap.set('n', '<Leader>D', editor.diagnostic.goto_prev, key_map_opts)
-editor.keymap.set('n', '<Leader>d', editor.diagnostic.goto_next, key_map_opts)
+editor.keymap.set('n', 'gp', editor.diagnostic.goto_prev, key_map_opts)
+editor.keymap.set('n', 'gn', editor.diagnostic.goto_next, key_map_opts)
 editor.keymap.set('n', '<Leader>q', editor.diagnostic.setloclist, key_map_opts)
 
 editor.o.updatetime = 300 -- updatetime affects the CursorHold event
@@ -88,7 +88,10 @@ local on_attach = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
   editor.keymap.set('n', 'gD', editor.lsp.buf.declaration, bufopts)
-  editor.keymap.set('n', 'gd', editor.lsp.buf.definition, bufopts)
+  editor.keymap.set('n', '<Leader>gd', editor.lsp.buf.definition, bufopts)
+  editor.keymap.set('n', 'gd', function()
+    require("fzf-lua").lsp_definitions{}
+  end, bufopts)
   editor.keymap.set('n', 'K', editor.lsp.buf.hover, bufopts)
   editor.keymap.set('n', 'gi', editor.lsp.buf.implementation, bufopts)
   editor.keymap.set('n', 'gk', editor.lsp.buf.signature_help, bufopts)
