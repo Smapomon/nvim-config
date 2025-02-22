@@ -228,7 +228,7 @@ require"fzf-lua".setup{
     },
   },
 
-  files = { hidden = true, no_ignore = true },
+  files = { hidden = true, no_ignore = false },
 
   grep = {
     hidden    = true,
