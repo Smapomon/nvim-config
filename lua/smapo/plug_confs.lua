@@ -237,11 +237,12 @@ require"fzf-lua".setup{
   files = { hidden = true, no_ignore = false },
 
   grep = {
-    hidden    = true,
-    no_ignore = true,
+    hidden    = false,
+    no_ignore = false,
 
     actions = {
-      ["alt-i"]   = { require("fzf-lua").actions.toggle_ignore }
+      ["alt-i"]   = { require("fzf-lua").actions.toggle_ignore },
+      ["alt-d"]   = { require("fzf-lua").actions.toggle_hidden }
     }
   }
 }
