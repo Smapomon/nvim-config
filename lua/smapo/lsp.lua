@@ -234,13 +234,11 @@ editor.lsp.handlers["$/progress"] = function(_, result, ctx)
   elseif val.kind == "end" and notif_data then
     if not val.message then
       message = "Complete"
+    elseif val.message == 'done' then
+      return
     else
       message = format_message(val.message)
     end
-  end
-
-  if message == 'done' then
-    return
   end
 
   print_message = title .. message
