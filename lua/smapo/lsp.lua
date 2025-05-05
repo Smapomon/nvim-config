@@ -223,6 +223,10 @@ editor.lsp.handlers["$/progress"] = function(_, result, ctx)
   local message       = ""
   local print_message = ""
 
+  if val.percentage == 0 then
+    return
+  end
+
   if val.kind == "begin" then
     message = format_message(val.message, val.percentage)
   elseif val.kind == "report" and notif_data then
@@ -233,6 +237,10 @@ editor.lsp.handlers["$/progress"] = function(_, result, ctx)
     else
       message = format_message(val.message)
     end
+  end
+
+  if message == 'done' then
+    return
   end
 
   print_message = title .. message
