@@ -53,7 +53,7 @@ A.nvim_create_user_command(
 
 A.nvim_create_user_command(
   'EOLSUB',
-  [[%s///"]],
+  [[%s/\r//g]],
   {bang = false}
 )
 
