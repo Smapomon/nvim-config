@@ -481,3 +481,15 @@ require("flutter-tools").setup{
   }
 }
 
+---------------------
+-- buffeline setup --
+---------------------
+require"obsidian".setup{
+  workspaces = {
+    {
+      name = "brain",
+      path = "~/dev/notes/brain",
+    },
+  },
+}
+

@@ -20,6 +20,7 @@ require"paq"{
   'm-demare/hlargs.nvim';                               -- better highlights for args
   'm00qek/baleia.nvim';                                 -- read ansi color coded (for logs and term scrollback)
   "olexsmir/gopher.nvim";                               -- golang support
+  "epwalsh/obsidian.nvim";                              -- Obsidian integration
 
   --LSP and dependencies
   "neovim/nvim-lspconfig";                             -- Use native LSP
