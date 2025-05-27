@@ -203,6 +203,13 @@ A.nvim_create_autocmd({'BufNewFile', 'BufFilePre', 'BufRead'}, {
   command = [[set syntax=fish]],
 })
 
+A.nvim_create_autocmd('BufReadPost', {
+  group = smapo_au,
+  pattern = {'*.md'},
+  command = [[set conceallevel=1]],
+})
+
+
 cmd[[
 let s:baleia = luaeval("require('baleia').setup { }")
 autocmd FileType ansi call s:baleia.once(bufnr('%'))
