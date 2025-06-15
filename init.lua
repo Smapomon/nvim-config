@@ -6,4 +6,5 @@ require('smapo.autocmd')
 require('smapo.keybinds')
 require('smapo.autocomplete')
 require('smapo.lsp')
+require('smapo.avante')
 

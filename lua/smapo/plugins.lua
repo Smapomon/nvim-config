@@ -26,8 +26,8 @@ require"paq"{
   "neovim/nvim-lspconfig";                             -- Use native LSP
   'gfanto/fzf-lsp.nvim';                               -- fuzzy over lsp
   'nvim-lua/plenary.nvim';                             -- for fzf-lsp
-  { 'williamboman/mason.nvim', build=':MasonUpdate' }; -- lsp installer'
-  'williamboman/mason-lspconfig.nvim';                 -- LSP connection for mason
+  { 'mason-org/mason.nvim', build=':MasonUpdate' };    -- lsp installer'
+  'mason-org/mason-lspconfig.nvim';                    -- LSP connection for mason
   'onsails/lspkind-nvim';                              -- lsp icons
   'nvim-flutter/flutter-tools.nvim';
 
@@ -76,5 +76,13 @@ require"paq"{
   -- debugging
   "mfussenegger/nvim-dap";
   "leoluz/nvim-dap-go";
+
+  -- Dependencies
+  "MunifTanjim/nui.nvim"; -- avante
+  "MeanderingProgrammer/render-markdown.nvim"; -- avante
+
+  -- AI Stuff
+  "supermaven-inc/supermaven-nvim";
+  --{ "yetone/avante.nvim", build='make' };
 }
 

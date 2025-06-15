@@ -50,9 +50,9 @@ cmp.setup({
         fallback()
       end
     end, { "i", "s" }),
+
     ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
     ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp', group_index = 1, max_item_count = 10 },
@@ -63,6 +63,7 @@ cmp.setup({
     { name = 'keyword_pattern', group_index = 2, max_item_count = 10 },
     { name = 'buffer', group_index = 3, max_item_count = 5 },
     { name = 'rg', keyword_length = 4, max_item_count = 5, group_index = 3 },
+    { name = 'supermaven', group_index = 3, max_item_count = 5 },
   }),
   experimental = {
     native_menu = false,
@@ -73,13 +74,14 @@ cmp.setup({
     format = lspkind.cmp_format({
       mode = 'symbol_text',
       menu = ({
-        nvim_lsp = '[LSP]',
-        nvim_lua = '[LUA]',
-        luasnip = '[SNIP]',
-        buffer = '[BUF]',
-        path = '[PATH]',
+        nvim_lsp        = '[LSP]',
+        nvim_lua        = '[LUA]',
+        luasnip         = '[SNIP]',
+        buffer          = '[BUF]',
+        path            = '[PATH]',
         keyword_pattern = '[KeyWordPattern]',
-        rg = '[RIPGREP]',
+        rg              = '[RIPGREP]',
+        supermaven      = '[SUPERMAVEN]',
       })
     }),
   }

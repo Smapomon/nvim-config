@@ -34,7 +34,7 @@ end)
 
 map('n', '<Leader>t', '<cmd>Trouble diagnostics toggle filter.buf=0<CR>')
 map ('n', '<Leader>gf', 'gf')
-map('n', 'gx', ':!brave <c-r><c-a><CR>')
+map('n', 'gx', ':!brave-beta <c-r><c-a><CR>')
 map('n', '<F3>', 'ggg?G``') -- obfuscate buffer
 map('n', '*', '*N') -- Keep cursor position when starting search
 -------------------

@@ -493,3 +493,11 @@ require"obsidian".setup{
   },
 }
 
+----------------------
+-- Supermaven setup --
+----------------------
+require('supermaven-nvim').setup({
+  disable_inline_completion = true,
+  disable_keymaps           = false
+})
+
