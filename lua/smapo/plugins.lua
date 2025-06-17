@@ -78,8 +78,8 @@ require"paq"{
   "leoluz/nvim-dap-go";
 
   -- Dependencies
-  "MunifTanjim/nui.nvim"; -- avante
-  "MeanderingProgrammer/render-markdown.nvim"; -- avante
+  --"MunifTanjim/nui.nvim"; -- avante
+  --"MeanderingProgrammer/render-markdown.nvim"; -- avante
 
   -- AI Stuff
   "supermaven-inc/supermaven-nvim";
