@@ -213,6 +213,7 @@ require"bufferline".setup{}
 -- FZF setup --
 ---------------
 
+-- For custom ignores edit ~/.config/fd/ignore
 --local actions = require("fzf-lua").actions
 require"fzf-lua".setup{
   winopts = {
