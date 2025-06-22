@@ -135,6 +135,22 @@ A.nvim_create_user_command(
   {bang = false}
 )
 
+A.nvim_create_user_command(
+  'Rg',
+  function ()
+    require"fzf-lua".live_grep({cmd = "rg --column --line-number --no-heading --color=always --smart-case --text"})
+  end,
+  {bang = false}
+)
+
+A.nvim_create_user_command(
+  'Ag',
+  function ()
+    require"fzf-lua".live_grep_resume({cmd = "ag"})
+  end,
+  {bang = false}
+)
+
 local smapo_au = A.nvim_create_augroup('SMAPO', { clear = true })
 A.nvim_create_autocmd('TextYankPost', {
   group = smapo_au,
@@ -216,4 +232,4 @@ autocmd FileType ansi call s:baleia.once(bufnr('%'))
 ]]
 
 
-cmd[[command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)]]
+--cmd[[command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)]]

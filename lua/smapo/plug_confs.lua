@@ -213,7 +213,6 @@ require"bufferline".setup{}
 -- FZF setup --
 ---------------
 
--- For custom ignores edit ~/.config/fd/ignore
 --local actions = require("fzf-lua").actions
 require"fzf-lua".setup{
   winopts = {
@@ -235,11 +234,14 @@ require"fzf-lua".setup{
     },
   },
 
+  -- For custom ignores edit ~/.config/fd/ignore
   files = { hidden = true, no_ignore = false },
 
   grep = {
     hidden    = false,
     no_ignore = false,
+
+    rg_opts = "--column --line-number --no-heading --color=always --smart-case --text --max-columns=4096 -e",
 
     actions = {
       ["alt-i"]   = { require("fzf-lua").actions.toggle_ignore },
@@ -254,8 +256,7 @@ end
 )
 
 kmap('n', '<Leader>f', function()
-  --require"fzf-lua".grep{ search = "", fzf_opts = { ['--nth'] = '2..' } }
-  require"fzf-lua".live_grep{}
+  require"fzf-lua".live_grep_resume{}
 end
 )
 
