@@ -40,12 +40,6 @@ map('n', '*', '*N') -- Keep cursor position when starting search
 -------------------
 -- unbind arrows --
 -------------------
-map({'n', 'i', 'v'}, '<Up>', function()
-	cmd[[:echo "Git gud noob! ^"]]
-end)
-map({'n', 'i', 'v'}, '<Down>', function()
-	cmd[[:echo "Git gud noob! v"]]
-end)
 map({'n', 'v'}, '<Left>', function()
 	cmd[[:echo "Git gud noob! <-"]]
 end)
