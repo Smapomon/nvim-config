@@ -12,12 +12,6 @@ local lspkind = require("lspkind")
 
 editor.opt.completeopt = {'menu', 'menuone', 'noselect'}
 
-local has_words_before = function()
-  unpack = unpack or table.unpack
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
-
 cmp.setup({
   performance = {
   },
@@ -33,9 +27,20 @@ cmp.setup({
   mapping = cmp.mapping.preset.insert({
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<Leader>c'] = cmp.mapping.complete(),
+    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-d>'] = cmp.mapping.scroll_docs(4),
     ['<C-e>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm({ select = false, behavior = cmp.ConfirmBehavior.Replace, }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['<C-r>'] = cmp.mapping.complete(),
+    ['<C-l>'] = cmp.mapping(function(fallback)
+      cmp.complete({
+        config = {
+          sources = {
+            { name = 'supermaven' },
+          },
+        },
+      })
+    end),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
