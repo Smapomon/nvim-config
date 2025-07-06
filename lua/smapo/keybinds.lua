@@ -228,7 +228,7 @@ map('n', 'N', 'Nzzzv')
 ---------------
 -- replacing --
 ---------------
-cmd[[nnoremap <Leader>cr :%s/\<<C-r><C-w>\>/<C-r><C-w>/gi<left><left><left>]]
+cmd[[nnoremap <Leader>r :%s/\<<C-r><C-w>\>/<C-r><C-w>/gi<left><left><left>]]
 
 -- move each . to new line in visual selection
 map({'n', 'v'}, '<Leader>td', ':s/\\m\\%(\\..*\\)\\@<=\\./\\r\\./g<CR>:noh<CR>')
