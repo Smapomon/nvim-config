@@ -221,7 +221,7 @@ A.nvim_create_autocmd({'BufNewFile', 'BufFilePre', 'BufRead'}, {
 
 A.nvim_create_autocmd('BufReadPost', {
   group = smapo_au,
-  pattern = {'*.md'},
+  pattern = {'*/brain/*.md'}, -- only set in notes
   command = [[set conceallevel=1]],
 })
 
