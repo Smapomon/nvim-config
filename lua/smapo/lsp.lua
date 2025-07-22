@@ -144,7 +144,7 @@ require("mason").setup()
 require("mason-lspconfig").setup()
 
 -- Setup lsp default servers
-local servers = { 'solargraph', 'kotlin_language_server', 'gopls', 'templ', 'ts_ls', 'rust_analyzer', 'lua_ls', 'clangd', 'yamlls', 'terraformls', 'slint_lsp', 'dartls' }
+local servers = { 'solargraph', 'kotlin_language_server', 'gopls', 'templ', 'ts_ls', 'rust_analyzer', 'lua_ls', 'clangd', 'yamlls', 'terraformls', 'slint_lsp' }
 for _, lsp in ipairs(servers) do
   if lsp == 'gopls' then
     require('lspconfig')[lsp].setup{
@@ -244,4 +244,20 @@ editor.lsp.handlers["$/progress"] = function(_, result, ctx)
   print_message = title .. message
   print(print_message)
 end
+
+-------------------------
+-- flutter-tools setup --
+-------------------------
+require("flutter-tools").setup{
+  closing_tags = {
+    enabled = false
+  },
+  lsp = {
+    color = {
+      enabled = true
+    },
+
+    on_attach = on_attach
+  }
+}
 
