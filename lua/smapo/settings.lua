@@ -52,6 +52,7 @@ o.cursorline     = true
 o.clipboard      = 'unnamedplus' -- use system clipboard
 o.number         = true
 o.relativenumber = true -- relative line numbers are better for navigation
+o.winborder      = "rounded"
 
 -- splits to right and below feel more natural
 o.splitbelow = true

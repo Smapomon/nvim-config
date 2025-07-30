@@ -141,7 +141,13 @@ local lsp_flags = {
 }
 
 require("mason").setup()
-require("mason-lspconfig").setup()
+require("mason-lspconfig").setup{
+  automatic_enable = {
+    exclude = {
+      "terraformls"
+    }
+  }
+}
 
 -- Setup lsp default servers
 local servers = { 'solargraph', 'kotlin_language_server', 'gopls', 'templ', 'ts_ls', 'rust_analyzer', 'lua_ls', 'clangd', 'yamlls', 'terraformls', 'slint_lsp' }
