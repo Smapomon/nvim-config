@@ -142,11 +142,9 @@ local lsp_flags = {
 
 require("mason").setup()
 require("mason-lspconfig").setup{
-  automatic_enable = {
-    exclude = {
-      "terraformls"
-    }
-  }
+  -- setup servers manually (everything should work with the same capabilities etc.)
+  -- and avoids double-loading servers
+  automatic_enable = false
 }
 
 -- Setup lsp default servers
