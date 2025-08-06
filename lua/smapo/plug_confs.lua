@@ -256,7 +256,7 @@ end
 )
 
 kmap('n', '<Leader>f', function()
-  require"fzf-lua".live_grep_resume{}
+  require"fzf-lua".live_grep({resume=true})
 end
 )
 

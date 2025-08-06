@@ -128,7 +128,7 @@ A.nvim_create_user_command(
     contents       = string.gsub(contents, "\n", ", ")
     contents       = string.gsub(contents, "\r", "")
 
-    vim.fn.setreg('+', contents)
+    editor.fn.setreg('+', contents)
 
     print('Copied to + register "'.. contents .. '"')
   end,
@@ -146,7 +146,7 @@ A.nvim_create_user_command(
 A.nvim_create_user_command(
   'Ag',
   function ()
-    require"fzf-lua".live_grep_resume({cmd = "ag"})
+    require"fzf-lua".live_grep({resume=true, cmd = "ag"})
   end,
   {bang = false}
 )
