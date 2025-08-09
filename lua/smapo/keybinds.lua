@@ -236,13 +236,9 @@ map({'n', 'v'}, '<Leader>td', ':s/\\m\\%(\\..*\\)\\@<=\\./\\r\\./g<CR>:noh<CR>')
 ---------------
 -- alignment --
 ---------------
---map({'n', 'v'}, '<Leader>t=', ':Tabularize /=<CR>')
 map({'n', 'v'}, '<Leader>t=', ':Tabularize /=.*<CR>')
 map({'n', 'v'}, '<Leader>t:', ':Tabularize /:.*/<CR>')
 map({'n', 'v'}, '<Leader>t.', ":Tabularize /\\..*/l0<CR>")
---map({'n', 'v'}, '<Leader>t:', ':Tabularize /:\zs<CR>')
---cmd[[inoremap <silent> =   =<C-o>:Tabularize /=<CR>]]
-
 
 ------------------
 -- case changes --
