@@ -160,6 +160,7 @@ for _, lsp in ipairs(servers) do
       root_dir = require('lspconfig/util').root_pattern('go.work', 'go.mod', '.git'),
       settings = {
         gopls = {
+          gofumpt = true,
           completeUnimported = true,
           usePlaceholders = true,
           analyses = {
