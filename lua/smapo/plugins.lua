@@ -21,6 +21,7 @@ require"paq"{
   'm00qek/baleia.nvim';                                 -- read ansi color coded (for logs and term scrollback)
   "olexsmir/gopher.nvim";                               -- golang support
   "epwalsh/obsidian.nvim";                              -- Obsidian integration
+  "fredrikaverpil/godoc.nvim";                          -- Go documentation
 
   --LSP and dependencies
   "neovim/nvim-lspconfig";                             -- Use native LSP
@@ -71,7 +72,6 @@ require"paq"{
   "laytan/cloak.nvim";
   "stevearc/oil.nvim";
   "SmiteshP/nvim-navic";
-  "NStefan002/screenkey.nvim";
 
   -- debugging
   "mfussenegger/nvim-dap";
