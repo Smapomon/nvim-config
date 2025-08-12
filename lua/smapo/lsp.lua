@@ -148,35 +148,40 @@ require("mason-lspconfig").setup{
 }
 
 -- Setup lsp default servers
-local servers = { 'solargraph', 'kotlin_language_server', 'gopls', 'templ', 'ts_ls', 'rust_analyzer', 'lua_ls', 'clangd', 'yamlls', 'terraformls', 'slint_lsp' }
+local servers = { 'solargraph', 'kotlin_language_server', 'templ', 'ts_ls', 'rust_analyzer', 'lua_ls', 'clangd', 'yamlls', 'slint_lsp' }
 for _, lsp in ipairs(servers) do
-  if lsp == 'gopls' then
-    require('lspconfig')[lsp].setup{
-      capabilities = Capabilities,
-      on_attach = on_attach,
-      flags = lsp_flags,
-      cmd = { 'gopls'},
-      filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
-      root_dir = require('lspconfig/util').root_pattern('go.work', 'go.mod', '.git'),
-      settings = {
-        gopls = {
-          gofumpt = true,
-          completeUnimported = true,
-          usePlaceholders = true,
-          analyses = {
-            unusedparams = true,
-          },
-        }
-      }
-    }
-  else
-    require('lspconfig')[lsp].setup{
-      capabilities = Capabilities,
-      on_attach = on_attach,
-      flags = lsp_flags,
-    }
-  end
+  require('lspconfig')[lsp].setup{
+    capabilities = Capabilities,
+    on_attach = on_attach,
+    flags = lsp_flags,
+  }
 end
+
+require('lspconfig')['terraformls'].setup{
+  capabilities = Capabilities,
+  on_attach = on_attach,
+  flags = lsp_flags,
+}
+
+require('lspconfig')['gopls'].setup{
+  capabilities = Capabilities,
+  on_attach = on_attach,
+  flags = lsp_flags,
+  cmd = { 'gopls'},
+  filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+  root_dir = require('lspconfig/util').root_pattern('go.work', 'go.mod', '.git'),
+  settings = {
+    gopls = {
+      gofumpt = true,
+      completeUnimported = true,
+      usePlaceholders = true,
+      analyses = {
+        unusedparams = true,
+      },
+    }
+  }
+}
+
 
 -- Format mappings
 editor.keymap.set({'n', 'v'}, 'gf', function()
