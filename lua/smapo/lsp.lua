@@ -154,7 +154,7 @@ require("mason-lspconfig").setup{
 }
 
 -- Setup lsp default servers
-local servers = { 'solargraph', 'kotlin_language_server', 'templ', 'ts_ls', 'rust_analyzer', 'lua_ls', 'terraformls', 'clangd', 'yamlls', 'slint_lsp' }
+local servers = { 'solargraph', 'bashls', 'kotlin_language_server', 'templ', 'ts_ls', 'rust_analyzer', 'lua_ls', 'terraformls', 'clangd', 'yamlls', 'slint_lsp' }
 for _, lsp in ipairs(servers) do
   require('lspconfig')[lsp].setup{
     capabilities = Capabilities,
