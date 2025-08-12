@@ -77,6 +77,12 @@ editor.o.updatetime = 300 -- updatetime affects the CursorHold event
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+  if client.name == 'terraformls' then
+    -- Stop semantic tokens since it can crash the client
+    pcall(function() editor.lsp.semantic_tokens.stop(bufnr) end)
+    client.server_capabilities.semanticTokensProvider = nil
+  end
+
   -- Enable completion triggered by <c-x><c-o>
   editor.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -148,7 +154,7 @@ require("mason-lspconfig").setup{
 }
 
 -- Setup lsp default servers
-local servers = { 'solargraph', 'kotlin_language_server', 'templ', 'ts_ls', 'rust_analyzer', 'lua_ls', 'clangd', 'yamlls', 'slint_lsp' }
+local servers = { 'solargraph', 'kotlin_language_server', 'templ', 'ts_ls', 'rust_analyzer', 'lua_ls', 'terraformls', 'clangd', 'yamlls', 'slint_lsp' }
 for _, lsp in ipairs(servers) do
   require('lspconfig')[lsp].setup{
     capabilities = Capabilities,
@@ -156,12 +162,6 @@ for _, lsp in ipairs(servers) do
     flags = lsp_flags,
   }
 end
-
-require('lspconfig')['terraformls'].setup{
-  capabilities = Capabilities,
-  on_attach = on_attach,
-  flags = lsp_flags,
-}
 
 require('lspconfig')['gopls'].setup{
   capabilities = Capabilities,
