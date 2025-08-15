@@ -206,7 +206,15 @@ require"gitsigns".setup {
 ---------------------
 -- buffeline setup --
 ---------------------
-require"bufferline".setup{}
+require"bufferline".setup{
+  options = {
+    custom_filter = function(buf_number, buf_numbers)
+      if editor.bo[buf_number].filetype ~= "fugitive" then
+        return true
+      end
+    end
+  }
+}
 
 
 ---------------
