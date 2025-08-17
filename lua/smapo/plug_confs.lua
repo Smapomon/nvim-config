@@ -225,7 +225,9 @@ require"bufferline".setup{
 require"fzf-lua".setup{
   winopts = {
     preview = {
-      horizontal = "right:45%"
+      horizontal = "right:45%",
+      vertical   = "down:45%",
+      layout     = "vertical"
     }
   },
 
