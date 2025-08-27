@@ -172,7 +172,7 @@ require('lspconfig')['gopls'].setup{
   root_dir = require('lspconfig/util').root_pattern('go.work', 'go.mod', '.git'),
   settings = {
     gopls = {
-      gofumpt = true,
+      gofumpt = false,
       completeUnimported = true,
       usePlaceholders = true,
       analyses = {
