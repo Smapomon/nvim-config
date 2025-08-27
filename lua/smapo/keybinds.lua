@@ -49,14 +49,14 @@ end)
 
 
 
-------------------
--- tab changing --
-------------------
-map({'n', 'i', 'v'}, '<PageDown>', function()
-	cmd[[:tabnext]]
+--------------
+-- alt file --
+--------------
+map('n', '<PageDown>', function()
+	cmd[[:e #]]
 end)
-map({'n', 'i', 'v'}, '<PageUp>', function()
-	cmd[[:tabprevious]]
+map('n', '<PageUp>', function()
+	cmd[[:e #]]
 end)
 
 
