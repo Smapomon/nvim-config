@@ -82,7 +82,7 @@ npairs.add_rules({
 require"lualine".setup {
   options = {
     icons_enabled        = true,
-    theme                = 'ayu',
+    theme                = 'catppuccin-mocha',
     component_separators = { left  = '', right = ''},
     section_separators   = { left  = '', right = ''},
     show_file_names_only = false,
@@ -207,6 +207,7 @@ require"gitsigns".setup {
 -- buffeline setup --
 ---------------------
 require"bufferline".setup{
+  highlights = require("catppuccin.groups.integrations.bufferline").get_theme(),
   options = {
     custom_filter = function(buf_number, buf_numbers)
       local hide = { fugitive = true, qf = true }
@@ -350,33 +351,23 @@ require'luasnip'.filetype_extend("ruby", {"rails"});
 -----------------
 -- theme setup --
 -----------------
-local colors = require('ayu.colors')
-colors.generate(true)
+require("catppuccin").setup({
+  integrations = {
+    cmp = true,
+    gitsigns = true,
+    treesitter = true,
+    mini = {
+      enabled = true,
+      indentscope_color = "",
+    },
 
-require('ayu').setup({
-  mirage          = false,
-  overrides       = {
-    Normal        = { bg = "None" },
-    ColorColumn   = { bg = "None" },
-    SignColumn    = { bg = "None" },
-    Folded        = { bg = "None" },
-    FoldColumn    = { bg = "None" },
-    CursorLine    = { bg = "None" },
-    CursorColumn  = { bg = "None" },
-    WhichKeyFloat = { bg = "None" },
-    VertSplit     = { bg = "None" },
-    --CurSearch     = { bg = "#3887b5", fg = "#000000" },
-    --Search        = { bg = "#1c4963", fg = "#000000" },
-
-    DiffAdd    = { bg = "None", fg = "#50FA7B" },
-    DiffChange = { bg = "None", fg = "#FFB86C" },
-    DiffDelete = { bg = "None", fg = "#FF5555" },
-    DiffText   = { bg = "None", fg = "#8BE9FD" },
-
-  },
-})
-
-editor.cmd.colorscheme "ayu"
+    navic = {
+      enabled = true,
+      custom_bg = "NONE",
+    },
+  }
+});
+editor.cmd[[colorscheme catppuccin-mocha]]
 
 -------------------
 -- diagnostic setup --
