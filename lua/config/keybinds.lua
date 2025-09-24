@@ -104,6 +104,8 @@ map('v', '>', '>gv')
 map('n', '<Tab>', ':BufferLineCycleNext<CR>', true)
 map('n', '<S-Tab>', ':BufferLineCyclePrev<CR>', true)
 
+map('n', '<C-s>', ':w<CR>', true)
+
 -- for keeping windows open
 editor.cmd[[cnoreabbrev <expr> q getcmdtype() == ":" && getcmdline() == 'q' && len(getbufinfo({'buflisted':1})) > 1 ? 'bd' : 'q']]
 
