@@ -1,10 +1,8 @@
 -- Entrypoint for modules
-require('smapo.plugins')
-require('smapo.settings')
-require('smapo.plug_confs')
-require('smapo.autocmd')
-require('smapo.keybinds')
-require('smapo.autocomplete')
-require('smapo.lsp')
-require('smapo.avante')
+require("config.opts")
+require("config.lazy")
+require("lazy").setup("plugins")
 
+require("config.keybinds")
+require("config.autocmds")
+require("config.usercmds")
