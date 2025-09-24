@@ -1,6 +1,17 @@
 ---@diagnostic disable: undefined-global
 
 return {
+	"godlygeek/tabular",
+	"tpope/vim-fugitive",
+	"tpope/vim-surround",
+	"tpope/vim-repeat",
+	"preservim/nerdcommenter",
+
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		config = true,
+	},
 	{
 		"laytan/cloak.nvim",
 		opts = {
@@ -110,19 +121,12 @@ return {
 		},
 	},
 	{
-		"godlygeek/tabular",
-	},
-	{ "tpope/vim-fugitive" },
-	{ "tpope/vim-surround" },
-	{ "tpope/vim-repeat" },
-	{ "preservim/nerdcommenter" },
-	{
 		"folke/trouble.nvim",
 		opts = {
-      auto_jump = {},
-      auto_preview = false,
-      auto_open = false,
-    }, -- for default options, refer to the configuration section for custom setup.
+			auto_jump = {},
+			auto_preview = false,
+			auto_open = false,
+		}, -- for default options, refer to the configuration section for custom setup.
 		cmd = "Trouble",
 		keys = {
 			{

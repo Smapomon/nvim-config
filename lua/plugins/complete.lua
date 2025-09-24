@@ -41,7 +41,32 @@ return {
 			},
 
 			-- (Default) Only show the documentation popup when manually triggered
-			completion = { documentation = { auto_show = false } },
+			completion = {
+				documentation = { auto_show = true },
+				list = {
+					auto_insert = false,
+				},
+				ghost_text = {
+					enabled = true,
+					show_with_selection = true,
+					show_without_selection = false,
+					show_with_menu = true,
+					show_without_menu = true,
+				},
+				menu = {
+					border = "rounded",
+					draw = {
+						columns = {
+							{ "label", "label_description", gap = 2 },
+							{ "kind_icon", "kind" },
+						},
+					},
+				},
+			},
+
+			signature = {
+				enabled = true,
+			},
 
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
