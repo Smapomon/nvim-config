@@ -18,6 +18,13 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+vim.api.nvim_create_autocmd('BufReadPost', {
+  group = file_types,
+  pattern = {'*/brain/*.md'}, -- only set in notes
+  command = [[set conceallevel=1]],
+})
+
+
 vim.api.nvim_create_autocmd('BufEnter', {
   group = file_types,
   pattern = {'Gemfile.lock'},
