@@ -23,8 +23,25 @@ return {
 	{
 		"saghen/blink.cmp",
 		dependencies = {
-			"rafamadriz/friendly-snippets",
 			"fang2hou/blink-copilot",
+			{
+				"L3MON4D3/LuaSnip",
+				version = "v2.*",
+				build = "make install_jsregexp",
+				dependencies = { "rafamadriz/friendly-snippets" },
+				config = function()
+					require("luasnip.loaders.from_snipmate").lazy_load({ paths = "~/.config/nvim/snippets" })
+					require("luasnip.loaders.from_vscode").lazy_load()
+					require("luasnip.loaders.from_vscode").lazy_load({
+						paths = { vim.fn.stdpath("config") .. "/snippets" },
+					})
+					require("luasnip").filetype_extend("ruby", { "rails" })
+				end,
+				opts = {
+					history = true,
+					delete_check_events = "TextChanged",
+				},
+			},
 		},
 
 		version = "1.*",
@@ -70,6 +87,7 @@ return {
 
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
+			snippets = { preset = "luasnip" },
 			sources = {
 				default = { "lsp", "path", "copilot", "snippets", "buffer" },
 				providers = {

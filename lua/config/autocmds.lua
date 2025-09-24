@@ -1,5 +1,15 @@
 ---@diagnostic disable: undefined-global
 
+
+local default = vim.api.nvim_create_augroup('DEFAULT', { clear = true })
+-- ensure that treesitter highlighting is enabled on weird acting buffers
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = default,
+  pattern = {'*.templ'},
+
+  command = [[TSEnable highlight]],
+})
+
 local file_types = vim.api.nvim_create_augroup('FILETYPES', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = file_types,
