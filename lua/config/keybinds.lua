@@ -1,14 +1,14 @@
-local editor = vim
+---@diagnostic disable: undefined-global
 
 -- helper for shortening map calls
 local function map(mode, keys, mapping, silent)
 	silent = silent or false
 	if type(mode) == 'string'
 	then
-		editor.keymap.set(mode, keys, mapping, { silent = silent })
+		vim.keymap.set(mode, keys, mapping, { silent = silent })
 	else
-		for i, ext_mode in ipairs(mode) do
-			editor.keymap.set(ext_mode, keys, mapping, { silent = silent })
+		for _, ext_mode in ipairs(mode) do
+			vim.keymap.set(ext_mode, keys, mapping, { silent = silent })
 		end
 	end
 end
@@ -17,7 +17,7 @@ end
 -- File manager --
 ------------------
 map('n', '<C-t>', function()
-  local buf_type = editor.o.filetype
+  local buf_type = vim.o.filetype
 
   if buf_type == "oil" then
     require("oil").close()
@@ -31,10 +31,10 @@ end)
 -- alt file --
 --------------
 map('n', '<PageDown>', function()
-	editor.cmd[[:e #]]
+	vim.cmd[[:e #]]
 end)
 map('n', '<PageUp>', function()
-	editor.cmd[[:e #]]
+	vim.cmd[[:e #]]
 end)
 
 ----------------
@@ -71,16 +71,16 @@ map('i', '<C-k>', '<C-o><C-y>')
 -- resize splits (tree, fugitive, etc.) --
 -------------------------------------------
 map('n', '<S-Left>', function()
-	editor.cmd[[:vertical resize -5]]
+	vim.cmd[[:vertical resize -5]]
 end, true)
 map('n', '<S-Right>', function()
-	editor.cmd[[:vertical resize +5]]
+	vim.cmd[[:vertical resize +5]]
 end, true)
 map('n', '<S-Up>', function()
-	editor.cmd[[:resize -5]]
+	vim.cmd[[:resize -5]]
 end, true)
 map('n', '<S-Down>', function()
-	editor.cmd[[:resize +5]]
+	vim.cmd[[:resize +5]]
 end, true)
 
 ----------------
@@ -107,7 +107,7 @@ map('n', '<S-Tab>', ':BufferLineCyclePrev<CR>', true)
 map('n', '<C-s>', ':w<CR>', true)
 
 -- for keeping windows open
-editor.cmd[[cnoreabbrev <expr> q getcmdtype() == ":" && getcmdline() == 'q' && len(getbufinfo({'buflisted':1})) > 1 ? 'bd' : 'q']]
+vim.cmd[[cnoreabbrev <expr> q getcmdtype() == ":" && getcmdline() == 'q' && len(getbufinfo({'buflisted':1})) > 1 ? 'bd' : 'q']]
 
 ---------------
 -- searching --
@@ -129,8 +129,13 @@ map('v', '<Leader>f', function()
 end)
 
 map({'n', 'v'}, 'gf', function()
-  editor.lsp.buf.format()
+  vim.lsp.buf.format()
 end)
+
+-------------
+-- pasting --
+-------------
+map({'n', 'x'}, 'p', '"0p')
 
 ---------------
 -- alignment --
@@ -142,7 +147,7 @@ map({'n', 'v'}, '<Leader>t.', ":Tabularize /\\..*/l0<CR>")
 ---------
 -- git --
 ---------
-editor.cmd[[
+vim.cmd[[
 function FugitiveToggle() abort
   try
     exe filter(getwininfo(), "get(v:val['variables'], 'fugitive_status', v:false) != v:false")[0].winnr .. "wincmd c"

@@ -1,3 +1,5 @@
+---@diagnostic disable: undefined-global
+
 return {
 	{
 		"folke/tokyonight.nvim",
@@ -21,9 +23,9 @@ return {
 		"akinsho/bufferline.nvim",
 		opts = {
       options = {
-        custom_filter = function(buf_number, buf_numbers)
+        custom_filter = function(buf_number, _)
           local hide = { fugitive = true, qf = true }
-          local ft = editor.bo[buf_number].filetype
+          local ft = vim.bo[buf_number].filetype
 
           return not hide[ft]
         end,

@@ -1,3 +1,5 @@
+---@diagnostic disable: undefined-global
+
 return {
 	{
 		"laytan/cloak.nvim",
@@ -78,25 +80,25 @@ return {
 				local function map(mode, l, r, opts)
 					opts = opts or {}
 					opts.buffer = bufnr
-					editor.keymap.set(mode, l, r, opts)
+					vim.keymap.set(mode, l, r, opts)
 				end
 
 				-- Navigation
 				map("n", "<Leader>gh", function()
-					if editor.wo.diff then
+					if vim.wo.diff then
 						return "]c"
 					end
-					editor.schedule(function()
+					vim.schedule(function()
 						gs.next_hunk()
 					end)
 					return "<Ignore>"
 				end, { expr = true })
 
 				map("n", "<Leader>gH", function()
-					if editor.wo.diff then
+					if vim.wo.diff then
 						return "[c"
 					end
-					editor.schedule(function()
+					vim.schedule(function()
 						gs.prev_hunk()
 					end)
 					return "<Ignore>"

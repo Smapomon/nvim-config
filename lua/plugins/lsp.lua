@@ -1,3 +1,5 @@
+---@diagnostic disable: undefined-global
+
 return {
   -- Main LSP Configuration
   'neovim/nvim-lspconfig',
@@ -14,30 +16,29 @@ return {
   },
   config = function()
     local key_map_opts = { noremap=true, silent=true }
-    local editor = vim
 
-    editor.o.updatetime = 300 -- updatetime affects the CursorHold event
+    vim.o.updatetime = 300 -- updatetime affects the CursorHold event
 
-    editor.keymap.set('n', '<Leader>e', editor.diagnostic.open_float, key_map_opts)
-    editor.keymap.set('n', 'gp', editor.diagnostic.goto_prev, key_map_opts)
-    editor.keymap.set('n', 'gn', editor.diagnostic.goto_next, key_map_opts)
+    vim.keymap.set('n', '<Leader>e', vim.diagnostic.open_float, key_map_opts)
+    vim.keymap.set('n', 'gp', vim.diagnostic.goto_prev, key_map_opts)
+    vim.keymap.set('n', 'gn', vim.diagnostic.goto_next, key_map_opts)
 
 
-    editor.api.nvim_create_autocmd('LspAttach', {
-      group = editor.api.nvim_create_augroup('lsp-attach', { clear = true }),
+    vim.api.nvim_create_autocmd('LspAttach', {
+      group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
       callback = function(event)
         local map = function(keys, func, desc, mode)
           mode = mode or 'n'
-          editor.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+          vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
 
         -- Rename the variable under your cursor.
         --  Most Language Servers support renaming across files, etc.
-        map('grn', editor.lsp.buf.rename, '[R]e[n]ame')
+        map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
 
         -- Execute a code action, usually your cursor needs to be on top of an error
         -- or a suggestion from your LSP for this to activate.
-        map('gra', editor.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
+        map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
 
         -- Find references for the word under your cursor.
         map('grr', require('fzf-lua').lsp_references, '[G]oto [R]eferences')
@@ -53,7 +54,7 @@ return {
 
         -- WARN: This is not Goto Definition, this is Goto Declaration.
         --  For example, in C this would take you to the header.
-        map('grD', editor.lsp.buf.declaration, '[G]oto [D]eclaration')
+        map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
         -- Fuzzy find all the symbols in your current document.
         --  Symbols are things like variables, functions, types, etc.
@@ -70,7 +71,7 @@ return {
 
         -- Just assume that at least 0.11 is installed
         local function client_supports_method(client, method, bufnr)
-          if editor.fn.has 'nvim-0.11' == 1 then
+          if vim.fn.has 'nvim-0.11' == 1 then
             return client:supports_method(method, bufnr)
           else
             return client.supports_method(method, { bufnr = bufnr })
@@ -78,10 +79,10 @@ return {
         end
 
         -- When you move your cursor, the diagnostic float will be shown.
-        local client = editor.lsp.get_client_by_id(event.data.client_id)
-        if client and client_supports_method(client, editor.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
+        if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
 
-          editor.api.nvim_create_autocmd("CursorHold", {
+          vim.api.nvim_create_autocmd("CursorHold", {
             buffer = event.buf,
             callback = function()
               local diag_opts = {
@@ -91,7 +92,7 @@ return {
                 prefix = '🔎 ',
               }
 
-              editor.diagnostic.open_float(nil, diag_opts)
+              vim.diagnostic.open_float(nil, diag_opts)
             end
           })
         end
@@ -100,16 +101,16 @@ return {
 
     -- Diagnostic Config
     -- See :help vim.diagnostic.Opts
-    editor.diagnostic.config {
+    vim.diagnostic.config {
       severity_sort = true,
       float = { border = 'rounded', source = 'if_many' },
       underline = true,
-      signs = editor.g.have_nerd_font and {
+      signs = vim.g.have_nerd_font and {
         text = {
-          [editor.diagnostic.severity.ERROR] = '󰅚 ',
-          [editor.diagnostic.severity.WARN] = '󰀪 ',
-          [editor.diagnostic.severity.INFO] = '󰋽 ',
-          [editor.diagnostic.severity.HINT] = '󰌶 ',
+          [vim.diagnostic.severity.ERROR] = '󰅚 ',
+          [vim.diagnostic.severity.WARN] = '󰀪 ',
+          [vim.diagnostic.severity.INFO] = '󰋽 ',
+          [vim.diagnostic.severity.HINT] = '󰌶 ',
         },
       } or {},
       virtual_text = false,
@@ -138,8 +139,8 @@ return {
       },
     }
 
-    local ensure_installed = editor.tbl_keys(servers or {})
-    editor.list_extend(ensure_installed, {
+    local ensure_installed = vim.tbl_keys(servers or {})
+    vim.list_extend(ensure_installed, {
       'stylua', -- Used to format Lua code
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -155,7 +156,7 @@ return {
           end
 
           local server = servers[server_name] or {}
-          server.capabilities = editor.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+          server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
           require('lspconfig')[server_name].setup(server)
         end,
       },
