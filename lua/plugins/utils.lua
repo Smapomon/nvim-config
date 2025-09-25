@@ -126,18 +126,15 @@ return {
 			auto_jump = false,
 			auto_preview = false,
 			auto_open = false,
+      pinned = true,
+      open_no_results = true,
 		}, -- for default options, refer to the configuration section for custom setup.
 		cmd = "Trouble",
 		keys = {
       {
         "gt",
         desc = "Buffer",
-        function()
-          require("trouble").toggle("diagnostics", {
-            filter = { buf = 0 },
-            jump = false, -- ⬅ prevents auto-jump when only one diagnostic
-          })
-        end,
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
         "Diagnostics (Trouble)",
       },
 		},
