@@ -123,17 +123,23 @@ return {
 	{
 		"folke/trouble.nvim",
 		opts = {
-			auto_jump = {},
+			auto_jump = false,
 			auto_preview = false,
 			auto_open = false,
 		}, -- for default options, refer to the configuration section for custom setup.
 		cmd = "Trouble",
 		keys = {
-			{
-				"gt",
-				"<cmd>Trouble diagnostics toggle<cr>",
-				desc = "Diagnostics (Trouble)",
-			},
+      {
+        "gt",
+        desc = "Buffer",
+        function()
+          require("trouble").toggle("diagnostics", {
+            filter = { buf = 0 },
+            jump = false, -- ⬅ prevents auto-jump when only one diagnostic
+          })
+        end,
+        "Diagnostics (Trouble)",
+      },
 		},
 	},
 	{

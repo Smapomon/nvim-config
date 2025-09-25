@@ -1,8 +1,9 @@
 ---@diagnostic disable: undefined-global
 
 vim.o.number         = true
-vim.o.relativenumber = true
+vim.o.relativenumber = false
 vim.o.winborder      = "rounded"
+vim.o.so             = 5
 
 vim.o.showtabline = 2             -- always show tabs
 vim.opt.mouse     = ""            -- disable mouse
