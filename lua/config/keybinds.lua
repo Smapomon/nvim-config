@@ -135,7 +135,7 @@ end)
 -------------
 -- Prevent pasting in visual mode from overwriting the default register
 vim.cmd([[
-  xnoremap p "_dP
+  xnoremap p P
 ]])
 
 ---------------
