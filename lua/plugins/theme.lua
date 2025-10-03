@@ -2,12 +2,12 @@
 
 return {
 	{
-		"folke/tokyonight.nvim",
+		"Shatur/neovim-ayu",
 		lazy = false,
 		priority = 1000,
 		opts = {},
 		config = function()
-			vim.cmd([[colorscheme tokyonight-night]])
+			vim.cmd([[colorscheme ayu-dark]])
 		end,
 	},
 	{
@@ -29,7 +29,7 @@ return {
 		opts = {
 			options = {
 				icons_enabled = true,
-				theme = "tokyonight-night",
+				theme = "ayu",
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
 				show_file_names_only = false,
