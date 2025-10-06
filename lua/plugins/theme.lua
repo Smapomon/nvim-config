@@ -1,15 +1,22 @@
 ---@diagnostic disable: undefined-global
 
 return {
-	{
-		"Shatur/neovim-ayu",
-		lazy = false,
-		priority = 1000,
-		opts = {},
-		config = function()
-			vim.cmd([[colorscheme ayu-dark]])
-		end,
-	},
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
+  {
+    "catppuccin/nvim",
+    name="catppuccin",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+    config = function()
+      vim.cmd("colorscheme catppuccin-mocha")
+    end
+  },
 	{
 		"akinsho/bufferline.nvim",
 		opts = {
@@ -29,7 +36,7 @@ return {
 		opts = {
 			options = {
 				icons_enabled = true,
-				theme = "ayu",
+				theme = "catppuccin-mocha",
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
 				show_file_names_only = false,
