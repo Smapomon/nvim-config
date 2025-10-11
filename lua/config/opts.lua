@@ -31,6 +31,8 @@ vim.o.shiftwidth  = 2
 vim.o.autoindent  = true
 vim.o.numberwidth = 6
 
+vim.opt.termguicolors = true
+
 -- expandtab "expands" tabs to spaces
 -- tabstop sets the indent on typing
 vim.cmd[[
