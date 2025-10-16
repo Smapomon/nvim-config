@@ -67,26 +67,25 @@ return {
 					},
 				},
 				lualine_b = { { color = { fg = "#25cc08" }, "branch" }, "diff" },
-				lualine_c = {
-					{
-						"diagnostics",
-						sources = { "nvim_lsp" },
-						symbols = { error = " ", warn = " ", info = " " },
-						colored = true,
-						update_in_insert = true,
-						always_visible = true,
-					},
-				},
+        lualine_c = {
+          {
+            "diagnostics",
+            sources = { "nvim_lsp" },
+            symbols = { error = " ", warn = " ", info = " " },
+            colored = true,
+            update_in_insert = true,
+            always_visible = true,
+          },
+        },
 				lualine_x = {
 					{ "filename", color = { fg = "#c151cc" }, file_status = true, path = 1 },
-					"filesize",
 				},
 				lualine_y = {
 					"filetype",
 				},
 				lualine_z = {
-					"fileformat",
-					"location",
+          "fileformat",
+					"filesize",
 				},
 			},
 
@@ -103,15 +102,29 @@ return {
 
 			winbar = {
 				lualine_c = { "navic" },
-				lualine_x = { "progress", {function() return (tostring(vim.api.nvim_buf_line_count(0))) end} },
+        lualine_x = {},
+				lualine_z = {
+          "location",
+          "progress",
+          {
+            function()
+              return (tostring(vim.api.nvim_buf_line_count(0)))
+            end
+          }
+        },
 			},
 
 			inactive_winbar = {
-				lualine_c = {},
+				lualine_c = {"filename"},
 				lualine_x = {
-					function()
-            return (tostring(vim.api.nvim_buf_line_count(0)))
-          end,
+          {
+            function()
+              local current_line = tostring(vim.api.nvim_win_get_cursor(0)[1])
+              local line_count   = tostring(vim.api.nvim_buf_line_count(0))
+
+              return (current_line .. "/" .. line_count)
+            end,
+          }
 				},
 			},
 			extensions = {},
