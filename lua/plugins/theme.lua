@@ -87,11 +87,6 @@ return {
 				lualine_z = {
 					"fileformat",
 					"location",
-					{
-						function()
-							return (tostring(editor.api.nvim_buf_line_count(0)))
-						end,
-					},
 				},
 			},
 
@@ -108,15 +103,15 @@ return {
 
 			winbar = {
 				lualine_c = { "navic" },
-				lualine_x = { "progress" },
+				lualine_x = { "progress", {function() return (tostring(vim.api.nvim_buf_line_count(0))) end} },
 			},
 
 			inactive_winbar = {
 				lualine_c = {},
 				lualine_x = {
 					function()
-						return "_"
-					end,
+            return (tostring(vim.api.nvim_buf_line_count(0)))
+          end,
 				},
 			},
 			extensions = {},
