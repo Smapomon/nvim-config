@@ -5,44 +5,47 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		-- or if using mini.icons/mini.nvim
 		-- dependencies = { "nvim-mini/mini.icons" },
-		opts = {
-			winopts = {
-				preview = {
-					horizontal = "right:45%",
-					vertical   = "down:45%",
-					layout     = "vertical"
-				}
-			},
+		opts = function()
+      local actions = require("fzf-lua").actions
+      return {
+        winopts = {
+          preview = {
+            horizontal = "right:45%",
+            vertical   = "down:45%",
+            layout     = "vertical"
+          }
+        },
 
-			previewers = {
-				builtin = {
-					extensions = {
-						["tfvars"]  = { "echo", "File contains sensitive information" },
-						["env"]     = { "echo", "File contains sensitive information" },
-						["tfstate"] = { "echo", "File contains sensitive information" },
-						["pub"]     = { "echo", "File contains sensitive information" },
-						["pem"]     = { "echo", "File contains sensitive information" },
-						["asc"]     = { "echo", "File contains sensitive information" },
-					}
-				},
-			},
+        previewers = {
+          builtin = {
+            extensions = {
+              ["tfvars"]  = { "echo", "File contains sensitive information" },
+              ["env"]     = { "echo", "File contains sensitive information" },
+              ["tfstate"] = { "echo", "File contains sensitive information" },
+              ["pub"]     = { "echo", "File contains sensitive information" },
+              ["pem"]     = { "echo", "File contains sensitive information" },
+              ["asc"]     = { "echo", "File contains sensitive information" },
+            }
+          },
+        },
 
-			-- For custom ignores edit ~/.config/fd/ignore
-			files = { hidden = true, no_ignore = false },
+        -- For custom ignores edit ~/.config/fd/ignore
+        files = { hidden = true, no_ignore = false },
 
-			grep = {
-				hidden    = false,
-				no_ignore = false,
+        grep = {
+          hidden    = false,
+          no_ignore = false,
 
-				rg_opts = "--column --line-number --no-heading --color=always --smart-case --text --max-columns=4096 -e",
+          rg_opts = "--column --line-number --no-heading --color=always --smart-case --text --max-columns=4096 -e",
 
-				actions = {
-					["alt-i"]   = { require("fzf-lua").actions.toggle_ignore },
-					["alt-d"]   = { require("fzf-lua").actions.toggle_hidden }
-				}
-			}
+          actions = {
+            ["alt-i"]   = { actions.toggle_ignore },
+            ["alt-d"]   = { actions.toggle_hidden }
+          }
+        }
 
-		}
+      }
+    end
 	},
 	{
 		'stevearc/oil.nvim',
