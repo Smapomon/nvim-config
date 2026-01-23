@@ -33,6 +33,27 @@ vim.o.numberwidth = 6
 
 vim.opt.termguicolors = true
 
+-- Folding
+vim.o.foldenable = true
+vim.o.foldlevel = 99
+vim.o.foldmethod = "expr"
+vim.o.foldtext = ""
+vim.opt.foldcolumn = "0"
+vim.opt.fillchars:append({fold = " "})
+vim.o.foldmethod = 'expr'
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()' -- Default to treesitter folding
+
+-- Prefer LSP folding if client supports it
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+         local client = vim.lsp.get_client_by_id(args.data.client_id)
+         if client:supports_method('textDocument/foldingRange') then
+             local win = vim.api.nvim_get_current_win()
+             vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+        end
+    end,
+ })
+
 -- expandtab "expands" tabs to spaces
 -- tabstop sets the indent on typing
 vim.cmd[[
