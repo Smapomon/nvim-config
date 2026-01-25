@@ -74,3 +74,9 @@ vim.api.nvim_create_autocmd({'BufNewFile', 'BufFilePre', 'BufRead'}, {
   pattern = {'*.tfvars'},
   command = [[set syntax=fish]],
 })
+
+vim.api.nvim_create_autocmd('BufReadPost', {
+  group = file_types,
+  pattern = {'*.gitconfig'}, -- only set in gitconfig files
+  command = [[set ft=gitconfig]],
+})
