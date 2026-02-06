@@ -80,3 +80,9 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   pattern = {'*.gitconfig'}, -- only set in gitconfig files
   command = [[set ft=gitconfig]],
 })
+
+vim.api.nvim_create_autocmd('BufReadPost', {
+  group = file_types,
+  pattern = {'*.mdc'}, -- use markdown cause it's actually just markdown
+  command = [[set ft=markdown]],
+})
