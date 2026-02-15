@@ -114,9 +114,7 @@ return {
 			-- (Default) Only show the documentation popup when manually triggered
 			completion = {
 				documentation = { auto_show = true },
-				list = {
-					auto_insert = false,
-				},
+				list = {},
 				ghost_text = {
 					enabled = true,
 					show_with_selection = true,
@@ -144,9 +142,6 @@ return {
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			snippets = { preset = "luasnip" },
 			sources = {
-        completion = {
-          enabled_providers = {}
-        },
 				default = { "lsp", "path", "snippets", "supermaven", "buffer" },
         providers = {
           supermaven = {
