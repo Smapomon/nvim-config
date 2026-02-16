@@ -1,12 +1,11 @@
 ---@diagnostic disable: undefined-global
 
+-- Other theme options:
+--
+--Shatur/neovim-ayu (ayu-dark)
+--folke/tokyonight.nvim (tokyonight-night)
+
 return {
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {},
-  },
   {
     "catppuccin/nvim",
     name="catppuccin",
