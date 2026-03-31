@@ -51,11 +51,11 @@ vim.api.nvim_create_autocmd('BufEnter', {
   command = [[set ft=json]],
 })
 
-vim.api.nvim_create_autocmd('BufReadPost', {
-  group = file_types,
-  pattern = {'*.erb'},
-  command = [[set syntax=javascript]],
-})
+--vim.api.nvim_create_autocmd('BufReadPost', {
+  --group = file_types,
+  --pattern = {'*.erb'},
+  --command = [[set syntax=javascript]],
+--})
 
 vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
   group = file_types,
