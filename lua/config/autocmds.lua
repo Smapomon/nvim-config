@@ -1,5 +1,15 @@
 ---@diagnostic disable: undefined-global
 
+-- Enable treesitter highlighting for filetypes with an installed parser
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function(args)
+    local ok = pcall(vim.treesitter.start, args.buf)
+    if ok then
+      vim.bo[args.buf].syntax = 'on'
+    end
+  end,
+})
+
 local file_types = vim.api.nvim_create_augroup('FILETYPES', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = file_types,
