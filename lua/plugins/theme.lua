@@ -69,7 +69,6 @@ return {
         lualine_c = {
           {
             "diagnostics",
-            sources = { "nvim_lsp" },
             symbols = { error = " ", warn = " ", info = " " },
             colored = true,
             update_in_insert = true,
