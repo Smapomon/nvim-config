@@ -76,7 +76,7 @@ vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
 vim.api.nvim_create_autocmd({'BufNewFile', 'BufFilePre', 'BufRead'}, {
   group = file_types,
   pattern = {'*.md'},
-  command = [[set syntax=lsp_markdown filetype=lsp_markdown]],
+  command = [[set syntax=markdown filetype=markdown]],
 })
 
 vim.api.nvim_create_autocmd({'BufNewFile', 'BufFilePre', 'BufRead'}, {

@@ -26,8 +26,6 @@ local kind_icons = {
 	Event = " ",
 	Operator = "󰆕 ",
 	TypeParameter = "󰅲 ",
-	supermaven = " ",
-	Supermaven = " ",
 }
 
 return {
@@ -59,16 +57,6 @@ return {
 				},
 			},
       "saghen/blink.compat",
-      {
-        "supermaven-inc/supermaven-nvim",
-        opts = {
-          disable_inline_completion = true, -- disables inline completion for use with cmp
-          disable_keymaps = true            -- disables built in keymaps for more manual control
-        }
-      },
-      {
-        "huijiro/blink-cmp-supermaven"
-      },
     },
 
 		version = "1.*",
@@ -143,16 +131,8 @@ return {
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			snippets = { preset = "luasnip" },
 			sources = {
-				default = { "lsp", "path", "snippets", "supermaven", "buffer" },
-        providers = {
-          supermaven = {
-            name = "supermaven",
-            module = "blink-cmp-supermaven",
-            score_offset = 3,
-            enabled = true,
-            async = true,
-          },
-        },
+				default = { "lsp", "path", "snippets", "buffer" },
+        providers = {},
 			},
 
 			-- See the fuzzy documentation for more information
