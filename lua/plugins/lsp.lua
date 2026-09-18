@@ -175,6 +175,44 @@ return {
 
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
+      -- Run from the project root; repeat for each mise-managed Ruby version:
+      -- mise exec -- gem install ruby-lsp
+      -- mise exec -- gem install rubocop rubocop-rails rubocop-performance
+      -- If the project has no Gemfile.lock, also run:
+      -- mise exec -- bundle install
+      vim.lsp.config("ruby_lsp", {
+        capabilities = capabilities,
+        init_options = {
+          linters = {},
+          formatter = "none",
+        },
+        cmd = function(dispatchers, config)
+          return vim.lsp.rpc.start(
+            { vim.fn.expand("~/.local/bin/mise"), "exec", "--", "ruby-lsp" },
+            dispatchers,
+            { cwd = config.root_dir }
+          )
+        end,
+      })
+
+      vim.lsp.enable("ruby_lsp")
+
+      vim.lsp.config("rubocop", {
+        capabilities = capabilities,
+        cmd = function(dispatchers, config)
+          return vim.lsp.rpc.start(
+            {
+              vim.fn.expand("~/.local/bin/mise"),
+              "exec", "--", "rubocop", "--lsp",
+            },
+            dispatchers,
+            { cwd = config.root_dir }
+          )
+        end,
+      })
+
+      vim.lsp.enable("rubocop")
+
 			--  Add any additional override configuration in the following tables. Available keys are:
 			--  - cmd (table): Override the default command used to start the server
 			--  - filetypes (table): Override the default list of associated filetypes for the server
@@ -182,9 +220,6 @@ return {
 			--  - settings (table): Override the default settings passed when initializing the server.
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
-				solargraph = {
-					cmd = { "bundle", "exec", "solargraph", "stdio" },
-				},
 				lua_ls = {
 					settings = {
 						Lua = {
@@ -207,6 +242,9 @@ return {
 
 			require("mason-lspconfig").setup({
 				ensure_installed = {}, -- explicitly set to an empty table (populates installs via mason-tool-installer)
+        automatic_enable = {
+          exclude = { "ruby_lsp", "solargraph", "rubocop" }
+        },
 				automatic_installation = false,
 				handlers = {
 					function(server_name)
