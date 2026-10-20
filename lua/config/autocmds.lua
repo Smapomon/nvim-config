@@ -14,7 +14,7 @@ local file_types = vim.api.nvim_create_augroup('FILETYPES', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = file_types,
   callback = function()
-    vim.highlight.on_yank({ higroup = 'Visual' })
+    vim.hl.hl_op({ higroup = 'Visual' })
   end,
 })
 
